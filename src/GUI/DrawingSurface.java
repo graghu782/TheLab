@@ -1,15 +1,17 @@
 package GUI;
+import Gameplay.Player;
 import processing.core.PApplet;
 
 public class DrawingSurface extends PApplet {
-	
+	Player player;
+
 	public DrawingSurface () {
 		runSketch();
 	}
 
 	public void setup() {
 		background(255);
-		Gameplay.Character ch = new Gameplay.Character(50, 50, "LOL");
+		player = new Player(100, 100, "noob");
 	}
 
 	// The statements in draw() are executed 60 times a second until the 
@@ -19,6 +21,7 @@ public class DrawingSurface extends PApplet {
 
 
 	public void draw() {		
+		player.draw(this);
 	}
 	
 }
