@@ -2,14 +2,19 @@ package GUI;
 import Gameplay.Player;
 import processing.core.PApplet;
 
-public class DrawingSurface extends PApplet {
+public class DrawingSurface extends PApplet 
+{
 	private Player player;
+	private boolean[] keysPressed;
 
-	public DrawingSurface () {
+	public DrawingSurface () 
+	{
+		keysPressed = new boolean[4];
 		runSketch();
 	}
 
-	public void setup() {
+	public void setup() 
+	{
 		background(255);
 		player = new Player(100, 100, "noob");
 	}
@@ -20,27 +25,70 @@ public class DrawingSurface extends PApplet {
 	// line is executed again.
 
 
-	public void draw() {		
+	public void draw() 
+	{		
 		background(255);
 		fill(255);
+		
+		if(keysPressed[0])
+		{
+			player.move(0, -10);
+		}
+		if(keysPressed[1])
+		{
+			player.move(-10, 0);
+		}
+		if(keysPressed[2])
+		{
+			player.move(0, 10);
+		}
+		if(keysPressed[3])
+		{
+			player.move(10, 0);
+		}
+		
 		player.draw(this);
 	}
 	
-	public void keyPressed() {
+	public void keyPressed() 
+	{
 	
-		if(key == 'w') {
-			player.move(0, -10);
+		if(key == 'w') 
+		{
+			keysPressed[0] = true;
 		}
-		if(key == 'a') {
-			player.move(-10, 0);
+		if(key == 'a') 
+		{
+			keysPressed[1] = true;
 		}
-		if(key == 's') { 
-			player.move(0, 10);
+		if(key == 's')
+		{ 
+			keysPressed[2] = true;
 		}
-		if(key == 'd') {
-			player.move(10, 0);
+		if(key == 'd') 
+		{
+			keysPressed[3] = true;
 		}
-		System.out.println(player.x + " " + player.y + " " + player.length + " " + player.width);
+	}
+	
+	public void keyReleased()
+	{
+		if(key == 'w') 
+		{
+			keysPressed[0] = false;
+		}
+		if(key == 'a') 
+		{
+			keysPressed[1] = false;
+		}
+		if(key == 's')
+		{ 
+			keysPressed[2] = false;
+		}
+		if(key == 'd') 
+		{
+			keysPressed[3] = false;
+		}
 	}
 }
 
