@@ -4,13 +4,15 @@ import java.awt.Color;
 
 import processing.core.PApplet;
 
-public class Player {
-	public double x, y, width, length;
+public class Player 
+{
+	private double x, y, width, length;
 	private Color color;
 	private String name;
 	
 	
-	public Player(double x, double y, String name) {
+	public Player(double x, double y, String name) 
+	{
 		this.x = x;
 		this.y = y;
 		width = 30;
@@ -18,12 +20,14 @@ public class Player {
 		this.name = name;
 	}
 	
-	public void move(double x, double y) {
+	public void move(double x, double y) 
+	{
 		this.x += x;
 		this.y += y;
 	}
 
-	public void draw(PApplet drawer) {
+	public void draw(PApplet drawer) 
+	{
 		drawer.rect((float)x, (float)y, (float)(width), (float)(length));
 	}
 	

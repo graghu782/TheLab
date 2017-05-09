@@ -6,6 +6,9 @@ public class DrawingSurface extends PApplet
 {
 	private Player player;
 	private boolean[] keysPressed;
+	
+	public static final int DRAWING_WIDTH = 800;
+	public static final int DRAWING_HEIGHT = 600;
 
 	public DrawingSurface () 
 	{
@@ -30,6 +33,15 @@ public class DrawingSurface extends PApplet
 		background(255);
 		fill(255);
 		
+		pushMatrix();
+		
+		float ratioX = (float)width/DRAWING_WIDTH;
+		float ratioY = (float)width/DRAWING_HEIGHT;
+		
+		scale(ratioX, ratioY);
+		
+		player.draw(this);
+		
 		if(keysPressed[0])
 		{
 			player.move(0, -10);
@@ -47,7 +59,7 @@ public class DrawingSurface extends PApplet
 			player.move(10, 0);
 		}
 		
-		player.draw(this);
+		popMatrix();
 	}
 	
 	public void keyPressed() 
