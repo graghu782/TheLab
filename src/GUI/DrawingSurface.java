@@ -3,7 +3,7 @@ import Gameplay.Player;
 import processing.core.PApplet;
 
 public class DrawingSurface extends PApplet {
-	Player player;
+	private Player player;
 
 	public DrawingSurface () {
 		runSketch();
@@ -21,8 +21,26 @@ public class DrawingSurface extends PApplet {
 
 
 	public void draw() {		
+		background(255);
+		fill(255);
 		player.draw(this);
 	}
 	
+	public void keyPressed() {
+	
+		if(key == 'w') {
+			player.move(0, -10);
+		}
+		if(key == 'a') {
+			player.move(-10, 0);
+		}
+		if(key == 's') { 
+			player.move(0, 10);
+		}
+		if(key == 'd') {
+			player.move(10, 0);
+		}
+		System.out.println(player.x + " " + player.y + " " + player.length + " " + player.width);
+	}
 }
 
