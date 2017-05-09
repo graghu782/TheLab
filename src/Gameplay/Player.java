@@ -1,7 +1,6 @@
 package Gameplay;
 
 import java.awt.Color;
-
 import processing.core.PApplet;
 
 public class Player 
