@@ -59,7 +59,6 @@ Package: MAP
 
 Obstacle - Obstacles on the map
 Map - Represents the map that will be used
-RespawnTile - Holds respawn locations for players
 Minimap - (Want-to-have) feature for showing various objects on the map
 
 
