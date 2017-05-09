@@ -9,6 +9,7 @@ public class Player
 	private double x, y, width, length;
 	private Color color;
 	private String name;
+	private double xcenter, ycenter;
 	
 	
 	public Player(double x, double y, String name) 
@@ -18,12 +19,15 @@ public class Player
 		width = 30;
 		length = 70;
 		this.name = name;
+		ycenter = y;
+		xcenter = x;
 	}
 	
 	public void move(double x, double y) 
 	{
 		this.x += x;
 		this.y += y;
+		
 	}
 
 	public void draw(PApplet drawer) 

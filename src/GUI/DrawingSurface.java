@@ -19,7 +19,7 @@ public class DrawingSurface extends PApplet
 	public void setup() 
 	{
 		background(255);
-		player = new Player(100, 100, "noob");
+		player = new Player(300, 100, "noob");
 	}
 
 	// The statements in draw() are executed 60 times a second until the 
