@@ -4,7 +4,8 @@ The Lab
 Introduction: 
 
 
-This is a two dimensional, third person multiplayer shooter game. There are different game modes, free for all and team deathmatch. There is a large 2D map which the players can move around in. The objective is to eliminate the enemy and secure the win for your team.
+This is a two dimensional, third person multiplayer shooter game. There are different game modes, free for all and team deathmatch. There is a large 2D map which the players can move around in. The objective is to eliminate 
+the enemy and secure the win for your team.
 
 
 Use your skills to move around the map, killing all others before the time runs out. 

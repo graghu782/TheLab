@@ -20,7 +20,8 @@ import javax.swing.SwingUtilities;
  *
  * @author john_shelby
  */
-public class ClientReader implements Runnable{
+public class ClientReader implements Runnable
+{
 
 	private static final int RETRY_TIMEOUT = 10;
 	
@@ -32,46 +33,60 @@ public class ClientReader implements Runnable{
     private ArrayList<NetworkListener> listeners;
     
 
-    public ClientReader(Socket s, ArrayList<NetworkListener> listeners) {
+    public ClientReader(Socket s, ArrayList<NetworkListener> listeners) 
+    {
         this.s = s;
         this.listeners = listeners;
         host = s.getInetAddress();
         
-        try {
+        try 
+        {
             in = new ObjectInputStream(new BufferedInputStream(s.getInputStream()));
             new Thread(this).start();
-        } catch(IOException e) {
+        } 
+        catch(IOException e) 
+        {
             System.err.println("Error connecting input stream.");
             e.printStackTrace();
         }
     }
     
-    public InetAddress getHost() {
+    public InetAddress getHost() 
+    {
     	return host;
     }
     
-    public void stop() {
+    public void stop() 
+    {
     	looping = false;
     }
 
-    public boolean isConnected() {
+    public boolean isConnected()
+    {
     	return looping;
     }
 
-    public void run() {
+    public void run() 
+    {
     	
     	looping = true;
         try {
         	int tries = 0;
-            while(looping) {
+            while(looping) 
+            {
 
                 try {
                 	Serializable data = (Serializable) in.readObject();
-                    if (data instanceof Object[]) {
-                    	synchronized(listeners) {
-	                    	for (NetworkListener nl : listeners) {
-	                    		SwingUtilities.invokeLater(new Runnable() {
-	                    		    public void run() {
+                    if (data instanceof Object[]) 
+                    {
+                    	synchronized(listeners)
+                    	{
+	                    	for (NetworkListener nl : listeners) 
+	                    	{
+	                    		SwingUtilities.invokeLater(new Runnable()
+	                    		{
+	                    		    public void run()
+	                    		    {
 	                    		    	nl.receiveUpdate(host.getHostAddress(),(Object[])data);
 	                    		    }
 	                    		});
@@ -80,13 +95,18 @@ public class ClientReader implements Runnable{
                     }
 
                     tries = 0;
-                } catch (IOException e) {
+                } 
+                catch (IOException e) 
+                {
                 	tries++;
-                	if (tries >= RETRY_TIMEOUT) {
+                	if (tries >= RETRY_TIMEOUT) 
+                	{
                 		looping = false;
                 	}
                     e.printStackTrace();
-                } catch (ClassNotFoundException ex) {
+                } 
+                catch (ClassNotFoundException ex)
+                {
                     ex.printStackTrace();
                     System.exit(0);
                 }
@@ -95,13 +115,18 @@ public class ClientReader implements Runnable{
             for (NetworkListener nl : listeners)
         		nl.receiveUpdate(host.getHostAddress(),new Object[] {NetworkListener.DISCONNECT});
 
-        } finally {
-            try {
+        }
+        finally 
+        {
+            try 
+            {
                 if (in != null)
                     in.close();
                 if (!s.isClosed())
                     s.close();
-            } catch (IOException e) {
+            } 
+            catch (IOException e) 
+            {
                 e.printStackTrace();
             }
         }
