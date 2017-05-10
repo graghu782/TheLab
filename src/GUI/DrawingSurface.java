@@ -44,18 +44,22 @@ public class DrawingSurface extends PApplet
 		
 		if(keysPressed[0])
 		{
+			if (player.getY() >1)
 			player.move(0, -10);
 		}
 		if(keysPressed[1])
 		{
+			if (player.getX() > 1)
 			player.move(-10, 0);
 		}
 		if(keysPressed[2])
 		{
+			if (player.getY() + player.getLength() <DRAWING_HEIGHT)
 			player.move(0, 10);
 		}
 		if(keysPressed[3])
 		{
+			if (player.getX() + player.getWidth() < DRAWING_WIDTH)
 			player.move(10, 0);
 		}
 		

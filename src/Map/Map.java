@@ -1,6 +1,7 @@
 package Map;
 
 import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 public class Map extends PApplet

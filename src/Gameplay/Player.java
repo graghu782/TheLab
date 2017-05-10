@@ -28,6 +28,18 @@ public class Player
 		this.y += y;
 		
 	}
+	public double getX(){
+		return x;
+	}
+	public double getY(){
+		return y;
+	}
+	public double getWidth(){
+		return width;
+	}
+	public double getLength(){
+		return length;
+	}
 
 	public void draw(PApplet drawer) 
 	{
