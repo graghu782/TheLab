@@ -4,14 +4,18 @@ The Lab
 Introduction: 
 
 
-This is a two dimensional, third person multiplayer shooter game. There are different game modes, free for all and team deathmatch. There is a large 2D map which the players can move around in. The objective is to eliminate 
-the enemy and secure the win for your team.
+There was once a legend about a mysterious lab that contained great secrets and many treasures... you and some others set off to find this lab. 
+One day, you and your team set off into a particularly forboding jungle... and there it is. However, you are not alone. You will have to kill
+the others for control of the legendary lab. This is a two dimensional, third person multiplayer shooter game. There are different game modes,
+free for all and team deathmatch. There is a large 2D map which the players can move around in. The objective is to eliminate the enemy and secure
+the win for your team. The game is timebased, so one and his team has to tally up as many kills as possible in the time given. The team with the 
+most kills wins and takes control of the legendary lab and its secrets.
 
 
 Use your skills to move around the map, killing all others before the time runs out. 
 
 
-Instructions: Use WASD to move while mercilessly killing all others who stand in your way by using your mouse to aim. 
+Instructions: Use WASD to move while mercilessly killing all others who stand in your way by using your mouse to aim. Click to shoot.
 
 
 Features List:
