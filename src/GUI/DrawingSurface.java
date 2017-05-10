@@ -51,6 +51,7 @@ public class DrawingSurface extends PApplet
 		{
 			this.rect((float)(MAP_WIDTH - x + i), (float)(MAP_HEIGHT - y + i), (float)20, (float)20);
 		}
+		
 		player.draw(this);
 		
 		if(keysPressed[0])
@@ -76,8 +77,6 @@ public class DrawingSurface extends PApplet
 				player.move(10, 0);
 		}
 		
-		System.out.println(width);
-		System.out.println(height);
 		
 		popMatrix();
 	}
