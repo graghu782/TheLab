@@ -41,9 +41,15 @@ public class Player
 		return length;
 	}
 
-	public void draw(PApplet drawer) 
+/*	public void draw(PApplet drawer) 
 	{
 		drawer.rect((float)x, (float)y, (float)(width), (float)(length));
+		
+	}
+*/
+	public void draw(PApplet drawer){
+		//drawer.rect((float)xMax/2, (float)yMax/2, (float)width, (float)length);
+		drawer.rect((float)(400-width/2), (float)(300-length/2), (float)width, (float)length);
 	}
 	
 }

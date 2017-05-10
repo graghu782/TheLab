@@ -9,12 +9,14 @@ public class DrawingSurface extends PApplet
 	
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
+	
 
 	public DrawingSurface () 
 	{
 		keysPressed = new boolean[4];
 		runSketch();
 	}
+
 
 	public void setup() 
 	{
@@ -44,8 +46,9 @@ public class DrawingSurface extends PApplet
 		
 		if(keysPressed[0])
 		{
-			if (player.getY() >1)
+			if (player.getY() >1){
 			player.move(0, -10);
+			}
 		}
 		if(keysPressed[1])
 		{
@@ -54,12 +57,12 @@ public class DrawingSurface extends PApplet
 		}
 		if(keysPressed[2])
 		{
-			if (player.getY() + player.getLength() <DRAWING_HEIGHT)
+			if (player.getY() + player.getLength() <DRAWING_HEIGHT-1)
 			player.move(0, 10);
 		}
 		if(keysPressed[3])
 		{
-			if (player.getX() + player.getWidth() < DRAWING_WIDTH)
+			if (player.getX() + player.getWidth() < DRAWING_WIDTH-1)
 			player.move(10, 0);
 		}
 		
