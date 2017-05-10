@@ -21,4 +21,14 @@ public class Map extends PApplet
 			o.draw(this);
 		}
 	}
+	
+	public double getHeight()
+	{
+		return height;
+	}
+	
+	public double getWidth()
+	{
+		return width;
+	}
 }
