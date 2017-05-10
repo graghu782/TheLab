@@ -7,8 +7,8 @@ public class DrawingSurface extends PApplet
 	private Player player;
 	private boolean[] keysPressed;
 	
-	public static final int DRAWING_WIDTH = 800;
-	public static final int DRAWING_HEIGHT = 600;
+	public static final int DRAWING_WIDTH = 2400;
+	public static final int DRAWING_HEIGHT = 1800;
 	public double x,y;
 	
 
@@ -45,32 +45,37 @@ public class DrawingSurface extends PApplet
 		float ratioY = (float)width/DRAWING_HEIGHT;
 		
 		scale(ratioX, ratioY);
-		for (int i = 0; i < 400; i+=10){
-			this.rect((float)(DRAWING_WIDTH - x+i), (float)(DRAWING_HEIGHT - y+i), (float)20, (float)20);
+		for (int i = 0; i < 400; i+=10)
+		{
+			this.rect((float)(DRAWING_WIDTH - x + i), (float)(DRAWING_HEIGHT - y + i), (float)20, (float)20);
 		}
 		player.draw(this);
 		
 		if(keysPressed[0])
 		{
-			if (player.getY() >1){
-			player.move(0, -10);
+			if (player.getY() > 1)
+			{
+				player.move(0, -10);
 			}
 		}
 		if(keysPressed[1])
 		{
 			if (player.getX() > 1)
-			player.move(-10, 0);
+				player.move(-10, 0);
 		}
 		if(keysPressed[2])
 		{
-			if (player.getY() + player.getLength() <DRAWING_HEIGHT-1)
-			player.move(0, 10);
+			if (player.getY() + player.getLength() < DRAWING_HEIGHT - 1)
+				player.move(0, 10);
 		}
 		if(keysPressed[3])
 		{
-			if (player.getX() + player.getWidth() < DRAWING_WIDTH-1)
-			player.move(10, 0);
+			if (player.getX() + player.getWidth() < DRAWING_WIDTH - 1)
+				player.move(10, 0);
 		}
+		
+		System.out.println(width);
+		System.out.println(height);
 		
 		popMatrix();
 	}

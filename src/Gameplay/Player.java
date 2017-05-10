@@ -15,29 +15,38 @@ public class Player
 	{
 		this.x = x;
 		this.y = y;
-		width = 30;
-		length = 70;
-		this.name = name;
+		
 		ycenter = y;
 		xcenter = x;
+		
+		width = 75;
+		length = 150;
+		this.name = name;
 	}
 	
 	public void move(double x, double y) 
 	{
 		this.x += x;
-		this.y += y;
-		
+		this.y += y;	
 	}
-	public double getX(){
+	
+	public double getX()
+	{
 		return x;
 	}
-	public double getY(){
+	
+	public double getY()
+	{
 		return y;
 	}
-	public double getWidth(){
+	
+	public double getWidth()
+	{
 		return width;
 	}
-	public double getLength(){
+	
+	public double getLength()
+	{
 		return length;
 	}
 
@@ -47,9 +56,10 @@ public class Player
 		
 	}
 */
-	public void draw(PApplet drawer){
+	public void draw(PApplet drawer)
+	{
 		//drawer.rect((float)xMax/2, (float)yMax/2, (float)width, (float)length);
-		drawer.rect((float)(400-width/2), (float)(300-length/2), (float)width, (float)length);
+		drawer.rect((float)(drawer.width - width/2), (float)(drawer.height - length/2), (float)width, (float)length);
 	}
 	
 }
