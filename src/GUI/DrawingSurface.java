@@ -9,6 +9,7 @@ public class DrawingSurface extends PApplet
 	
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
+	public double x,y;
 	
 
 	public DrawingSurface () 
@@ -32,6 +33,9 @@ public class DrawingSurface extends PApplet
 
 	public void draw() 
 	{		
+		x =  player.getX();
+		y = player.getY();
+		
 		background(255);
 		fill(255);
 		
@@ -41,7 +45,9 @@ public class DrawingSurface extends PApplet
 		float ratioY = (float)width/DRAWING_HEIGHT;
 		
 		scale(ratioX, ratioY);
-		
+		for (int i = 0; i < 400; i+=10){
+			this.rect((float)(DRAWING_WIDTH - x+i), (float)(DRAWING_HEIGHT - y+i), (float)20, (float)20);
+		}
 		player.draw(this);
 		
 		if(keysPressed[0])
