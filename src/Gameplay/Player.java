@@ -21,7 +21,7 @@ public class Player
 		
 		width = 75;
 		length = 150;
-		this.name = name;
+		this.name = name; 
 	}
 	
 	public void move(double x, double y) 
