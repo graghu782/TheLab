@@ -28,11 +28,11 @@ public class DrawingSurface extends PApplet
 	// The statements in draw() are executed 60 times a second until the 
 	// program is stopped. Each statement is executed in 
 	// sequence and after the last line is read, the first 
-	// line is executed again.
+	// line is executed again.s
 
 
 	public void draw() 
-	{		
+	{		s
 		x =  player.getX();
 		y = player.getY();
 		
