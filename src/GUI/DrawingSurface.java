@@ -33,7 +33,7 @@ public class DrawingSurface extends PApplet
 
 	public void draw() 
 	{		
-		x =  player.getX();
+		x = player.getX();
 		y = player.getY();
 		
 		background(255);
@@ -42,10 +42,10 @@ public class DrawingSurface extends PApplet
 		pushMatrix();
 		
 		float ratioX = (float)width/DRAWING_WIDTH;
-		float ratioY = (float)width/DRAWING_HEIGHT;
+		float ratioY = (float)height/DRAWING_HEIGHT;
 		
 		scale(ratioX, ratioY);
-		for (int i = 0; i < 400; i+=10)
+		for (int i = 0; i < 400; i += 10)
 		{
 			this.rect((float)(DRAWING_WIDTH - x + i), (float)(DRAWING_HEIGHT - y + i), (float)20, (float)20);
 		}
