@@ -3,13 +3,16 @@ package Map;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Map extends PApplet
 {
 	private ArrayList<Obstacle> obstacles;
+	private PImage background;
 	
-	public Map()
+	public Map(PImage background)
 	{
+		this.background = background;
 		obstacles = new ArrayList<Obstacle>();
 		width = 3200;
 		height = 2400;

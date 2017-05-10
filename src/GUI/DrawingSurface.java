@@ -1,11 +1,13 @@
 package GUI;
 import Gameplay.Player;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class DrawingSurface extends PApplet 
 {
 	private Player player;
 	private boolean[] keysPressed;
+	private PImage img;
 	
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
@@ -24,6 +26,7 @@ public class DrawingSurface extends PApplet
 	public void setup() 
 	{
 		background(255);
+		img = loadImage("background.jpg");
 		player = new Player(300, 100, "noob");
 	}
 
@@ -34,7 +37,8 @@ public class DrawingSurface extends PApplet
 
 
 	public void draw() 
-	{		
+	{	
+		image(img, 0, 0);
 		x = player.getX();
 		y = player.getY();
 		
@@ -42,6 +46,7 @@ public class DrawingSurface extends PApplet
 		fill(255);
 		
 		pushMatrix();
+		
 		
 		float ratioX = (float)width/DRAWING_WIDTH;
 		float ratioY = (float)height/DRAWING_HEIGHT;
