@@ -32,7 +32,7 @@ public class DrawingSurface extends PApplet
 
 
 	public void draw() 
-	{		s
+	{		
 		x =  player.getX();
 		y = player.getY();
 		
