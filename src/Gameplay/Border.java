@@ -12,6 +12,10 @@ public class Border {
 		this.y2 = y2;
 	}
 	public void draw(PApplet drawer){
-		drawer.rect(0,0,10,10);
+		drawer.noFill();
+		drawer.strokeWeight(10);
+		drawer.rect((float)x,(float)y,(float)x2,(float)y2);
+		drawer.fill(255);
+		drawer.strokeWeight(1);
 	}
 }

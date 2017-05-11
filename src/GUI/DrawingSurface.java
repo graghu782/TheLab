@@ -45,7 +45,11 @@ public class DrawingSurface extends PApplet
 		
 		background(255);
 		image(img, (float)(- x), (float)(-y), (float)(MAP_WIDTH+DRAWING_WIDTH), (float)(MAP_HEIGHT+DRAWING_HEIGHT));
-		//image(img, 0, 0, (float)MAP_WIDTH, (float)MAP_HEIGHT);
+		
+		border = new Border(DRAWING_WIDTH/2-x-10,DRAWING_WIDTH/2-y,MAP_WIDTH+20,MAP_HEIGHT+20);
+		
+		border.draw(this);
+		
 		System.out.println(x + " " + y);
 		fill(255);
 				
