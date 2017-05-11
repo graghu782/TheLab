@@ -19,8 +19,8 @@ public class Player
 		ycenter = y;
 		xcenter = x;
 		
-		width = 75;
-		length = 150;
+		width = 50;
+		length = 90;
 		this.name = name; 
 	}
 	
