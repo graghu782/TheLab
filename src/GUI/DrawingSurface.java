@@ -57,10 +57,6 @@ public class DrawingSurface extends PApplet
 		scale(ratioX, ratioY);
 		
 
-		for (int i = 0; i < 400; i += 10)
-		{
-			this.rect((float)(-x), (float)(-y), (float)20, (float)20);
-		}
 		
 		player.draw(this);
 		
