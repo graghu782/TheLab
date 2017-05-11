@@ -82,14 +82,22 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
   	}
   }
     
-  public void keyReleased(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+  public void keyReleased(KeyEvent e)
+  {
+    if (e.getKeyCode() == KeyEvent.VK_RIGHT) 
+    {
   		this.rightKey = false;
-  	} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+  	} 
+    else if (e.getKeyCode() == KeyEvent.VK_LEFT) 
+  	{
   		this.leftKey = false;
-  	} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+  	} 
+  	else if (e.getKeyCode() == KeyEvent.VK_UP) 
+  	{
   		this.upKey = false;
-  	} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+  	} 
+  	else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+  	{
   		this.downKey = false;
   	}
   }
