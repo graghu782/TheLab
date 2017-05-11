@@ -21,12 +21,11 @@ public class DrawingSurface extends PApplet
 		keysPressed = new boolean[4];
 		runSketch();
 	}
-
-
+	
 	public void setup() 
 	{
+		//img = loadImage("background.jpg");
 		background(255);
-		img = loadImage("background.jpg");
 		player = new Player(300, 100, "noob");
 	}
 
@@ -38,13 +37,12 @@ public class DrawingSurface extends PApplet
 
 	public void draw() 
 	{	
-		image(img, 0, 0);
 		x = player.getX();
 		y = player.getY();
 		
 		background(255);
 		fill(255);
-		
+				
 		pushMatrix();
 		
 		
@@ -52,6 +50,8 @@ public class DrawingSurface extends PApplet
 		float ratioY = (float)height/DRAWING_HEIGHT;
 		
 		scale(ratioX, ratioY);
+		
+
 		for (int i = 0; i < 400; i += 10)
 		{
 			this.rect((float)(MAP_WIDTH - x + i), (float)(MAP_HEIGHT - y + i), (float)20, (float)20);

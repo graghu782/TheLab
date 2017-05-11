@@ -8,18 +8,16 @@ import processing.core.PImage;
 public class Map extends PApplet
 {
 	private ArrayList<Obstacle> obstacles;
-	private PImage background;
 	
-	public Map(PImage background)
+	public Map()
 	{
-		this.background = background;
 		obstacles = new ArrayList<Obstacle>();
 		width = 3200;
 		height = 2400;
 	}
 	
-	public void draw()
-	{
+	public void draw(PApplet drawer)
+	{		
 		for(Obstacle o : obstacles)
 		{
 			o.draw(this);
