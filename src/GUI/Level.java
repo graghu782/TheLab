@@ -6,11 +6,13 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 
-public class Level extends Rectangle2D.Double {
+public class Level extends Rectangle2D.Double 
+{
 
 	private ArrayList<MovingImage> scene;
 	
-	public Level() {
+	public Level() 
+	{
 		scene = new ArrayList<MovingImage>();
 		scene.add(new MovingImage("tree.gif",150,150,175,300,false));
 		scene.add(new MovingImage("house.jpg",525,250,200,200,false));
@@ -19,7 +21,8 @@ public class Level extends Rectangle2D.Double {
 		this.height = 600;
 	}
 	
-	public void draw(Graphics2D g2, ImageObserver io) {
+	public void draw(Graphics2D g2, ImageObserver io) 
+	{
 		for (MovingImage mi : scene)
 			mi.draw(g2, io);
 	}

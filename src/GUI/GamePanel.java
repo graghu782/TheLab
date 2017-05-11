@@ -24,7 +24,8 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
   
   private Level thisLevel;
   
-  public GamePanel () {
+  public GamePanel () 
+  {
 	  super();
 	  setBackground(Color.WHITE);
 	  thisLevel = new Level();
@@ -60,15 +61,23 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
   
 
   
-  public void keyPressed(KeyEvent e) {
+  public void keyPressed(KeyEvent e) 
+  {
   	
-  	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+  	if (e.getKeyCode() == KeyEvent.VK_RIGHT) 
+  	{
   		this.rightKey = true;
-  	} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+  	} 
+  	else if (e.getKeyCode() == KeyEvent.VK_LEFT) 
+  	{
   		this.leftKey = true;
-  	} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+  	} 
+  	else if (e.getKeyCode() == KeyEvent.VK_UP)
+  	{
   		this.upKey = true;
-  	} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+  	} 
+  	else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+  	{
   		this.downKey = true;
   	}
   }
@@ -85,13 +94,16 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
   	}
   }
 
-  public void keyTyped(KeyEvent e) {
+  public void keyTyped(KeyEvent e) 
+  {
   	
   }
   
 
-  public void run() {
-  	while(true) {
+  public void run() 
+  {
+  	while(true) 
+  	{
   		long startTime = System.currentTimeMillis();
 	  	
 	  	if (upKey) 
@@ -109,29 +121,43 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
 	  	
 	  	long waitTime = 20 - (System.currentTimeMillis() - startTime);
             
-        if (waitTime > 0) {
-            try {
+        if (waitTime > 0) 
+        {
+            try 
+            {
                 Thread.sleep(waitTime);
-            } catch (InterruptedException e) {}
+            } 
+            catch (InterruptedException e) 
+            {
+            	
+            }
         } else Thread.yield();
   	}
   }
   
-  public void slideWorldToImage(MovingImage img) {
+  public void slideWorldToImage(MovingImage img) 
+  {
   	Point2D.Double center = img.getCenter();
-	if (!characterSpace.contains(center)) {
+	if (!characterSpace.contains(center)) 
+	{
 		double newX = visibleSpace.getX();
 		double newY = visibleSpace.getY();
 		
-	  	if (center.getX() < characterSpace.getX()) {
+	  	if (center.getX() < characterSpace.getX())
+	  	{
 	  		newX -= (characterSpace.getX() - center.getX());
-	  	} else if (center.getX() > characterSpace.getX() + characterSpace.getWidth()) {
+	  	} 
+	  	else if (center.getX() > characterSpace.getX() + characterSpace.getWidth())
+	  	{
 	  		newX += (center.getX() - (characterSpace.getX() + characterSpace.getWidth()));
 	  	}
 	  	
-	  	if (center.getY() < characterSpace.getY()) {
+	  	if (center.getY() < characterSpace.getY()) 
+	  	{
 	  		newY -= (characterSpace.getY() - center.getY());
-	  	} else if (center.getY() > characterSpace.getY() + characterSpace.getHeight()) {
+	  	} 
+	  	else if (center.getY() > characterSpace.getY() + characterSpace.getHeight())
+	  	{
 	  		newY += (center.getY() - characterSpace.getY() - characterSpace.getHeight());
 	  	}
 	  	newX = Math.max(newX,0);
@@ -145,11 +171,13 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
 	}
   }
   
-  public Point assumedCoordinatesToActual(Point assumed) {
+  public Point assumedCoordinatesToActual(Point assumed) 
+  {
     return new Point((int)((assumed.getX() - visibleSpace.getX())*ratioX), (int)((assumed.getY() - visibleSpace.getY())*ratioY));
   }
 
-  public Point actualCoordinatesToAssumed(Point actual) {
+  public Point actualCoordinatesToAssumed(Point actual) 
+  {
     return new Point((int)(actual.getX()/ratioX + visibleSpace.getX()), (int)(actual.getY()/ratioY + visibleSpace.getY()));
   }
 

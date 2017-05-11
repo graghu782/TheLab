@@ -3,9 +3,11 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class Main extends JFrame {
+public class Main extends JFrame
+{
 	
-	public Main(String title) {
+	public Main(String title) 
+	{
 		super(title);
 		setBounds(100, 100, 640, 480);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
