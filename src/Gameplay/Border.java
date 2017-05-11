@@ -1,5 +1,6 @@
-package GUI;
+package Gameplay;
 
+import java.awt.Color;
 import processing.core.PApplet;
 
 public class Border {
@@ -11,6 +12,6 @@ public class Border {
 		this.y2 = y2;
 	}
 	public void draw(PApplet drawer){
-		
+		drawer.rect(0,0,10,10);
 	}
 }

@@ -1,4 +1,5 @@
 package GUI;
+import Gameplay.Border;
 import Gameplay.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -6,7 +7,7 @@ import processing.core.PImage;
 public class DrawingSurface extends PApplet 
 {
 	private Player player;
-//	private Border border;
+	private Border border;
 	private boolean[] keysPressed;
 	private PImage img;
 	
@@ -28,7 +29,7 @@ public class DrawingSurface extends PApplet
 		background(255);
 		img = loadImage("background.bmp");
 		player = new Player(00, 00, "noob");
-	//	border = new Border(player.getX(), player.getY(), MAP_WIDTH,MAP_HEIGHT);
+		border = new Border(0,0,10,10);
 	}
 
 	// The statements in draw() are executed 60 times a second until the 
