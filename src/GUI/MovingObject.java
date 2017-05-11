@@ -28,7 +28,7 @@ import java.util.*;
 import java.io.*;
 import javax.imageio.*;
 
-public class MovingImage extends Rectangle2D.Double 
+public class MovingObject extends Rectangle2D.Double 
 {
 
 	// FIELDS
@@ -44,7 +44,7 @@ public class MovingImage extends Rectangle2D.Double
 	 All coordinates are in assumed coordinates and represent data for the
 	 image, not the window.
 	 */
-	public MovingImage(String filename, int x, int y, int w, int h, boolean textured) 
+	public MovingObject(String filename, int x, int y, int w, int h, boolean textured) 
 	{
 		super(x,y,w,h);
 		try

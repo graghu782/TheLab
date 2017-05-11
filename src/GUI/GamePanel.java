@@ -15,7 +15,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
   
   private double ratioX, ratioY;
 
-  private MovingImage mario;
+  private MovingObject mario;
 
   private boolean rightKey, leftKey, upKey, downKey;
 
@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
 	  visibleSpace = new Rectangle2D.Double(0,thisLevel.getHeight()-ASSUMED_DRAWING_HEIGHT,ASSUMED_DRAWING_WIDTH,ASSUMED_DRAWING_HEIGHT);
 	  characterSpace = new Rectangle2D.Double(visibleSpace.getX()+visibleSpace.getWidth()/5,visibleSpace.getY()+visibleSpace.getHeight()/5,visibleSpace.getWidth()*3/5,visibleSpace.getHeight()*3/5);
 	  
-	  mario = new MovingImage("mario.png",0,300,50,60, false);
+	  mario = new MovingObject("mario.png",0,300,50,60, false);
 	  
 	  addComponentListener(new ComponentAdapter() {
 	  	public void componentResized(ComponentEvent e) {ratioX = (double)e.getComponent().getWidth()/ASSUMED_DRAWING_WIDTH;ratioY = (double)e.getComponent().getHeight()/ASSUMED_DRAWING_HEIGHT;}	  	
@@ -143,7 +143,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
   	}
   }
   
-  public void slideWorldToImage(MovingImage img) 
+  public void slideWorldToImage(MovingObject img) 
   {
   	Point2D.Double center = img.getCenter();
 	if (!characterSpace.contains(center)) 
