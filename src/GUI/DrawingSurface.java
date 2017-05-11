@@ -24,6 +24,10 @@ public class DrawingSurface extends PApplet
 		runSketch();
 	}
 	
+	public void settings() {
+		size(800, 600);
+	}
+	
 	public void setup() 
 	{
 		background(255);
