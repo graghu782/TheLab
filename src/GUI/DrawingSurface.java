@@ -6,6 +6,7 @@ import processing.core.PImage;
 public class DrawingSurface extends PApplet 
 {
 	private Player player;
+//	private Border border;
 	private boolean[] keysPressed;
 	private PImage img;
 	
@@ -25,8 +26,9 @@ public class DrawingSurface extends PApplet
 	public void setup() 
 	{
 		background(255);
-		img = loadImage("kyoot_kitty.jpg");
+		img = loadImage("background.bmp");
 		player = new Player(00, 00, "noob");
+	//	border = new Border(player.getX(), player.getY(), MAP_WIDTH,MAP_HEIGHT);
 	}
 
 	// The statements in draw() are executed 60 times a second until the 
