@@ -24,8 +24,8 @@ public class DrawingSurface extends PApplet
 	
 	public void setup() 
 	{
-		//img = loadImage("background.jpg");
 		background(255);
+		img = loadImage("background.jpg");
 		player = new Player(300, 100, "noob");
 	}
 
@@ -41,6 +41,7 @@ public class DrawingSurface extends PApplet
 		y = player.getY();
 		
 		background(255);
+		image(img, (float)0, (float)0, (float)width, (float)height);
 		fill(255);
 				
 		pushMatrix();
