@@ -41,7 +41,7 @@ public class DrawingSurface extends PApplet
 		y = player.getY();
 		
 		background(255);
-		image(img, (float)0, (float)0, (float)width, (float)height);
+		image(img, (float)(MAP_WIDTH - x), (float)(MAP_HEIGHT-y), (float)width, (float)height);
 		fill(255);
 				
 		pushMatrix();
