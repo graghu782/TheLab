@@ -58,7 +58,6 @@ public class Player
 */
 	public void draw(PApplet drawer)
 	{
-		//drawer.rect((float)xMax/2, (float)yMax/2, (float)width, (float)length);
 		drawer.rect((float)(drawer.width/2 - width/2), (float)(drawer.height/2 - length/2), (float)width, (float)length);
 	}
 	
