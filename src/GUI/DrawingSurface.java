@@ -41,7 +41,7 @@ public class DrawingSurface extends PApplet
 		y = player.getY();
 		
 		background(255);
-		image(img, (float)(- x), (float)(-y), (float)MAP_WIDTH, (float)MAP_HEIGHT);
+		image(img, (float)(- x), (float)(-y), (float)(MAP_WIDTH+DRAWING_WIDTH), (float)(MAP_HEIGHT+DRAWING_HEIGHT));
 		//image(img, 0, 0, (float)MAP_WIDTH, (float)MAP_HEIGHT);
 		System.out.println(x + " " + y);
 		fill(255);
@@ -57,7 +57,7 @@ public class DrawingSurface extends PApplet
 
 		for (int i = 0; i < 400; i += 10)
 		{
-			this.rect((float)(MAP_WIDTH - x + i), (float)(MAP_HEIGHT - y + i), (float)20, (float)20);
+			this.rect((float)(-x), (float)(-y), (float)20, (float)20);
 		}
 		
 		player.draw(this);
