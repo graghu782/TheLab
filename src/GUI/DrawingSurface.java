@@ -25,8 +25,8 @@ public class DrawingSurface extends PApplet
 	public void setup() 
 	{
 		background(255);
-		img = loadImage("background.jpg");
-		player = new Player(300, 100, "noob");
+		img = loadImage("kyoot_kitty.jpg");
+		player = new Player(00, 00, "noob");
 	}
 
 	// The statements in draw() are executed 60 times a second until the 
@@ -41,7 +41,9 @@ public class DrawingSurface extends PApplet
 		y = player.getY();
 		
 		background(255);
-		image(img, (float)(MAP_WIDTH - x), (float)(MAP_HEIGHT-y), (float)width, (float)height);
+		image(img, (float)(- x), (float)(-y), (float)MAP_WIDTH, (float)MAP_HEIGHT);
+		//image(img, 0, 0, (float)MAP_WIDTH, (float)MAP_HEIGHT);
+		System.out.println(x + " " + y);
 		fill(255);
 				
 		pushMatrix();
