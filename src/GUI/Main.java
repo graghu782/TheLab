@@ -37,6 +37,7 @@ public class Main extends JFrame
 	
 	public void changePanel()
 	{
+		this.setVisible(false);
 		DrawingSurface drawing = new DrawingSurface();
 		
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
