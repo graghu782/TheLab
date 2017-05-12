@@ -9,6 +9,7 @@ public class Player
 	private Color color;
 	private String name;
 	private double xcenter, ycenter;
+	private Arm arm;
 	
 	
 	public Player(double x, double y, String name) 
@@ -22,6 +23,8 @@ public class Player
 		width = 50;
 		length = 90;
 		this.name = name; 
+		arm = new Arm(x,y,x,y);
+		
 	}
 	
 	public void move(double x, double y) 
@@ -59,6 +62,8 @@ public class Player
 	public void draw(PApplet drawer)
 	{
 		drawer.rect((float)(drawer.width/2 - width/2), (float)(drawer.height/2 - length/2), (float)width, (float)length);
+		float x = mouseX;
+		
 	}
 	
 }
