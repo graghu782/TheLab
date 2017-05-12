@@ -62,8 +62,6 @@ public class Player
 	public void draw(PApplet drawer)
 	{
 		drawer.rect((float)(drawer.width/2 - width/2), (float)(drawer.height/2 - length/2), (float)width, (float)length);
-		float x = mouseX;
-		
 	}
 	
 }
