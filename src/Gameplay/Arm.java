@@ -11,6 +11,12 @@ public class Arm {
 		mx = xmx;
 		my = xmy;
 	}
+	public void setmx(double sx){
+		mx = sx;
+	}
+	public void setmy(double sy){
+		my = sy;
+	}
 	public void draw(PApplet drawer){
 		drawer.line((float)x,(float)y,(float)mx,(float)my);
 	}
