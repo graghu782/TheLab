@@ -16,13 +16,10 @@ public class DrawingSurface extends PApplet
 	public static final int MAP_WIDTH = 2400;
 	public static final int MAP_HEIGHT = 1800;
 	public double x,y;
-	
-	private boolean keepRunning;
 
 	public DrawingSurface () 
 	{
 		keysPressed = new boolean[4];
-		keepRunning = true;
 		runSketch();
 	}
 	
@@ -46,12 +43,7 @@ public class DrawingSurface extends PApplet
 
 
 	public void draw() 
-	{	
-		if(!keepRunning)
-		{
-			noLoop();
-		}
-		
+	{		
 		x = player.getX();
 		y = player.getY();
 		
@@ -143,11 +135,6 @@ public class DrawingSurface extends PApplet
 		{
 			keysPressed[3] = false;
 		}
-	}
-	
-	public void end()
-	{
-		keepRunning = false;
 	}
 }
 

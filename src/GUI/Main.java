@@ -69,7 +69,7 @@ public class Main extends JFrame
 				window.setVisible(false);
 				window.dispose();
 				
-				drawing.end();
+				drawing.noLoop();
 			}
 			
 		    cardPanel.add(panel1,"1");
