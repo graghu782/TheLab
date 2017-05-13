@@ -32,7 +32,7 @@ public class DrawingSurface extends PApplet
 	{
 		background(255);
 		img = loadImage("background.bmp");
-		player = new Player(00, 00, "noob");
+		player = new Player(0, 0, "noob");
 		border = new Border(0,0,10,10);
 	}
 
