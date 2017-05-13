@@ -15,14 +15,16 @@ public class Main extends JFrame
 	private MenuPanel panel1;
 	private InstructionsPanel panel2;
 	private OptionPanel panel3;
-	JFrame window;
+	
+	private JFrame window;
+	private DrawingSurface drawing;
 	
 	private boolean[] panelsInPlace;
 	
 	public Main(String title)
 	{
 		super(title);
-		setBounds(100, 100, 800, 600);
+		setBounds(250, 250, 800, 600);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setVisible(true);
 	    
@@ -66,6 +68,8 @@ public class Main extends JFrame
 				
 				window.setVisible(false);
 				window.dispose();
+				
+				drawing.end();
 			}
 			
 		    cardPanel.add(panel1,"1");
@@ -100,9 +104,9 @@ public class Main extends JFrame
 			add(cardPanel);
 			panelsInPlace[2] = true;
 			
-			setSize(100, 100);
+			setSize(300, 100);
 			
-			DrawingSurface drawing = new DrawingSurface();
+			drawing = new DrawingSurface();
 			
 			PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 			PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
