@@ -49,7 +49,8 @@ public class InstructionsPanel extends JPanel implements ActionListener
 		
 		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
 		g.drawString("Move around the map with the WASD keys and kill as many enemy players as possible.", 100, 150);
-		g.drawString("The matches are all time based, and the team, or individual with the most kills wins!", 100, 200);
+		g.drawString("Use the mouse to aim and click to shoot.", 100, 200);
+		g.drawString("The matches are all time based, and the team, or individual with the most kills wins!", 100, 250);
 		
 		g2.setTransform(af);
 	}
