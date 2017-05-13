@@ -10,6 +10,9 @@ public class MenuPanel extends JPanel implements ActionListener
 	
 	private Main w;
 	
+	private JButton button;
+	private JButton button2;
+	
 	public MenuPanel(Main w) 
 	{
 		this.w = w;
@@ -19,9 +22,14 @@ public class MenuPanel extends JPanel implements ActionListener
 		p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));	
 		p.add(Box.createVerticalStrut(300));   // Move down by 300 pixels  
 		
-		JButton button = new JButton("Play");
+		button = new JButton("Start");
+		button2 = new JButton("Instructions");
+		
 		button.addActionListener(this);
+		button2.addActionListener(this);
+		
 		p.add(button);
+		p.add(button2);
 		add(p);
 	}
 	
@@ -39,14 +47,21 @@ public class MenuPanel extends JPanel implements ActionListener
 		g2.scale(ratioX,ratioY);
 		
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 45));
-		g.drawString("The Title", 305, 200);
+		g.drawString("The Lab", 315, 115);
 		
 		g2.setTransform(af);
 	}
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		w.changePanel();
+		if(e.getSource() == button)
+		{
+			w.changePanel(2);
+		}
+		else if(e.getSource() == button2)
+		{
+			w.changePanel(1);
+		}
 	}
 	
 }
