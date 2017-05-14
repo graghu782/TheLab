@@ -2,7 +2,6 @@ package Gameplay;
 
 import java.awt.Color;
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class Player 
 {
@@ -11,7 +10,7 @@ public class Player
 	private String name;
 	private double xCenter, yCenter;
 	private Arm arm;
-	private PImage img;
+	
 	
 	public Player(double x, double y, String name) 
 	{
@@ -22,7 +21,7 @@ public class Player
 		xCenter = x;
 		
 		width = 50;
-		length = 70;
+		length = 90;
 		this.name = name; 
 		arm = new Arm(x,y,x,y);
 		
@@ -56,8 +55,7 @@ public class Player
 
 	public void draw(PApplet drawer)
 	{
-		img = drawer.loadImage("Ghost.png");
-		drawer.image(img, (float)(drawer.width/2 - width/2), (float)(drawer.height/2 - length/2), (float)width, (float)length);
+		drawer.rect((float)(drawer.width/2 - width/2), (float)(drawer.height/2 - length/2), (float)width, (float)length);
 		
 		double mouseXChange = drawer.mouseX - drawer.width/2;
 		double mouseYChange = drawer.mouseY - drawer.height/2;
