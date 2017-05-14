@@ -31,20 +31,6 @@ public class OptionPanel extends JPanel implements ActionListener
 		add(p);
 	}
 	
-	public void paintComponent(Graphics g) 
-	{
-		super.paintComponent(g);
-		
-		double ratioX = getWidth() / 100.0;
-		double ratioY = getHeight() / 100.0;
-		
-		Graphics2D g2 = (Graphics2D)g;
-		
-		AffineTransform af = g2.getTransform();
-		g2.scale(ratioX,ratioY);
-		g2.setTransform(af);
-	}
-	
 	public void actionPerformed(ActionEvent e) 
 	{
 		w.changePanel(0);

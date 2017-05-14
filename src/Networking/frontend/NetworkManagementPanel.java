@@ -29,7 +29,6 @@ import Networking.backend.SchoolServer;
 
 public class NetworkManagementPanel extends JPanel
 {
-
     private static final int TCP_PORT = 4444;
     private static final int BROADCAST_PORT = 4444;
 
@@ -161,7 +160,7 @@ public class NetworkManagementPanel extends JPanel
 	{
 	    discover = new PeerDiscovery(InetAddress.getByName("255.255.255.255"), BROADCAST_PORT);
 	    statusText.append("\nBroadcast discovery server running on " + BROADCAST_PORT);
-	} 
+	}
 	catch (IOException e1)
 	{
 	    e1.printStackTrace();
@@ -169,12 +168,14 @@ public class NetworkManagementPanel extends JPanel
 		    + "\nCannot discover or be discovered.");
 	    discoverButton.setEnabled(false);
 	}
-
+	
+	/*
 	JFrame window = new JFrame("Network Management");
 	window.setBounds(300, 300, 700, 480);
 	window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	window.add(this);
 	window.setVisible(true);
+	*/
     }
 
     /**
@@ -211,7 +212,7 @@ public class NetworkManagementPanel extends JPanel
 	try
 	{
 	    connect(InetAddress.getByName(host));
-	} 
+	}
 	catch (UnknownHostException e)
 	{
 	    // TODO Auto-generated catch block
@@ -231,7 +232,7 @@ public class NetworkManagementPanel extends JPanel
 		statusText.append("\nCould not connect to " + host + " on " + TCP_PORT);
 		sc.disconnect();
 		sc = null;
-	    } 
+	    }
 	    else
 	    {
 		statusText.append("\nConnected to " + host + " on " + TCP_PORT);
@@ -291,7 +292,7 @@ public class NetworkManagementPanel extends JPanel
 		    statusText.append("\nError sending discovery packet.");
 		    e1.printStackTrace();
 		}
-	    } 
+	    }
 	    else if (source == connectButton)
 	    {
 		InetAddress host = hostList.getSelectedValue();
@@ -312,7 +313,7 @@ public class NetworkManagementPanel extends JPanel
 		    ss = null;
 
 		}
-	    } 
+	    }
 	    else if (source == serverButton)
 	    {
 		ss = new SchoolServer(programID, myIP);
@@ -322,7 +323,7 @@ public class NetworkManagementPanel extends JPanel
 		if (discover != null)
 		    discover.setDiscoverable(true);
 		connect(myIP);
-	    } 
+	    }
 	    else if (source == refreshTimer)
 	    {
 		timeOut--;
