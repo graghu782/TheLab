@@ -54,7 +54,9 @@ public class Main extends JFrame
 	{
 	    setSize(800, 600);
 
-	    cardPanel.removeAll();
+	    cardPanel.remove(panel3);
+	    cardPanel.remove(panel2);
+	    //cardPanel.removeAll();
 	    
 	    if(drawing != null)
 		drawing.noLoop();
@@ -68,7 +70,7 @@ public class Main extends JFrame
 	}
 	else if (x == 1)
 	{
-	    cardPanel.removeAll();
+	    cardPanel.remove(panel1);
 	    cardPanel.add(panel2, "2");
 	    add(cardPanel);
 
@@ -76,7 +78,8 @@ public class Main extends JFrame
 	}
 	else if (x == 2)
 	{
-	    cardPanel.removeAll();
+	    cardPanel.remove(panel1);
+	    cardPanel.remove(panel2);
 	    cardPanel.add(panel3, "3");
 	    add(cardPanel);
 	    setSize(300, 100);
