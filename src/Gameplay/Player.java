@@ -56,7 +56,9 @@ public class Player
 	{
 		return length;
 	}
-	public double getDir(){
+	
+	public double getDir()
+	{
 		return direction;
 	}
 

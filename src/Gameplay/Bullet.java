@@ -45,10 +45,13 @@ public class Bullet
 		iters++;
 	}
 	
-	public int getIs(){
+	public int getIs()
+	{
 		return iters;
 	}
-	public void update(double x, double y){
+	
+	public void update(double x, double y)
+	{
 		xCoord+=xo-x;
 		xo = x;
 		yCoord+=yo-y;
