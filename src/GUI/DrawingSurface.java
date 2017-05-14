@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import Gameplay.Border;
 import Gameplay.Bullet;
 import Gameplay.Player;
+import Networking.frontend.NetworkDataObject;
+import Networking.frontend.NetworkListener;
+import Networking.frontend.NetworkMessenger;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class DrawingSurface extends PApplet 
+public class DrawingSurface extends PApplet implements NetworkListener
 {
 	private Player player;
 	private Border border;
@@ -22,9 +25,8 @@ public class DrawingSurface extends PApplet
 	private double x,y;
 	
 	private int count;
-	/*
-	 * we need to make an array of ppl for multiplayer
-	 */
+	
+	private NetworkMessenger nm;
 
 	public DrawingSurface () 
 	{
@@ -96,15 +98,18 @@ public class DrawingSurface extends PApplet
 				player.move(10, 0);
 		}
 	
-		if(mousePressed) {
+		if(mousePressed) 
+		{
 			count++;
-			if(count % 3 == 0) { 
+			if(count % 3 == 0) 
+			{ 
 				bullets.add(new Bullet(DRAWING_WIDTH/2,DRAWING_HEIGHT/2,player.getDir(), x,y));
 				count = 0;
 			}
 		}
 		
-		for (Bullet b:bullets){
+		for (Bullet b:bullets)
+		{
 			b.draw(this);
 			b.update(x,y);
 		}
@@ -158,6 +163,18 @@ public class DrawingSurface extends PApplet
 		{
 			keysPressed[3] = false;
 		}
+	}
+
+	@Override
+	public void connectedToServer(NetworkMessenger nm) 
+	{
+		this.nm = nm;
+	}
+
+	@Override
+	public void networkMessageReceived(NetworkDataObject ndo) 
+	{
+		
 	}
 
 }
