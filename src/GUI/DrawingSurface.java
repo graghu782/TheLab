@@ -22,6 +22,7 @@ public class DrawingSurface extends PApplet implements NetworkListener
 	public static final int DRAWING_HEIGHT = 600;
 	public static final int MAP_WIDTH = 2400;
 	public static final int MAP_HEIGHT = 1800;
+	private Player target;
 	private double x,y;
 	
 	private int count;
@@ -44,7 +45,8 @@ public class DrawingSurface extends PApplet implements NetworkListener
 	{
 		background(255);
 		img = loadImage("background.bmp");
-		player = new Player(0, 0, "noob");
+		player = new Player(0, 0, "noob",true);
+		target = new Player(110, 140, "target",false);
 		border = new Border(0,0,10,10);
 	}
 
@@ -58,6 +60,8 @@ public class DrawingSurface extends PApplet implements NetworkListener
 	{		
 		x = player.getX();
 		y = player.getY();
+		
+		
 		
 		background(255);
 		image(img, (float)(- x), (float)(-y), (float)(MAP_WIDTH+DRAWING_WIDTH), (float)(MAP_HEIGHT+DRAWING_HEIGHT));
@@ -74,6 +78,21 @@ public class DrawingSurface extends PApplet implements NetworkListener
 		scale(ratioX, ratioY);
 		
 		player.draw(this);
+		target.draw(this);
+		
+		
+		for (Bullet b:bullets)
+		{
+			b.draw(this);
+			b.update(x,y);
+		}
+		if (bullets.size() >0){
+			if (bullets.get(0).getIs() >= 6)
+				bullets.remove(0);
+		}
+		
+		
+		
 		
 		if(keysPressed[0])
 		{
@@ -101,21 +120,11 @@ public class DrawingSurface extends PApplet implements NetworkListener
 		if(mousePressed) 
 		{
 			count++;
-			if(count % 10 == 0) 
+			if(count % 3 == 0) 
 			{ 
 				bullets.add(new Bullet(DRAWING_WIDTH/2,DRAWING_HEIGHT/2,player.getDir(), x,y));
 				count = 0;
 			}
-		}
-		
-		for (Bullet b:bullets)
-		{
-			b.draw(this);
-			b.update(x,y);
-		}
-		if (bullets.size() >0){
-			if (bullets.get(0).getIs() >= 6)
-				bullets.remove(0);
 		}
 		
 		
