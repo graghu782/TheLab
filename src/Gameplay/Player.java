@@ -8,7 +8,7 @@ public class Player
 	private double x, y, width, length;
 	private Color color;
 	private String name;
-	private double xcenter, ycenter;
+	private double xCenter, yCenter;
 	private Arm arm;
 	
 	
@@ -17,8 +17,8 @@ public class Player
 		this.x = x;
 		this.y = y;
 		
-		ycenter = y;
-		xcenter = x;
+		yCenter = y;
+		xCenter = x;
 		
 		width = 50;
 		length = 90;
@@ -53,15 +53,26 @@ public class Player
 		return length;
 	}
 
-/*	public void draw(PApplet drawer) 
-	{
-		drawer.rect((float)x, (float)y, (float)(width), (float)(length));
-		
-	}
-*/
 	public void draw(PApplet drawer)
 	{
 		drawer.rect((float)(drawer.width/2 - width/2), (float)(drawer.height/2 - length/2), (float)width, (float)length);
+		
+		double mouseXChange = drawer.mouseX - drawer.width/2;
+		double mouseYChange = drawer.mouseY - drawer.height/2;
+		
+		System.out.println(mouseXChange + " " + mouseYChange);
+		
+		double direction = Math.atan(mouseYChange/mouseXChange);
+		
+		if(mouseXChange < 0)
+		{
+			direction += Math.PI;
+		}
+		
+		arm.setmx(direction);
+		arm.setmy(direction);
+		
+		arm.draw(drawer);
 	//	arm.setmx(mouseX);
 	//	arm.setmy(mouseY);
 	}

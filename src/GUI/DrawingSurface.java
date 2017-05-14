@@ -53,19 +53,14 @@ public class DrawingSurface extends PApplet
 		border = new Border(DRAWING_WIDTH/2-x-5-player.getWidth()/2,DRAWING_HEIGHT/2-y-5-player.getLength()/2,MAP_WIDTH+10,MAP_HEIGHT+10);
 	//	this.rect((float)(DRAWING_WIDTH/2), b, c, d);
 		border.draw(this);
-		
-		System.out.println(x + " " + y);
 		fill(255);
 				
 		pushMatrix();
-		
 		
 		float ratioX = (float)width/DRAWING_WIDTH;
 		float ratioY = (float)height/DRAWING_HEIGHT;
 		
 		scale(ratioX, ratioY);
-		
-
 		
 		player.draw(this);
 		
