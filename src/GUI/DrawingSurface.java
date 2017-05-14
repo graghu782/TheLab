@@ -174,8 +174,20 @@ public class DrawingSurface extends PApplet implements NetworkListener
 	@Override
 	public void networkMessageReceived(NetworkDataObject ndo) 
 	{
+		String host = ndo.getSourceIP();
 		
+		if(ndo.messageType.equals(NetworkDataObject.MESSAGE))
+		{
+			
+		}
+		else if(ndo.messageType.equals(NetworkDataObject.CLIENT_LIST))
+		{
+			
+		}
+		else if(ndo.messageType.equals(NetworkDataObject.DISCONNECT))
+		{
+			
+		}
 	}
-
 }
 
