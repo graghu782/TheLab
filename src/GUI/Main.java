@@ -21,16 +21,12 @@ public class Main extends JFrame
     private JFrame window;
     private DrawingSurface drawing;
 
-    private boolean[] panelsInPlace;
-
     public Main(String title)
     {
 	super(title);
 	setBounds(250, 250, 800, 600);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
-	    
-	panelsInPlace = new boolean[3];
 	    
 	cardPanel = new JPanel();
 	CardLayout cl = new CardLayout();
@@ -43,7 +39,6 @@ public class Main extends JFrame
 		
 	cardPanel.add(panel1,"1"); // Card is named "1"
 	add(cardPanel);
-	panelsInPlace[0] = true;
 	
 	setVisible(true);
     }
@@ -59,54 +54,31 @@ public class Main extends JFrame
 	{
 	    setSize(800, 600);
 
-	    if (panelsInPlace[1])
-	    {
-		cardPanel.remove(panel2);
-		panelsInPlace[1] = false;
-	    }
-	    if (panelsInPlace[2])
-	    {
-		cardPanel.remove(panel3);
-		panelsInPlace[2] = false;
-
-		window.setVisible(false);
-		window.dispose();
-
+	    cardPanel.removeAll();
+	    
+	    if(drawing != null)
 		drawing.noLoop();
-	    }
+	    if(window != null)
+		window.dispose();
 
 	    cardPanel.add(panel1, "1");
 	    add(cardPanel);
-	    panelsInPlace[0] = true;
-
+	    
 	    setVisible(true);
 	}
 	else if (x == 1)
 	{
-	    if (panelsInPlace[0])
-	    {
-		cardPanel.remove(panel1);
-		panelsInPlace[0] = false;
-	    }
-	    if (panelsInPlace[2])
-	    {
-		cardPanel.remove(panel3);
-		panelsInPlace[2] = false;
-	    }
-
+	    cardPanel.removeAll();
 	    cardPanel.add(panel2, "2");
 	    add(cardPanel);
-	    panelsInPlace[1] = true;
 
 	    setVisible(true);
 	}
 	else if (x == 2)
 	{
-	    cardPanel.remove(panel1);
+	    cardPanel.removeAll();
 	    cardPanel.add(panel3, "3");
 	    add(cardPanel);
-	    panelsInPlace[2] = true;
-
 	    setSize(300, 100);
 
 	    drawing = new DrawingSurface();
