@@ -1,4 +1,4 @@
-package Networking;
+package Networking.backend;
 
 
 import java.io.IOException;
@@ -42,6 +42,8 @@ public class PeerDiscovery
 	private final InetSocketAddress broadcastAddress;
 
 	private boolean shouldStop = false;
+	
+	private boolean beDiscoverable;
 
 	private List<InetAddress> responseList = null;
 
@@ -78,7 +80,7 @@ public class PeerDiscovery
 					{
 						mcastSocket.receive( rx );
 
-						if( buffy[ 0 ] == QUERY_PACKET )
+						if( buffy[ 0 ] == QUERY_PACKET && beDiscoverable )
 						{
 							lastResponseDestination = rx.getAddress();
 							mcastSocket.send( tx );
@@ -141,7 +143,7 @@ public class PeerDiscovery
 						if( groupMatch )
 						{
 							
-							if( buffy[ 0 ] == QUERY_PACKET )
+							if( buffy[ 0 ] == QUERY_PACKET && beDiscoverable )
 							{
 								byte[] data = new byte[ 1 + group.getAddress().length ];
 								data[ 0 ] = RESPONSE_PACKET;
@@ -200,13 +202,15 @@ public class PeerDiscovery
 	 *           <255 = unrestricted
 	 * @throws IOException
 	 */
-	public PeerDiscovery( InetAddress group, int port, int ttl )
+	public PeerDiscovery( InetAddress group, int port, int ttl)
 			throws IOException
 	{
 		/*
 		 * on systems with both IPv4 and IPv6 stacks,
 		 * MulticastSocket.setTimeToLive() does not work. This fixes things
 		 */
+		this.beDiscoverable = false;;
+		
 		Properties props = System.getProperties();
 		props.setProperty( "java.net.preferIPv4Stack", "true" );
 		System.setProperties( props );
@@ -240,8 +244,9 @@ public class PeerDiscovery
 	 *           a valid port, i.e.: in the range 1025 to 65535 inclusive
 	 * @throws IOException
 	 */
-	public PeerDiscovery( InetAddress group, int port ) throws IOException
+	public PeerDiscovery( InetAddress group, int port) throws IOException
 	{
+		this.beDiscoverable = false;
 		this.group = group;
 		this.port = port;
 
@@ -312,6 +317,10 @@ public class PeerDiscovery
 			bcastSocket.send( tx );
 		}
 
+	}
+	
+	public void setDiscoverable(boolean discoverable) {
+		this.beDiscoverable = discoverable;
 	}
 	
 	public InetAddress[] getPeers() {
