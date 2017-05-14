@@ -12,6 +12,7 @@ public class Bullet
 	double yTemp;
 	double xo;
 	double yo;
+	private boolean isRedTeam;//for when we get teams
 	
 	private int iters;
 	

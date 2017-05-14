@@ -14,8 +14,6 @@ public class Player
 	private Arm arm;
 	double direction;
 	
-	private ArrayList<Bullet> bullets;
-	
 	
 	public Player(double x, double y, String name) 
 	{
@@ -31,7 +29,6 @@ public class Player
 		arm = new Arm(x,y,x,y);
 		direction = 0;
 		
-		bullets = new ArrayList();
 	}
 	
 	public void move(double x, double y) 
@@ -59,6 +56,9 @@ public class Player
 	{
 		return length;
 	}
+	public double getDir(){
+		return direction;
+	}
 
 	public void draw(PApplet drawer)
 	{
@@ -80,20 +80,6 @@ public class Player
 		arm.setmy(direction);
 		arm.draw(drawer);
 		
-		for (Bullet b:bullets){
-			b.update(x,y);
-			b.draw(drawer);
-		}
-		if (bullets.size() >0){
-			if (bullets.get(0).getIs() >= 6)
-				bullets.remove(0);
-		}
-		
-		
-		
-	}
-	public void makeBullet(double dW, double dH){
-		bullets.add(new Bullet(dW/2 ,dH/2, direction,x,y));
 	}
 	
 }

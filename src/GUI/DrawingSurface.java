@@ -1,4 +1,6 @@
 package GUI;
+import java.util.ArrayList;
+
 import Gameplay.Border;
 import Gameplay.Bullet;
 import Gameplay.Player;
@@ -11,17 +13,22 @@ public class DrawingSurface extends PApplet
 	private Border border;
 	private boolean[] keysPressed;
 	private PImage img;
+	private ArrayList<Bullet> bullets;
 	
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
 	public static final int MAP_WIDTH = 2400;
 	public static final int MAP_HEIGHT = 1800;
 	private double x,y;
+	/*
+	 * we need to make an array of ppl for multiplayer
+	 */
 
 	public DrawingSurface () 
 	{
 		keysPressed = new boolean[4];
 		runSketch();
+		bullets = new ArrayList();
 	}
 	
 	public void settings() 
@@ -87,6 +94,17 @@ public class DrawingSurface extends PApplet
 				player.move(10, 0);
 		}
 		
+		for (Bullet b:bullets){
+			b.draw(this);
+			b.update(x,y);
+		}
+		if (bullets.size() >0){
+			if (bullets.get(0).getIs() >= 6)
+				bullets.remove(0);
+		}
+		
+		
+		
 		
 		popMatrix();
 	}
@@ -132,7 +150,7 @@ public class DrawingSurface extends PApplet
 		}
 	}
 	public void mouseClicked(){
-		player.makeBullet(DRAWING_WIDTH, DRAWING_HEIGHT);
+		bullets.add(new Bullet(DRAWING_WIDTH/2,DRAWING_HEIGHT/2,player.getDir(), x,y));
 	}
 }
 
