@@ -22,8 +22,8 @@ public class Bullet
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		
-		length = 2000;
-		speed = 10;
+		length = 100;
+		speed = 90;
 		iters = 0;
 		xo = x;
 		yo = y;
