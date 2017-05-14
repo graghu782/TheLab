@@ -15,7 +15,7 @@ public class DrawingSurface extends PApplet
 	public static final int DRAWING_HEIGHT = 600;
 	public static final int MAP_WIDTH = 2400;
 	public static final int MAP_HEIGHT = 1800;
-	public double x,y;
+	private double x,y;
 
 	public DrawingSurface () 
 	{
@@ -50,7 +50,7 @@ public class DrawingSurface extends PApplet
 		background(255);
 		image(img, (float)(- x), (float)(-y), (float)(MAP_WIDTH+DRAWING_WIDTH), (float)(MAP_HEIGHT+DRAWING_HEIGHT));
 		
-		border = new Border(DRAWING_WIDTH/2-x-5-player.getWidth()/2,DRAWING_HEIGHT/2-y-5-player.getLength()/2,MAP_WIDTH+10,MAP_HEIGHT+10);
+		border = new Border(DRAWING_WIDTH/2 -x - 5 - player.getWidth()/2, DRAWING_HEIGHT/2 - y - 5-player.getLength()/2, MAP_WIDTH+10, MAP_HEIGHT+10);
 	//	this.rect((float)(DRAWING_WIDTH/2), b, c, d);
 		border.draw(this);
 		fill(255);
