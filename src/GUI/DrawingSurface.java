@@ -101,7 +101,7 @@ public class DrawingSurface extends PApplet implements NetworkListener
 		if(mousePressed) 
 		{
 			count++;
-			if(count % 3 == 0) 
+			if(count % 10 == 0) 
 			{ 
 				bullets.add(new Bullet(DRAWING_WIDTH/2,DRAWING_HEIGHT/2,player.getDir(), x,y));
 				count = 0;
