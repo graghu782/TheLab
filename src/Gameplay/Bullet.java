@@ -37,7 +37,7 @@ public class Bullet
 		double xTempr = xCoord + (length * xTemp);
 		
 		double yTempr = yCoord + (length * yTemp);
-		
+		drawer.strokeWeight(1);
 		drawer.line((float)xCoord, (float)yCoord, (float)(xTempr), (float)(yTempr));
 		
 		xCoord = xCoord + (speed * xTemp);
