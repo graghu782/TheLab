@@ -1,5 +1,6 @@
 package GUI;
 import Gameplay.Border;
+import Gameplay.Bullet;
 import Gameplay.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -93,19 +94,19 @@ public class DrawingSurface extends PApplet
 	public void keyPressed() 
 	{
 	
-		if(key == 'w') 
+		if(key == 'w' || key == 'W') 
 		{
 			keysPressed[0] = true;
 		}
-		if(key == 'a') 
+		if(key == 'a' || key == 'A') 
 		{
 			keysPressed[1] = true;
 		}
-		if(key == 's')
+		if(key == 's' || key == 'S')
 		{ 
 			keysPressed[2] = true;
 		}
-		if(key == 'd') 
+		if(key == 'd' || key == 'D') 
 		{
 			keysPressed[3] = true;
 		}
@@ -113,22 +114,25 @@ public class DrawingSurface extends PApplet
 	
 	public void keyReleased()
 	{
-		if(key == 'w') 
+		if(key == 'w' || key == 'W') 
 		{
 			keysPressed[0] = false;
 		}
-		if(key == 'a') 
+		if(key == 'a' || key == 'A') 
 		{
 			keysPressed[1] = false;
 		}
-		if(key == 's')
+		if(key == 's' || key == 'S')
 		{ 
 			keysPressed[2] = false;
 		}
-		if(key == 'd') 
+		if(key == 'd' || key == 'D') 
 		{
 			keysPressed[3] = false;
 		}
+	}
+	public void mouseClicked(){
+		player.makeBullet(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 }
 
