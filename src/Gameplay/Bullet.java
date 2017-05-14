@@ -36,7 +36,6 @@ public class Bullet
 		drawer.strokeWeight(3);
 		double xTempr = xCoord + (length * xTemp);
 		
-		System.out.println(length * Math.cos(direction));
 		double yTempr = yCoord + (length * yTemp);
 		
 		drawer.line((float)xCoord, (float)yCoord, (float)(xTempr), (float)(yTempr));
