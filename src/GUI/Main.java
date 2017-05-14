@@ -15,6 +15,7 @@ public class Main extends JFrame
 	private MenuPanel panel1;
 	private InstructionsPanel panel2;
 	private OptionPanel panel3;
+	private ServerPanel panel4;
 	
 	private JFrame window;
 	private DrawingSurface drawing;
@@ -37,6 +38,7 @@ public class Main extends JFrame
 		panel1 = new MenuPanel(this); 
 		panel2 = new InstructionsPanel(this);
 		panel3 = new OptionPanel(this);
+		panel4 = new ServerPanel(this);
 		
 	    cardPanel.add(panel1,"1"); // Card is named "1"
 	    add(cardPanel);
