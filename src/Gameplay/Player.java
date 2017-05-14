@@ -60,7 +60,7 @@ public class Player
 		double mouseXChange = drawer.mouseX - drawer.width/2;
 		double mouseYChange = drawer.mouseY - drawer.height/2;
 		
-		System.out.println(mouseXChange + " " + mouseYChange);
+		//System.out.println(mouseXChange + " " + mouseYChange);
 		
 		double direction = Math.atan(mouseYChange/mouseXChange);
 		
@@ -73,8 +73,6 @@ public class Player
 		arm.setmy(direction);
 		
 		arm.draw(drawer);
-	//	arm.setmx(mouseX);
-	//	arm.setmy(mouseY);
 	}
 	
 }
