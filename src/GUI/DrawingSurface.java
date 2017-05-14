@@ -12,7 +12,6 @@ public class DrawingSurface extends PApplet
 	private Player player;
 	private Border border;
 	private boolean[] keysPressed;
-	private boolean mousePressed;
 	private PImage img;
 	private ArrayList<Bullet> bullets;
 	
@@ -21,6 +20,8 @@ public class DrawingSurface extends PApplet
 	public static final int MAP_WIDTH = 2400;
 	public static final int MAP_HEIGHT = 1800;
 	private double x,y;
+	
+	private int count;
 	/*
 	 * we need to make an array of ppl for multiplayer
 	 */
@@ -30,7 +31,6 @@ public class DrawingSurface extends PApplet
 		keysPressed = new boolean[4];
 		runSketch();
 		bullets = new ArrayList();
-		mousePressed = false;
 	}
 	
 	public void settings() 
@@ -96,6 +96,14 @@ public class DrawingSurface extends PApplet
 				player.move(10, 0);
 		}
 	
+		if(mousePressed) {
+			count++;
+			if(count % 3 == 0) { 
+				bullets.add(new Bullet(DRAWING_WIDTH/2,DRAWING_HEIGHT/2,player.getDir(), x,y));
+				count = 0;
+			}
+		}
+		
 		for (Bullet b:bullets){
 			b.draw(this);
 			b.update(x,y);
@@ -152,12 +160,5 @@ public class DrawingSurface extends PApplet
 		}
 	}
 
-	public void mousePressed(){
-		bullets.add(new Bullet(DRAWING_WIDTH/2,DRAWING_HEIGHT/2,player.getDir(), x,y));
-	}
-	
-	public void mouseReleased() {
-		
-	}
 }
 
