@@ -34,7 +34,7 @@ public class DrawingSurface extends PApplet implements NetworkListener
     {
 	keysPressed = new boolean[4];
 	runSketch();
-	bullets = new ArrayList();
+	bullets = new ArrayList<Bullet>();
     }
 
     public void settings()
