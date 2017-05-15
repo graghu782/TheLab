@@ -1,4 +1,5 @@
 package GUI;
+
 import java.util.ArrayList;
 
 import Gameplay.Border;
@@ -12,191 +13,183 @@ import processing.core.PImage;
 
 public class DrawingSurface extends PApplet implements NetworkListener
 {
-	private Player player;
-	private Border border;
-	private boolean[] keysPressed;
-	private PImage img;
-	private ArrayList<Bullet> bullets;
-	
-	public static final int DRAWING_WIDTH = 800;
-	public static final int DRAWING_HEIGHT = 600;
-	public static final int MAP_WIDTH = 2400;
-	public static final int MAP_HEIGHT = 1800;
-	private Player target;
-	private double x,y;
-	
-	private int count;
-	
-	private NetworkMessenger nm;
+    private Player player;
+    private Border border;
+    private boolean[] keysPressed;
+    private PImage img;
+    private ArrayList<Bullet> bullets;
 
-	public DrawingSurface () 
-	{
-		keysPressed = new boolean[4];
-		runSketch();
-		bullets = new ArrayList();
-	}
-	
-	public void settings() 
-	{
-		size(800, 600);
-	}
-	
-	public void setup() 
-	{
-		background(255);
-		img = loadImage("background.bmp");
-		player = new Player(0, 0, "noob",true);
-		target = new Player(110, 140, "target",false);
-		border = new Border(0,0,10,10);
-	}
+    public static final int DRAWING_WIDTH = 800;
+    public static final int DRAWING_HEIGHT = 600;
+    public static final int MAP_WIDTH = 2400;
+    public static final int MAP_HEIGHT = 1800;
+    private Player target;
+    private double x, y;
 
-	// The statements in draw() are executed 60 times a second until the 
-	// program is stopped. Each statement is executed in 
-	// sequence and after the last line is read, the first 
-	// line is executed again.s
+    private int count;
 
+    private NetworkMessenger nm;
 
-	public void draw() 
-	{		
-		x = player.getX();
-		y = player.getY();
-		
-		
-		
-		background(255);
-		image(img, (float)(- x), (float)(-y), (float)(MAP_WIDTH+DRAWING_WIDTH), (float)(MAP_HEIGHT+DRAWING_HEIGHT));
-		
-		border = new Border(DRAWING_WIDTH/2 -x - 5 - player.getWidth()/2, DRAWING_HEIGHT/2 - y - 5-player.getLength()/2, MAP_WIDTH+10, MAP_HEIGHT+10);
-		border.draw(this);
-		fill(255);
-				
-		pushMatrix();
-		
-		float ratioX = (float)width/DRAWING_WIDTH;
-		float ratioY = (float)height/DRAWING_HEIGHT;
-		
-		scale(ratioX, ratioY);
-		
-		player.draw(this);
-		target.draw(this);
-		
-		
-		for (Bullet b:bullets)
-		{
-			b.draw(this);
-			b.update(x,y);
-		}
-		if (bullets.size() >0){
-			if (bullets.get(0).getIs() >= 6)
-				bullets.remove(0);
-		}
-		
-		
-		
-		
-		if(keysPressed[0])
-		{
-			if (player.getY() > 1)
-			{
-				player.move(0, -10);
-			}
-		}
-		if(keysPressed[1])
-		{
-			if (player.getX() > 1)
-				player.move(-10, 0);
-		}
-		if(keysPressed[2]) 
-		{
-			if (player.getY() + player.getLength() < MAP_HEIGHT - 1)
-				player.move(0, 10);
-		}
-		if(keysPressed[3])
-		{
-			if (player.getX() + player.getWidth() < MAP_WIDTH - 1)
-				player.move(10, 0);
-		}
-	
-		if(mousePressed) 
-		{
-			count++;
-			if(count % 3 == 0) 
-			{ 
-				bullets.add(new Bullet(DRAWING_WIDTH/2,DRAWING_HEIGHT/2,player.getDir(), x,y));
-				count = 0;
-			}
-		}
-		
-		
-		
-		
-		popMatrix();
-	}
-	
-	public void keyPressed() 
+    public DrawingSurface()
+    {
+	keysPressed = new boolean[4];
+	runSketch();
+	bullets = new ArrayList();
+    }
+
+    public void settings()
+    {
+	size(800, 600);
+    }
+
+    public void setup()
+    {
+	background(255);
+	img = loadImage("background.bmp");
+	player = new Player(0, 0, "noob", true);
+	target = new Player(110, 140, "target", false);
+	border = new Border(0, 0, 10, 10);
+    }
+
+    // The statements in draw() are executed 60 times a second until the
+    // program is stopped. Each statement is executed in
+    // sequence and after the last line is read, the first
+    // line is executed again.s
+
+    public void draw()
+    {
+	x = player.getX();
+	y = player.getY();
+
+	background(255);
+	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH),
+		(float) (MAP_HEIGHT + DRAWING_HEIGHT));
+
+	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2,
+		DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
+	border.draw(this);
+	fill(255);
+
+	pushMatrix();
+
+	float ratioX = (float) width / DRAWING_WIDTH;
+	float ratioY = (float) height / DRAWING_HEIGHT;
+
+	scale(ratioX, ratioY);
+
+	player.draw(this);
+	target.draw(this);
+
+	for (Bullet b : bullets)
 	{
-	
-		if(key == 'w' || key == 'W') 
-		{
-			keysPressed[0] = true;
-		}
-		if(key == 'a' || key == 'A') 
-		{
-			keysPressed[1] = true;
-		}
-		if(key == 's' || key == 'S')
-		{ 
-			keysPressed[2] = true;
-		}
-		if(key == 'd' || key == 'D') 
-		{
-			keysPressed[3] = true;
-		}
+	    b.draw(this);
+	    b.update(x, y);
 	}
-	
-	public void keyReleased()
+	if (bullets.size() > 0)
 	{
-		if(key == 'w' || key == 'W') 
-		{
-			keysPressed[0] = false;
-		}
-		if(key == 'a' || key == 'A') 
-		{
-			keysPressed[1] = false;
-		}
-		if(key == 's' || key == 'S')
-		{ 
-			keysPressed[2] = false;
-		}
-		if(key == 'd' || key == 'D') 
-		{
-			keysPressed[3] = false;
-		}
+	    if (bullets.get(0).getIs() >= 6)
+		bullets.remove(0);
 	}
 
-	@Override
-	public void connectedToServer(NetworkMessenger nm) 
+	if (keysPressed[0])
 	{
-		this.nm = nm;
+	    if (player.getY() > 1)
+	    {
+		player.move(0, -10);
+	    }
+	}
+	if (keysPressed[1])
+	{
+	    if (player.getX() > 1)
+		player.move(-10, 0);
+	}
+	if (keysPressed[2])
+	{
+	    if (player.getY() + player.getLength() < MAP_HEIGHT - 1)
+		player.move(0, 10);
+	}
+	if (keysPressed[3])
+	{
+	    if (player.getX() + player.getWidth() < MAP_WIDTH - 1)
+		player.move(10, 0);
 	}
 
-	@Override
-	public void networkMessageReceived(NetworkDataObject ndo) 
+	if (mousePressed)
 	{
-		String host = ndo.getSourceIP();
-		
-		if(ndo.messageType.equals(NetworkDataObject.MESSAGE))
-		{
-			
-		}
-		else if(ndo.messageType.equals(NetworkDataObject.CLIENT_LIST))
-		{
-			
-		}
-		else if(ndo.messageType.equals(NetworkDataObject.DISCONNECT))
-		{
-			
-		}
+	    count++;
+	    if (count % 3 == 0)
+	    {
+		bullets.add(new Bullet(DRAWING_WIDTH / 2, DRAWING_HEIGHT / 2, player.getDir(), x, y));
+		count = 0;
+	    }
 	}
+
+	popMatrix();
+    }
+
+    public void keyPressed()
+    {
+
+	if (key == 'w' || key == 'W')
+	{
+	    keysPressed[0] = true;
+	}
+	if (key == 'a' || key == 'A')
+	{
+	    keysPressed[1] = true;
+	}
+	if (key == 's' || key == 'S')
+	{
+	    keysPressed[2] = true;
+	}
+	if (key == 'd' || key == 'D')
+	{
+	    keysPressed[3] = true;
+	}
+    }
+
+    public void keyReleased()
+    {
+	if (key == 'w' || key == 'W')
+	{
+	    keysPressed[0] = false;
+	}
+	if (key == 'a' || key == 'A')
+	{
+	    keysPressed[1] = false;
+	}
+	if (key == 's' || key == 'S')
+	{
+	    keysPressed[2] = false;
+	}
+	if (key == 'd' || key == 'D')
+	{
+	    keysPressed[3] = false;
+	}
+    }
+
+    @Override
+    public void connectedToServer(NetworkMessenger nm)
+    {
+	this.nm = nm;
+    }
+
+    @Override
+    public void networkMessageReceived(NetworkDataObject ndo)
+    {
+	String host = ndo.getSourceIP();
+
+	if (ndo.messageType.equals(NetworkDataObject.MESSAGE))
+	{
+
+	}
+	else if (ndo.messageType.equals(NetworkDataObject.CLIENT_LIST))
+	{
+
+	}
+	else if (ndo.messageType.equals(NetworkDataObject.DISCONNECT))
+	{
+
+	}
+    }
 }
-
