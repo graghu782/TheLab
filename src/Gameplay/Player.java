@@ -87,14 +87,7 @@ public class Player
 	}
 	drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
 		(float) (drawer.height / 2 - mainY + y - length / 2), (float) width, (float) length);
-	if (!isMain)
-	{
-	    System.out.println(mainX + " " + x);
-	}
-	if (isMain)
-	{
-	    System.out.println("  " + mainX + " " + x);
-	}
+
 	double mouseXChange = drawer.mouseX - drawer.width / 2;
 	double mouseYChange = drawer.mouseY - drawer.height / 2;
 
