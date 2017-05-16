@@ -43,7 +43,7 @@ public class Main extends JFrame
 	cardPanel.add(panel3, "game");
 	cardPanel.add(panel4, "servermenu");
 	add(cardPanel);
-
+		
 	setVisible(true);
     }
 
