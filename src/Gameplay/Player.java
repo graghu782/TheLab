@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import raghu.shapes.Line;
 
 public class Player
 {
@@ -16,6 +17,8 @@ public class Player
     private Arm arm;
     double direction;
     private int health;
+    
+    private Line l1,l2,l3,l4; //top, right ,bottom, left
 
     private static double mainX, mainY;
 
@@ -34,7 +37,7 @@ public class Player
 	arm = new Arm(x, y, x, y);
 	direction = 0;
 	health = 100;
-
+	
     }
 
     public void move(double x, double y)
@@ -68,6 +71,11 @@ public class Player
     {
 	return direction;
     }
+    public boolean isHit(Line k1){
+	
+	return isMain;
+	
+    }
 
     public void decHealth(int num)
     {
@@ -85,12 +93,20 @@ public class Player
 	{
 	    drawer.fill(255, 0, 0);
 	}
+	
 	drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
 		(float) (drawer.height / 2 - mainY + y - length / 2), (float) width, (float) length);
 
 	double mouseXChange = drawer.mouseX - drawer.width / 2;
 	double mouseYChange = drawer.mouseY - drawer.height / 2;
-
+	
+	l1 = new Line(x,y,x+width,y);
+	l2 = new Line(x+width,y,x+width,y+length);	
+	l3 = new Line(x,y+length,x+width,y+length);	
+	l4 = new Line(x,y,x,y+length);
+	
+	
+	
 	// System.out.println(mouseXChange + " " + mouseYChange);
 
 	direction = Math.atan(mouseYChange / mouseXChange);

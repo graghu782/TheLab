@@ -1,11 +1,12 @@
 package Gameplay;
 
 import processing.core.PApplet;
+import raghu.shapes.Line;
 
-public class Bullet
+public class Bullet extends raghu.shapes.Line
 { 
 	private double direction;
-	private double xCoord, yCoord;
+	//private double xCoord, yCoord;
 	private double length;
 	private double speed;
 	double xTemp;
@@ -14,13 +15,16 @@ public class Bullet
 	double yo;
 	private boolean isRedTeam;//for when we get teams
 	
+	private Line l1;
+	
 	private int iters;
 	
 	public Bullet(double xCoord, double yCoord, double direction, double x, double y)
 	{
+	    super(xCoord,yCoord,Math.cos(direction),Math.sin(direction));
 		this.direction = direction;
-		this.xCoord = xCoord;
-		this.yCoord = yCoord;
+		//this.xCoord = xCoord;
+		//this.yCoord = yCoord;
 		
 		length = 100;
 		speed = 90;
@@ -34,14 +38,16 @@ public class Bullet
 	public void draw(PApplet drawer)
 	{
 		drawer.strokeWeight(3);
-		double xTempr = xCoord + (length * xTemp);
+		double xTempr = x + (length * xTemp);
 		
-		double yTempr = yCoord + (length * yTemp);
+		double yTempr = y + (length * yTemp);
 		drawer.strokeWeight(1);
-		drawer.line((float)xCoord, (float)yCoord, (float)(xTempr), (float)(yTempr));
+		drawer.line((float)x, (float)y, (float)(xTempr), (float)(yTempr));
 		
-		xCoord = xCoord + (speed * xTemp);
-		yCoord = yCoord + (speed * yTemp);
+		//draw(drawer);
+		
+		x = x + (speed * xTemp);
+		y = y + (speed * yTemp);
 		iters++;
 	}
 	
@@ -52,9 +58,9 @@ public class Bullet
 	
 	public void update(double x, double y)
 	{
-		xCoord+=xo-x;
+		x+=xo-x;
 		xo = x;
-		yCoord+=yo-y;
+		y+=yo-y;
 		yo = y;
 	}
 }
