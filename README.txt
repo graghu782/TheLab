@@ -24,7 +24,7 @@ Features List:
 Must-Have features:
 
 
-(NOT DONE)Menu that includes instructions, start button, join server, create server
+(DONE)Menu that includes instructions, start button, join server, create server
 (DONE)Players can move around and shoot
 (DONE)A background that moves with the player
 (NOT DONE)Characters have hitboxes

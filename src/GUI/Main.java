@@ -61,11 +61,12 @@ public class Main extends JFrame
     {
 	cl.show(cardPanel, s);
 
-	setSize(800, 600);
+	setBounds(200, 200, 800, 600);
 
 	if (s.equals("game"))
 	{
 	    setSize(300, 100);
+	    setBounds(200, 200, 800, 100);
 	    drawing = new DrawingSurface();
 
 	    PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
@@ -73,7 +74,7 @@ public class Main extends JFrame
 
 	    window = (JFrame) canvas.getFrame();
 
-	    window.setSize(800, 600);
+	    window.setBounds(200, 300, 800, 600);
 	    window.setMinimumSize(new Dimension(100, 100));
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setResizable(false);

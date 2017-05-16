@@ -23,16 +23,16 @@ public class MenuPanel extends JPanel implements ActionListener
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.add(Box.createVerticalStrut(300)); // Move down by 300 pixels
 
-	button = new JButton("Start");
-	button1 = new JButton("Server Testing");
+	button = new JButton("Sandbox");
+	button1 = new JButton("Start");
 	button2 = new JButton("Instructions");
 
 	button.addActionListener(this);
 	button1.addActionListener(this);
 	button2.addActionListener(this);
 
-	p.add(button);
 	p.add(button1);
+	p.add(button);
 	p.add(button2);
 	add(p);
     }
