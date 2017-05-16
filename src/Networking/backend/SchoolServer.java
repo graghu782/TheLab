@@ -177,7 +177,7 @@ public class SchoolServer implements NetworkMessenger
 	{
 	    InetAddress hostAdd = InetAddress.getByName(host);
 	    disconnectFromClient(hostAdd);
-	} 
+	}
 	catch (UnknownHostException e)
 	{
 	    // TODO Auto-generated catch block
@@ -203,7 +203,7 @@ public class SchoolServer implements NetworkMessenger
 	    try
 	    {
 		serverSocket.close();
-	    } 
+	    }
 	    catch (IOException e)
 	    {
 		e.printStackTrace();
@@ -283,7 +283,7 @@ public class SchoolServer implements NetworkMessenger
 				    }
 				    repeatMessage(ndo);
 				    sendClientList();
-				} 
+				}
 				else
 				{
 				    NetworkDataObject ndo2 = new NetworkDataObject();
@@ -316,11 +316,11 @@ public class SchoolServer implements NetworkMessenger
 
 		    }
 
-		} 
+		}
 		catch (IOException e)
 		{
 		    e.printStackTrace();
-		} 
+		}
 		finally
 		{
 		    if (serverSocket != null)
@@ -328,7 +328,7 @@ public class SchoolServer implements NetworkMessenger
 			try
 			{
 			    serverSocket.close();
-			} 
+			}
 			catch (IOException e)
 			{
 			    e.printStackTrace();

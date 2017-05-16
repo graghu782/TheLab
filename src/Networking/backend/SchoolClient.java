@@ -14,151 +14,166 @@ import Networking.frontend.NetworkMessenger;
 public class SchoolClient implements NetworkMessenger
 {
 
-	private InetAddress server;
-	private InetAddress myIP;
+    private InetAddress server;
+    private InetAddress myIP;
 
-	private ClientWriter writer;
-	private ClientReader reader;
+    private ClientWriter writer;
+    private ClientReader reader;
 
-	private List<NetworkListener> listeners;
+    private List<NetworkListener> listeners;
 
-	private String programID;
-	
-	
+    private String programID;
 
-	public SchoolClient(String programID, InetAddress myIP) 
+    public SchoolClient(String programID, InetAddress myIP)
+    {
+	this.myIP = myIP;
+	this.programID = programID;
+	listeners = new ArrayList<NetworkListener>();
+	addNetworkListener(new NetworkListener()
 	{
-		this.myIP = myIP;
-		this.programID = programID;
-		listeners = new ArrayList<NetworkListener>();
-		addNetworkListener(new NetworkListener() 
+	    @Override
+	    public void networkMessageReceived(NetworkDataObject ndo)
+	    {
+
+		new Thread(new Runnable()
 		{
-			@Override
-			public void networkMessageReceived(NetworkDataObject ndo) 
+
+		    @Override
+		    public void run()
+		    {
+
+			synchronized (SchoolClient.this)
 			{
 
-				new Thread(new Runnable()
+			    if (ndo.messageType.equals(NetworkDataObject.DISCONNECT))
+			    {
+
+				if (ndo.dataSource.equals(server))
 				{
+				    disconnect();
+				}
 
-					@Override
-					public void run()
-					{
-
-						synchronized(SchoolClient.this)
-						{
-
-							if (ndo.messageType.equals(NetworkDataObject.DISCONNECT)) 
-							{
-
-								if (ndo.dataSource.equals(server))
-								{
-									disconnect();
-								}
-
-							}
-						}
-					}
-
-				}).start();
-
+			    }
 			}
+		    }
 
-			@Override
-			public void connectedToServer(NetworkMessenger nm)
-			{
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		}).start();
+
+	    }
+
+	    @Override
+	    public void connectedToServer(NetworkMessenger nm)
+	    {
+		// TODO Auto-generated method stub
+
+	    }
+	});
+    }
+
+    public void addNetworkListener(NetworkListener nl)
+    {
+	synchronized (listeners)
+	{
+	    listeners.add(nl);
+	}
+    }
+
+    public void removeNetworkListener(NetworkListener nl)
+    {
+	synchronized (listeners)
+	{
+	    listeners.remove(nl);
+	}
+    }
+
+    public synchronized void sendMessage(String messageType, Object... message)
+    {
+	if (writer != null)
+	{
+	    NetworkDataObject ndo = new NetworkDataObject();
+	    ndo.serverHost = server;
+	    ndo.dataSource = myIP;
+	    ndo.messageType = messageType;
+	    ndo.message = message;
+
+	    writer.sendMessage(ndo);
+	}
+    }
+
+    public synchronized boolean connect(InetAddress host, int port)
+    {
+	try
+	{
+
+	    disconnect();
+
+	    this.server = host;
+
+	    Socket s = new Socket(host, port);
+	    s.setKeepAlive(true);
+
+	    System.out.println("Client connected to " + s.getInetAddress().getHostAddress());
+
+	    reader = new ClientReader(s);
+	    writer = new ClientWriter(s);
+
+	    reader.setListeners(listeners);
+
+	    reader.start();
+	    writer.start();
+
+	    sendMessage(NetworkDataObject.HANDSHAKE, new Object[]
+	    { programID });
+
+	}
+	catch (UnknownHostException e)
+	{
+	    return false;
+	}
+	catch (IOException e)
+	{
+	    if (reader != null)
+	    {
+		reader.stop();
+		reader = null;
+	    }
+	    if (writer != null)
+	    {
+		writer.stop();
+		writer = null;
+	    }
+	    return false;
 	}
 
+	return true;
+    }
 
-	public void addNetworkListener(NetworkListener nl) {
-		synchronized(listeners) {
-			listeners.add(nl);
-		}
+    public boolean connect(String host, int port)
+    {
+	try
+	{
+	    return connect(InetAddress.getByName(host), port);
 	}
-	
-	public void removeNetworkListener(NetworkListener nl) {
-    	synchronized(listeners) {
-    		listeners.remove(nl);
-    	}
+	catch (UnknownHostException e)
+	{
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return false;
 	}
+    }
 
-	public synchronized void sendMessage(String messageType, Object... message) {
-		if (writer != null) {
-			NetworkDataObject ndo = new NetworkDataObject();
-			ndo.serverHost = server;
-			ndo.dataSource = myIP;
-			ndo.messageType = messageType;
-			ndo.message = message;
-
-			writer.sendMessage(ndo);
-		}
+    public synchronized void disconnect()
+    {
+	if (reader != null)
+	{
+	    reader.stop();
+	    reader = null;
 	}
-
-
-	public synchronized boolean connect(InetAddress host,int port) {
-		try {
-
-			disconnect();
-
-			this.server = host;
-
-			Socket s = new Socket(host, port);
-			s.setKeepAlive(true);
-
-			System.out.println("Client connected to " + s.getInetAddress().getHostAddress());
-
-			reader = new ClientReader(s);
-			writer = new ClientWriter(s);
-			
-			reader.setListeners(listeners);
-			
-			reader.start();
-			writer.start();
-
-			sendMessage(NetworkDataObject.HANDSHAKE, new Object[]{programID});
-
-		} catch (UnknownHostException e) {
-			return false;
-		} catch (IOException e) {
-			if (reader != null) {
-				reader.stop();
-				reader = null;
-			}
-			if (writer != null) {
-				writer.stop();
-				writer = null;
-			}
-			return false;
-		}
-
-		return true;
+	if (writer != null)
+	{
+	    writer.stop();
+	    writer = null;
 	}
-
-
-	public boolean connect(String host,int port) {
-		try {
-			return connect(InetAddress.getByName(host),port);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	public synchronized void disconnect() {
-		if (reader != null) {
-			reader.stop();
-			reader = null;
-		}
-		if (writer != null) {
-			writer.stop();
-			writer = null;
-		}
-	}
-
-
+    }
 
 }

@@ -39,7 +39,7 @@ public class ClientWriter implements Runnable
     }
 
     public InetAddress getHost()
-    { 
+    {
 	return host;
     }
 
@@ -87,7 +87,7 @@ public class ClientWriter implements Runnable
 	    while (looping)
 	    {
 		long startTime = System.currentTimeMillis();
- 
+
 		try
 		{
 		    while (!messageQueue.isEmpty())
@@ -113,17 +113,17 @@ public class ClientWriter implements Runnable
 		    try
 		    {
 			Thread.sleep(waitTime);
-		    } 
+		    }
 		    catch (InterruptedException e)
 		    {
-			
+
 		    }
 		}
 		else
 		    Thread.yield();
 
 	    }
-	} 
+	}
 	finally
 	{
 	    try
@@ -132,7 +132,7 @@ public class ClientWriter implements Runnable
 		    out.close();
 		if (!s.isClosed())
 		    s.close();
-	    } 
+	    }
 	    catch (IOException e)
 	    {
 		e.printStackTrace();
