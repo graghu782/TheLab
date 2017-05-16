@@ -170,7 +170,7 @@ public class NetworkManagementPanel extends JPanel
 	}
 	
 	
-	add(this);
+	//add(this);
 	/*
 	JFrame window = new JFrame("Network Management");
 	window.setBounds(300, 300, 700, 480);

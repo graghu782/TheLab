@@ -36,10 +36,12 @@ public class Main extends JFrame
 	panel1 = new MenuPanel(this);
 	panel2 = new InstructionsPanel(this);
 	panel3 = new OptionPanel(this);
+	panel4 = new NetworkManagementPanel("The Lab", 8, drawing);
 
 	cardPanel.add(panel1, "menu");
 	cardPanel.add(panel2, "instructions");
 	cardPanel.add(panel3, "game");
+	cardPanel.add(panel4, "servermenu");
 	add(cardPanel);
 
 	setVisible(true);
