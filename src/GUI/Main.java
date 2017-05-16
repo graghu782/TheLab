@@ -3,6 +3,9 @@ package GUI;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import Networking.frontend.NetworkManagementPanel;
@@ -47,8 +50,10 @@ public class Main extends JFrame
 	setVisible(true);
     }
 
-    public static void main(String args[])
+    public static void main(String args[]) throws UnknownHostException, IOException
     {
+	Networking n = new Networking("127.0.0.1", 4444);
+	
 	Main w = new Main("The Lab");
     }
 

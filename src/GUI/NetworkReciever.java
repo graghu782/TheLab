@@ -2,23 +2,25 @@ package GUI;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Networking
+public class NetworkReciever
 {
+    private ServerSocket ss;
     private Socket s;
     private Scanner sc;
     private PrintStream ps;
     
-    public Networking(String host, int port) throws UnknownHostException, IOException {
-	s = new Socket(host, port);
+    public NetworkReciever(int port) throws IOException {
+	ss = new ServerSocket(port);
+	s = ss.accept();
 	sc = new Scanner(s.getInputStream());
 	ps = new PrintStream(s.getOutputStream());
     }
     
-    public void sendMessage(String x) {
-	ps.print(x);
+    public String readNext() {
+	return sc.next();
     }
 }
