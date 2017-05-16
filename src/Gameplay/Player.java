@@ -97,7 +97,7 @@ public class Player
 	    mainX = x;
 	    mainY = y;
 	}
-	if (name == "target")
+	if (name == "target") 
 	{
 	    drawer.fill(255, 0, 0);
 	}

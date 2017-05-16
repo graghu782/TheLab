@@ -107,7 +107,7 @@ public class DrawingSurface extends PApplet
 	if (mousePressed)
 	{
 	    count++;
-	    if (count % 3 == 0)
+	    if (count % 3 == 0) 
 	    {
 		player.fire();
 		count = 0;
