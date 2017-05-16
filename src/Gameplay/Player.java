@@ -102,10 +102,10 @@ public class Player
 	double mouseXChange = drawer.mouseX - drawer.width / 2;
 	double mouseYChange = drawer.mouseY - drawer.height / 2;
 	
-	lines[1] = new Line(x,y,x+width,y);
-	lines[2] = new Line(x+width,y,x+width,y+length);	
-	lines[3] = new Line(x,y+length,x+width,y+length);	
-	lines[4] = new Line(x,y,x,y+length);
+	lines[0] = new Line(x,y,x+width,y);
+	lines[1] = new Line(x+width,y,x+width,y+length);	
+	lines[2] = new Line(x,y+length,x+width,y+length);	
+	lines[3] = new Line(x,y,x,y+length);
 	
 	
 	

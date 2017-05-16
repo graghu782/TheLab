@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import Gameplay.Border;
 import Gameplay.Bullet;
 import Gameplay.Player;
-import Networking.frontend.NetworkDataObject;
-import Networking.frontend.NetworkListener;
-import Networking.frontend.NetworkMessenger;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class DrawingSurface extends PApplet implements NetworkListener
+public class DrawingSurface extends PApplet
 {
     private Player player;
     private Border border;
@@ -27,8 +24,6 @@ public class DrawingSurface extends PApplet implements NetworkListener
     private double x, y;
 
     private int count;
-
-    private NetworkMessenger nm;
 
     public DrawingSurface()
     {
@@ -173,31 +168,6 @@ public class DrawingSurface extends PApplet implements NetworkListener
 	if (key == 'd' || key == 'D')
 	{
 	    keysPressed[3] = false;
-	}
-    }
-
-    @Override
-    public void connectedToServer(NetworkMessenger nm)
-    {
-	this.nm = nm;
-    }
-
-    @Override
-    public void networkMessageReceived(NetworkDataObject ndo)
-    {
-	String host = ndo.getSourceIP();
-
-	if (ndo.messageType.equals(NetworkDataObject.MESSAGE))
-	{
-
-	}
-	else if (ndo.messageType.equals(NetworkDataObject.CLIENT_LIST))
-	{
-
-	}
-	else if (ndo.messageType.equals(NetworkDataObject.DISCONNECT))
-	{
-
 	}
     }
 }
