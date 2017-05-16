@@ -33,7 +33,7 @@ public class Player
 	xCenter = x;
 
 	width = 50;
-	length = 90;
+	length = 50;
 	this.name = name;
 	arm = new Arm(x, y, x, y);
 	direction = 0;
@@ -52,6 +52,7 @@ public class Player
     public void fire()
     {
 	bullets.add(new Bullet(400, 300, direction, x, y));
+	
     }
 
     public double getX()
@@ -118,7 +119,7 @@ public class Player
 	for (Bullet b : bullets)
 	{
 	    b.draw(drawer);
-	    b.update(x, y);
+	    b.update(mainX,mainY);
 	}
 	if (bullets.size() > 0)
 	{
