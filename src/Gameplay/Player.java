@@ -18,7 +18,7 @@ public class Player
     double direction;
     private int health;
     
-    private Line l1,l2,l3,l4; //top, right ,bottom, left
+    private Line[] lines; //top, right ,bottom, left
 
     private static double mainX, mainY;
 
@@ -37,6 +37,8 @@ public class Player
 	arm = new Arm(x, y, x, y);
 	direction = 0;
 	health = 100;
+	
+	lines = new Line[4];
 	
     }
 
