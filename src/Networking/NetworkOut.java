@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class NetworkOut {
 	public static void main(String[] args) {
-		String hostName = "127.0.0.1";
+		String hostName = "172.16.240.166";
 		
 		try	 {
 			Socket s = new Socket(hostName, 4444);

@@ -22,7 +22,7 @@ public class NetworkIn {
 					String in = br.readLine();
 					if(in != null) {
 						System.out.println(in);
-						break;
+						// break;
 					}
 				}
 			//}
