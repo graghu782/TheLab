@@ -51,6 +51,14 @@ public class DrawingSurface extends PApplet implements NetworkListener
 	border = new Border(0, 0, 10, 10);
     }
 
+    public void runMe()
+    {
+	super.setSize(800, 600);
+	super.sketchPath();
+	super.initSurface();
+	super.surface.startThread();
+    }
+
     // The statements in draw() are executed 60 times a second until the
     // program is stopped. Each statement is executed in
     // sequence and after the last line is read, the first

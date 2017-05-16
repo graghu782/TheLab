@@ -1,15 +1,17 @@
 package GUI;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import Networking.frontend.NetworkManagementPanel;
 
+import Networking.frontend.NetworkManagementPanel;
 import processing.awt.PSurfaceAWT;
 
 public class Main extends JFrame
@@ -52,8 +54,6 @@ public class Main extends JFrame
 
     public static void main(String args[]) throws UnknownHostException, IOException
     {
-	Networking n = new Networking("127.0.0.1", 4444);
-	
 	Main w = new Main("The Lab");
     }
 
