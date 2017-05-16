@@ -3,7 +3,10 @@ package Gameplay;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import org.w3c.dom.css.Rect;
+
 import processing.core.PApplet;
+import processing.core.PImage;
 import raghu.shapes.Line;
 
 public class Player
@@ -17,6 +20,8 @@ public class Player
     private Arm arm;
     double direction;
     private int health;
+    private PImage player;
+   // private rect[] spriteRects;
 
     private Line[] lines; // top, right ,bottom, left
     private ArrayList<Bullet> bullets;
@@ -41,6 +46,10 @@ public class Player
 
 	lines = new Line[4];
 	bullets = new ArrayList<Bullet>();
+	
+	//Sprites
+	//spriteRects = new Rect[2];
+	//spriteRects[0] = new rect(0,99,41,46);
     }
 
     public void move(double x, double y)
@@ -53,6 +62,9 @@ public class Player
     {
 	bullets.add(new Bullet(400, 300, direction, x, y));
 	
+    }
+    public ArrayList<Bullet> getBullets (){
+	return bullets;
     }
 
     public double getX()
