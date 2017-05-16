@@ -12,7 +12,7 @@ public class NetworkOut {
 		String hostName = "127.0.0.1";
 		
 		try	 {
-			Socket s = new Socket(hostName, 13);
+			Socket s = new Socket(hostName, 4444);
 			BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			PrintWriter pw = new PrintWriter(s.getOutputStream(), true);
 			pw.println("hello");

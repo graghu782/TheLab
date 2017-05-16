@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class NetworkIn {
 	public static void main(String[] args) {
 		try {
-			ServerSocket ss = new ServerSocket(13);
+			ServerSocket ss = new ServerSocket(4444);
 			
 			//while(true) {
 				Socket connect = ss.accept();
