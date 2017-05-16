@@ -12,6 +12,7 @@ import processing.awt.PSurfaceAWT;
 public class Main extends JFrame
 {
     private JPanel cardPanel;
+    private CardLayout cl;
 
     private MenuPanel panel1;
     private InstructionsPanel panel2;
@@ -27,19 +28,20 @@ public class Main extends JFrame
 	setBounds(250, 250, 800, 600);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
-	    
+
 	cardPanel = new JPanel();
-	CardLayout cl = new CardLayout();
+	cl = new CardLayout();
 	cardPanel.setLayout(cl);
-	    
-	panel1 = new MenuPanel(this); 
+
+	panel1 = new MenuPanel(this);
 	panel2 = new InstructionsPanel(this);
 	panel3 = new OptionPanel(this);
 
-		
-	cardPanel.add(panel1,"1"); // Card is named "1"
+	cardPanel.add(panel1, "menu");
+	cardPanel.add(panel2, "instructions");
+	cardPanel.add(panel3, "game");
 	add(cardPanel);
-	
+
 	setVisible(true);
     }
 
@@ -48,42 +50,15 @@ public class Main extends JFrame
 	Main w = new Main("The Lab");
     }
 
-    public void changePanel(int x)
+    public void changePanel(String s)
     {
-	if (x == 0)
-	{
-	    setSize(800, 600);
+	cl.show(cardPanel, s);
 
-	    cardPanel.remove(panel3);
-	    cardPanel.remove(panel2);
-	    //cardPanel.removeAll();
-	    
-	    if(drawing != null)
-		drawing.noLoop();
-	    if(window != null)
-		window.dispose();
+	setSize(800, 600);
 
-	    cardPanel.add(panel1, "1");
-	    add(cardPanel);
-	    
-	    setVisible(true);
-	}
-	else if (x == 1)
+	if (s.equals("game"))
 	{
-	    cardPanel.remove(panel1);
-	    cardPanel.add(panel2, "2");
-	    add(cardPanel);
-
-	    setVisible(true);
-	}
-	else if (x == 2)
-	{
-	    cardPanel.remove(panel1);
-	    cardPanel.remove(panel2);
-	    cardPanel.add(panel3, "3");
-	    add(cardPanel);
 	    setSize(300, 100);
-
 	    drawing = new DrawingSurface();
 
 	    PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
@@ -96,6 +71,11 @@ public class Main extends JFrame
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setResizable(false);
 	    window.setVisible(true);
+	}
+	else if (drawing != null && window != null)
+	{
+	    drawing.noLoop();
+	    window.dispose();
 	}
     }
 }
