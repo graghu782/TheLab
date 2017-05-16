@@ -3,7 +3,6 @@ package Map;
 import processing.core.PApplet;
 import processing.core.PImage;
 import raghu.shapes.Rectangle;
-import raghu.shapes.Shape;
 
 public class Obstacle extends Rectangle
 {
