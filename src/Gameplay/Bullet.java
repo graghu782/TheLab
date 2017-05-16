@@ -56,11 +56,11 @@ public class Bullet extends raghu.shapes.Line
 		return iters;
 	}
 	
-	public void update(double x, double y)
+	public void update(double mn, double mb)
 	{
-		x+=xo-x;
-		xo = x;
-		y+=yo-y;
-		yo = y;
+		x+=xo-mn;
+		xo = mn;
+		y+=yo-mb;
+		yo = mb;
 	}
 }
