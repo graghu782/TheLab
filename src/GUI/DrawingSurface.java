@@ -14,7 +14,6 @@ public class DrawingSurface extends PApplet
     private Border border;
     private boolean[] keysPressed;
     private PImage img;
-    private ArrayList<Bullet> bullets;
 
     public static final int DRAWING_WIDTH = 800;
     public static final int DRAWING_HEIGHT = 600;
@@ -29,7 +28,6 @@ public class DrawingSurface extends PApplet
     {
 	keysPressed = new boolean[4];
 	runSketch();
-	bullets = new ArrayList<Bullet>();
     }
 
     public void settings()
@@ -83,17 +81,6 @@ public class DrawingSurface extends PApplet
 	player.draw(this);
 	target.draw(this);
 
-	for (Bullet b : bullets)
-	{
-	    b.draw(this);
-	    b.update(x, y);
-	}
-	if (bullets.size() > 0)
-	{
-	    if (bullets.get(0).getIs() >= 6)
-		bullets.remove(0);
-	}
-
 	if (keysPressed[0])
 	{
 	    if (player.getY() > 1)
@@ -122,7 +109,7 @@ public class DrawingSurface extends PApplet
 	    count++;
 	    if (count % 3 == 0)
 	    {
-		bullets.add(new Bullet(DRAWING_WIDTH / 2, DRAWING_HEIGHT / 2, player.getDir(), x, y));
+		player.fire();
 		count = 0;
 	    }
 	}

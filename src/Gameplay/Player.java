@@ -17,8 +17,9 @@ public class Player
     private Arm arm;
     double direction;
     private int health;
-    
-    private Line[] lines; //top, right ,bottom, left
+
+    private Line[] lines; // top, right ,bottom, left
+    private ArrayList<Bullet> bullets;
 
     private static double mainX, mainY;
 
@@ -37,16 +38,20 @@ public class Player
 	arm = new Arm(x, y, x, y);
 	direction = 0;
 	health = 100;
-	
+
 	lines = new Line[4];
-	
+	bullets = new ArrayList<Bullet>();
     }
 
     public void move(double x, double y)
     {
-
 	this.x += x;
 	this.y += y;
+    }
+    
+    public void fire()
+    {
+	bullets.add(new Bullet(400, 300, direction, x, y));
     }
 
     public double getX()
@@ -73,10 +78,11 @@ public class Player
     {
 	return direction;
     }
-    public boolean isHit(Line k1){
+
+    public boolean isHit(Line k1)
+    {
 	
 	return isMain;
-	
     }
 
     public void decHealth(int num)
@@ -95,21 +101,30 @@ public class Player
 	{
 	    drawer.fill(255, 0, 0);
 	}
-	
+
 	drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
 		(float) (drawer.height / 2 - mainY + y - length / 2), (float) width, (float) length);
 
 	double mouseXChange = drawer.mouseX - drawer.width / 2;
 	double mouseYChange = drawer.mouseY - drawer.height / 2;
-	
-	lines[0] = new Line(x,y,x+width,y);
-	lines[1] = new Line(x+width,y,x+width,y+length);	
-	lines[2] = new Line(x,y+length,x+width,y+length);	
-	lines[3] = new Line(x,y,x,y+length);
-	
-	
-	
+
+	lines[0] = new Line(x, y, x + width, y);
+	lines[1] = new Line(x + width, y, x + width, y + length);
+	lines[2] = new Line(x, y + length, x + width, y + length);
+	lines[3] = new Line(x, y, x, y + length);
+
 	// System.out.println(mouseXChange + " " + mouseYChange);
+	
+	for (Bullet b : bullets)
+	{
+	    b.draw(drawer);
+	    b.update(x, y);
+	}
+	if (bullets.size() > 0)
+	{
+	    if (bullets.get(0).getIs() >= 6)
+		bullets.remove(0);
+	}
 
 	direction = Math.atan(mouseYChange / mouseXChange);
 	if (mouseXChange < 0)
