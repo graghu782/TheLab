@@ -22,11 +22,14 @@ public class DrawingSurface extends PApplet
     private Player target;
     private double x, y;
 
+    private ArrayList<Player> players;
+
     private int count;
 
     public DrawingSurface()
     {
 	keysPressed = new boolean[4];
+	players = new ArrayList<Player>();
 	runSketch();
     }
 
@@ -63,11 +66,8 @@ public class DrawingSurface extends PApplet
 	y = player.getY();
 
 	background(255);
-	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH),
-		(float) (MAP_HEIGHT + DRAWING_HEIGHT));
-
-	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2,
-		DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
+	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH), (float) (MAP_HEIGHT + DRAWING_HEIGHT));
+	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2, DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
 	border.draw(this);
 	fill(255);
 
@@ -77,6 +77,17 @@ public class DrawingSurface extends PApplet
 	float ratioY = (float) height / DRAWING_HEIGHT;
 
 	scale(ratioX, ratioY);
+	
+	for(Bullet b : player.getBullets())
+	{
+	    for(Player p : players)
+	    {
+		if(p.isHit(b))
+		{
+		    p.decHealth(10);
+		}
+	    }
+	}
 
 	player.draw(this);
 	target.draw(this);
@@ -107,7 +118,7 @@ public class DrawingSurface extends PApplet
 	if (mousePressed)
 	{
 	    count++;
-	    if (count % 3 == 0) 
+	    if (count % 3 == 0)
 	    {
 		player.fire();
 		count = 0;
