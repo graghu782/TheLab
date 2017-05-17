@@ -74,8 +74,9 @@ public class MenuPanel extends JPanel implements ActionListener
 	{
 	    w.changePanel("servermenu");
 	}
-	else if(e.getSource() == joinServer) {
-	    
+	else if(e.getSource() == joinServer) 
+	{
+	    w.changePanel("joinmenu");
 	}
 	else if(e.getSource() == instructions)
 	{

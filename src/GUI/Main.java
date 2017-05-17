@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,10 +19,11 @@ public class Main extends JFrame
     private JPanel cardPanel;
     private CardLayout cl;
 
-    private MenuPanel panel1;
-    private InstructionsPanel panel2;
-    private OptionPanel panel3;
-    private ServerCreationPanel panel4;
+    private MenuPanel menuPanel;
+    private InstructionsPanel instructionsPanel;
+    private OptionPanel optionPanel;
+    private ServerCreationPanel serverCreatePanel;
+    private ServerJoinPanel serverJoinPanel;
 
     private JFrame window;
     private DrawingSurface drawing;
@@ -37,15 +39,17 @@ public class Main extends JFrame
 	cl = new CardLayout();
 	cardPanel.setLayout(cl);
 
-	panel1 = new MenuPanel(this);
-	panel2 = new InstructionsPanel(this);
-	panel3 = new OptionPanel(this);
-	panel4 = new ServerCreationPanel(this);
+	menuPanel = new MenuPanel(this);
+	instructionsPanel = new InstructionsPanel(this);
+	optionPanel = new OptionPanel(this);
+	serverCreatePanel = new ServerCreationPanel(this);
+	serverJoinPanel = new ServerJoinPanel(this);
 
-	cardPanel.add(panel1, "menu");
-	cardPanel.add(panel2, "instructions");
-	cardPanel.add(panel3, "game");
-	cardPanel.add(panel4, "servermenu");
+	cardPanel.add(menuPanel, "menu");
+	cardPanel.add(instructionsPanel, "instructions");
+	cardPanel.add(optionPanel, "game");
+	cardPanel.add(serverCreatePanel, "servermenu");
+	cardPanel.add(serverJoinPanel, "joinmenu");
 	add(cardPanel);
 		
 	setVisible(true);
