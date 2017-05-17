@@ -13,18 +13,20 @@ public class Bullet extends Line
     double yTemp;
     double xo;
     double yo;
-    private boolean isRedTeam;// for when we get teams
+    Player player;
 
     private Line l1;
 
     private int iters;
 
-    public Bullet(double xCoord, double yCoord, double direction, double x, double y)
+    public Bullet(double xCoord, double yCoord, double direction, double x, double y, Player p)
     {
 	super(xCoord, yCoord, Math.cos(direction), Math.sin(direction));
 	this.direction = direction;
 	// this.xCoord = xCoord;
 	// this.yCoord = yCoord;
+	
+	player = p;
 
 	length = 100;
 	speed = 90;
@@ -49,6 +51,11 @@ public class Bullet extends Line
 	x = x + (speed * xTemp);
 	y = y + (speed * yTemp);
 	iters++;
+    }
+    
+    public Player getPlayer()
+    {
+	return player;
     }
 
     public int getIs()

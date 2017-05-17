@@ -60,7 +60,7 @@ public class Player
     
     public void fire()
     {
-	bullets.add(new Bullet(400, 300, direction, x, y));
+	bullets.add(new Bullet(400, 300, direction, x, y, this));
 	
     }
     public ArrayList<Bullet> getBullets (){
@@ -92,10 +92,17 @@ public class Player
 	return direction;
     }
 
-    public boolean isHit(Line k1)
+    public boolean isHit(Bullet b)
     {
-	
-	return isMain;
+	if(!b.getPlayer().equals(this))
+	{
+	    if(b.intersects(lines[1]) || b.intersects(lines[2]) || b.intersects(lines[3]) || b.intersects(lines[4]))
+	    {
+		return true;
+	    }
+	    else return false;
+	}
+	else return false;
     }
 
     public void decHealth(int num)
