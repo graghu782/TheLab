@@ -87,6 +87,11 @@ public class DrawingSurface extends PApplet
 		    p.decHealth(10);
 		}
 	    }
+	    
+	    if(target.isHit(b))
+	    {
+		target.decHealth(10);
+	    }
 	}
 
 	player.draw(this);

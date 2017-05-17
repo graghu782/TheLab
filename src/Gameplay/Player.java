@@ -96,7 +96,7 @@ public class Player
     {
 	if(!b.getPlayer().equals(this))
 	{
-	    if(b.intersects(lines[1]) || b.intersects(lines[2]) || b.intersects(lines[3]) || b.intersects(lines[4]))
+	    if(b.intersects(lines[0]) || b.intersects(lines[1]) || b.intersects(lines[2]) || b.intersects(lines[3]))
 	    {
 		return true;
 	    }
@@ -155,7 +155,8 @@ public class Player
 	arm.setmx(direction);
 	arm.setmy(direction);
 	arm.draw(drawer);
-
+	
+	System.out.println(health);
     }
 
 }
