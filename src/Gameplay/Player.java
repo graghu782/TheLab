@@ -66,6 +66,9 @@ public class Player
     public ArrayList<Bullet> getBullets (){
 	return bullets;
     }
+    public void updateBullets(ArrayList<Bullet> bs){
+	bullets = bs;
+    }
 
     public double getX()
     {
@@ -107,7 +110,7 @@ public class Player
 
     public void decHealth(int num)
     {
-	health += num;
+	health -= num;
     }
 
     public void draw(PApplet drawer)
@@ -130,8 +133,8 @@ public class Player
 
 	lines[0] = new Line(x, y, x + width, y);
 	lines[1] = new Line(x + width, y, x + width, y + length);
-	lines[2] = new Line(x, y + length, x + width, y + length);
-	lines[3] = new Line(x, y, x, y + length);
+	lines[2] = new Line(x + width, y + length, x, y + length);
+	lines[3] = new Line(x, y + length, x, y);
 
 	// System.out.println(mouseXChange + " " + mouseYChange);
 	

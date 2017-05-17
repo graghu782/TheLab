@@ -78,18 +78,21 @@ public class DrawingSurface extends PApplet
 
 	scale(ratioX, ratioY);
 	
-	for(Bullet b : player.getBullets())
+	for (int i = 0; i < player.getBullets().size(); i++)
 	{
+	    ArrayList<Bullet> bas = player.getBullets();
 	    for(Player p : players)
 	    {
-		if(p.isHit(b))
+		if(p.isHit(bas.get(i)))
 		{
 		    p.decHealth(10);
 		}
 	    }
 	    
-	    if(target.isHit(b))
+	    if(target.isHit(player.getBullets().get(i)))
 	    {
+		bas.remove(i);
+		player.updateBullets(bas);
 		target.decHealth(10);
 	    }
 	}
