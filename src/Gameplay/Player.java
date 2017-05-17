@@ -128,16 +128,20 @@ public class Player
 
 	double mouseXChange = drawer.mouseX - drawer.width / 2;
 	double mouseYChange = drawer.mouseY - drawer.height / 2;
+	
+	double xs = -mainX + drawer.width/2 - width / 2;
+	double ys = -mainY + drawer.height/2 - height/2;
 
-	lines[0] = new Line(x-mainX +drawer.width / 2- width / 2,y-mainY + drawer.height/2 - height/2,x + width-mainX + drawer.width/2-width/2,y-mainY+drawer.height/2-height/2);
-	lines[1] = new Line(x + width-mainX, 	y-mainY, 		x + width-mainX, 	y + height-mainY);
-	lines[2] = new Line(x + width-mainX, 	y-mainY+height, 	x-mainX, 		y + height-mainY);
-	lines[3] = new Line(x-mainX, 		y+height-mainY, 	x-mainX, 		y-mainY);
+	lines[0] = new Line(x+xs,y+ys,x+width+xs,y+ys);
+	lines[1] = new Line(x+xs+width,y+ys,x + width+xs,y + height+ys);
+	lines[2] = new Line(x+width+xs,y+ys+height,x+xs,y + height+ys);
+	lines[3] = new Line(x+xs,y+ys,x+xs,y+ys+height);
+	drawer.strokeWeight(10);
 	lines[0].draw(drawer);
 	lines[1].draw(drawer);
 	lines[2].draw(drawer);
 	lines[3].draw(drawer);
-
+	
 	// System.out.println(mouseXChange + " " + mouseYChange);
 	
 	for (Bullet b : bullets)

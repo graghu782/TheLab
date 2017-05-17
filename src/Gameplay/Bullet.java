@@ -28,8 +28,8 @@ public class Bullet extends Line
 	
 	player = p;
 
-	length = 100;
-	speed = 90;
+	length = 50;
+	speed = 40;
 	iters = 0;
 	xo = x;
 	yo = y;
@@ -50,7 +50,7 @@ public class Bullet extends Line
 
 	x = x + (speed * xTemp);
 	y = y + (speed * yTemp);
-	iters++;
+	iters= 0;
     }
     
     public Player getPlayer()
