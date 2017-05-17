@@ -21,6 +21,7 @@ public class Main extends JFrame
     private MenuPanel panel1;
     private InstructionsPanel panel2;
     private OptionPanel panel3;
+    private ServerCreationPanel panel4;
 
     private JFrame window;
     private DrawingSurface drawing;
@@ -39,10 +40,12 @@ public class Main extends JFrame
 	panel1 = new MenuPanel(this);
 	panel2 = new InstructionsPanel(this);
 	panel3 = new OptionPanel(this);
+	panel4 = new ServerCreationPanel(this);
 
 	cardPanel.add(panel1, "menu");
 	cardPanel.add(panel2, "instructions");
 	cardPanel.add(panel3, "game");
+	cardPanel.add(panel4, "servermenu");
 	add(cardPanel);
 		
 	setVisible(true);
