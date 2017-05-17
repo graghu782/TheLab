@@ -85,6 +85,7 @@ public class DrawingSurface extends PApplet
 	    {
 		if(p.isHit(bas.get(i)))
 		{
+		    bas.remove(i);
 		    p.decHealth(10);
 		}
 	    }
@@ -92,7 +93,6 @@ public class DrawingSurface extends PApplet
 	    if(target.isHit(player.getBullets().get(i)))
 	    {
 		bas.remove(i);
-		player.updateBullets(bas);
 		target.decHealth(10);
 	    }
 	}

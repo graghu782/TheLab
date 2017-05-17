@@ -63,11 +63,9 @@ public class Player
 	bullets.add(new Bullet(400, 300, direction, x, y, this));
 	
     }
-    public ArrayList<Bullet> getBullets (){
+    public ArrayList<Bullet> getBullets()
+    {
 	return bullets;
-    }
-    public void updateBullets(ArrayList<Bullet> bs){
-	bullets = bs;
     }
 
     public double getX()
