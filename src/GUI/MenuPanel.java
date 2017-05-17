@@ -3,7 +3,7 @@ package GUI;
 import java.awt.*;
 import javax.swing.*;
 
-import Networking.NetworkIn;
+import Networking.Server;
 
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
