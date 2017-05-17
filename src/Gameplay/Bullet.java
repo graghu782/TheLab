@@ -1,7 +1,7 @@
 package Gameplay;
 
 import processing.core.PApplet;
-import raghu.shapes.Line;
+import kim.shapes.Line;
 
 public class Bullet extends Line
 {

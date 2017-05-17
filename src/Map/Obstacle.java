@@ -2,7 +2,7 @@ package Map;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import raghu.shapes.Rectangle;
+import kim.shapes.Rectangle;
 
 public class Obstacle extends Rectangle
 {
