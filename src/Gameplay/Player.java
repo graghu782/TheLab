@@ -20,7 +20,8 @@ public class Player
     private Arm arm;
     double direction;
     private int health;
-    private PImage player;
+
+    private PImage john;
    // private rect[] spriteRects;
 
     private Line[] lines; // top, right ,bottom, left
@@ -30,6 +31,8 @@ public class Player
 
     public Player(double x, double y, String name, boolean isMain)
     {
+
+	
 	this.isMain = isMain;
 	this.x = x;
 	this.y = y;
@@ -72,6 +75,9 @@ public class Player
     {
 	return x;
     }
+    public void turn(double dir){
+	
+    }
 
     public double getY()
     {
@@ -110,7 +116,10 @@ public class Player
     {
 	health -= num;
     }
-
+    
+    public void setPlayerImage(PApplet drawer){
+	john = drawer.loadImage("player.jpg");
+    }
     public void draw(PApplet drawer)
     {
 	if (isMain)
@@ -151,7 +160,7 @@ public class Player
 	}
 	if (bullets.size() > 0)
 	{
-	    if (bullets.get(0).getIs() >= 6)
+	    if (bullets.get(0).getIs() >= 12)
 		bullets.remove(0);
 	}
 

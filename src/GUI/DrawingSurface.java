@@ -15,6 +15,7 @@ public class DrawingSurface extends PApplet
     private boolean[] keysPressed;
     private PImage img;
 
+
     public static final int DRAWING_WIDTH = 800;
     public static final int DRAWING_HEIGHT = 600;
     public static final int MAP_WIDTH = 2400;
@@ -45,6 +46,8 @@ public class DrawingSurface extends PApplet
 	player = new Player(0, 0, "noob", true);
 	target = new Player(110, 140, "target", false);
 	border = new Border(0, 0, 10, 10);
+	player.setPlayerImage(this);
+	target.setPlayerImage(this);
     }
 
     public void runMe()

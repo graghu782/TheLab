@@ -50,7 +50,7 @@ public class Bullet extends Line
 
 	x = x + (speed * xTemp);
 	y = y + (speed * yTemp);
-	iters= 0;
+	iters++;
     }
     
     public Player getPlayer()
