@@ -27,7 +27,7 @@ Must-Have features:
 (DONE)Menu that includes instructions, start button, join server, create server
 (DONE)Players can move around and shoot
 (DONE)A background that moves with the player
-(NOT DONE)Characters have hitboxes
+(DONE)Characters have hitboxes
 (NOT DONE)Character animations
 (NOT DONE)A multiplayer mode allowing local players on the network to play each other
 
