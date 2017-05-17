@@ -2,6 +2,9 @@ package GUI;
 
 import java.awt.*;
 import javax.swing.*;
+
+import Networking.NetworkIn;
+
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 
@@ -10,9 +13,10 @@ public class MenuPanel extends JPanel implements ActionListener
 
     private Main w;
 
-    private JButton button;
-    private JButton button1;
-    private JButton button2;
+    private JButton sandbox;
+    private JButton startServer;
+    private JButton joinServer;
+    private JButton instructions;
 
     public MenuPanel(Main w)
     {
@@ -23,17 +27,21 @@ public class MenuPanel extends JPanel implements ActionListener
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.add(Box.createVerticalStrut(300)); // Move down by 300 pixels
 
-	button = new JButton("Sandbox");
-	button1 = new JButton("Start");
-	button2 = new JButton("Instructions");
+	sandbox = new JButton("Sandbox");
+	instructions = new JButton("Instructions");
+	startServer = new JButton("Start Server");
+	joinServer = new JButton("Join Server");
 
-	button.addActionListener(this);
-	button1.addActionListener(this);
-	button2.addActionListener(this);
 
-	p.add(button1);
-	p.add(button);
-	p.add(button2);
+	sandbox.addActionListener(this);
+	startServer.addActionListener(this);
+	joinServer.addActionListener(this);
+	instructions.addActionListener(this);
+
+	p.add(sandbox);
+	p.add(startServer);
+	p.add(joinServer);
+	p.add(instructions);
 	add(p);
     }
 
@@ -58,18 +66,22 @@ public class MenuPanel extends JPanel implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	if (e.getSource() == button)
+	if (e.getSource() == sandbox)
 	{
 	    w.changePanel("game");
 	}
-	else if(e.getSource() == button1)
+	else if(e.getSource() == startServer)
 	{
 	    w.changePanel("servermenu");
 	}
-	else if(e.getSource() == button2)
+	else if(e.getSource() == joinServer) {
+	    
+	}
+	else if(e.getSource() == instructions)
 	{
 	    w.changePanel("instructions");
 	}
+
     }
 
 }

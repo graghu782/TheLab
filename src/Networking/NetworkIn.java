@@ -9,11 +9,11 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class NetworkIn {
-	public static void main(String[] args) {
+	public void startServer() {
 		try {
 			ServerSocket ss = new ServerSocket(4444);
 			
-			//while(true) {
+			while(true) {
 				Socket connect = ss.accept();
 				BufferedReader br = new BufferedReader(new InputStreamReader(connect.getInputStream()));
 				PrintWriter pw = new PrintWriter(connect.getOutputStream(), true);
@@ -22,10 +22,10 @@ public class NetworkIn {
 					String in = br.readLine();
 					if(in != null) {
 						System.out.println(in);
-						// break;
+						break;
 					}
 				}
-			//}
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
