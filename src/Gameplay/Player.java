@@ -13,7 +13,7 @@ public class Player
 {
     // private static double mx, my;
     private boolean isMain;
-    private double x, y, width, length;
+    private double x, y, width, height;
     private Color color;
     private String name;
     private double xCenter, yCenter;
@@ -38,7 +38,7 @@ public class Player
 	xCenter = x;
 
 	width = 50;
-	length = 50;
+	height = 50;
 	this.name = name;
 	arm = new Arm(x, y, x, y);
 	direction = 0;
@@ -85,7 +85,7 @@ public class Player
 
     public double getLength()
     {
-	return length;
+	return height;
     }
 
     public double getDir()
@@ -124,15 +124,19 @@ public class Player
 	}
 
 	drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
-		(float) (drawer.height / 2 - mainY + y - length / 2), (float) width, (float) length);
+		(float) (drawer.height / 2 - mainY + y - height / 2), (float) width, (float) height);
 
 	double mouseXChange = drawer.mouseX - drawer.width / 2;
 	double mouseYChange = drawer.mouseY - drawer.height / 2;
 
-	lines[0] = new Line(x, y, x + width, y);
-	lines[1] = new Line(x + width, y, x + width, y + length);
-	lines[2] = new Line(x + width, y + length, x, y + length);
-	lines[3] = new Line(x, y + length, x, y);
+	lines[0] = new Line(x-mainX +drawer.width / 2- width / 2,y-mainY + drawer.height/2 - height/2,x + width-mainX + drawer.width/2-width/2,y-mainY+drawer.height/2-height/2);
+	lines[1] = new Line(x + width-mainX, 	y-mainY, 		x + width-mainX, 	y + height-mainY);
+	lines[2] = new Line(x + width-mainX, 	y-mainY+height, 	x-mainX, 		y + height-mainY);
+	lines[3] = new Line(x-mainX, 		y+height-mainY, 	x-mainX, 		y-mainY);
+	lines[0].draw(drawer);
+	lines[1].draw(drawer);
+	lines[2].draw(drawer);
+	lines[3].draw(drawer);
 
 	// System.out.println(mouseXChange + " " + mouseYChange);
 	
