@@ -20,9 +20,10 @@ public class Player
     private Arm arm;
     double direction;
     private int health;
+    private int jnum;
 
     private PImage john;
-   // private rect[] spriteRects;
+    // private rect[] spriteRects;
 
     private Line[] lines; // top, right ,bottom, left
     private ArrayList<Bullet> bullets;
@@ -32,7 +33,7 @@ public class Player
     public Player(double x, double y, String name, boolean isMain)
     {
 
-	
+	jnum = 1;
 	this.isMain = isMain;
 	this.x = x;
 	this.y = y;
@@ -49,7 +50,7 @@ public class Player
 
 	lines = new Line[4];
 	bullets = new ArrayList<Bullet>();
-	
+
 	//Sprites
 	//spriteRects = new Rect[2];
 	//spriteRects[0] = new rect(0,99,41,46);
@@ -59,12 +60,18 @@ public class Player
     {
 	this.x += x;
 	this.y += y;
+	if (jnum != 2){
+	    jnum = 2;
+	}else{
+	    jnum = 3;
+	}
+
     }
-    
+
     public void fire()
     {
 	bullets.add(new Bullet(400, 300, direction, x, y, this));
-	
+
     }
     public ArrayList<Bullet> getBullets()
     {
@@ -76,7 +83,7 @@ public class Player
 	return x;
     }
     public void turn(double dir){
-	
+
     }
 
     public double getY()
@@ -116,12 +123,17 @@ public class Player
     {
 	health -= num;
     }
-    
-    public void setPlayerImage(PApplet drawer){
-	john = drawer.loadImage("player.jpg");
-    }
+
     public void draw(PApplet drawer)
     {
+	if (jnum == 1){
+	    john = drawer.loadImage("john1.png");
+	}else if (jnum == 2){
+	    john = drawer.loadImage("john2.png");
+	}else{
+	    john = drawer.loadImage("john3.png");
+	}
+	//drawer.image(john, 0, 0, 300,300);
 	if (isMain)
 	{
 	    mainX = x;
@@ -132,12 +144,18 @@ public class Player
 	    drawer.fill(255, 0, 0);
 	}
 
-	drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
-		(float) (drawer.height / 2 - mainY + y - height / 2), (float) width, (float) height);
-
+	//drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
+		//(float) (drawer.height / 2 - mainY + y - height / 2), (float) width, (float) height);
+	drawer.pushMatrix();
+	drawer.translate((float)(drawer.width/2) , (float)(drawer.height/2));
+	drawer.rotate((float) direction);
+	drawer.image(john,(float) (- mainX + x - width / 2),(float) (- mainY + y - height / 2), (float) width, (float) height);
+	drawer.rotate((float) -direction);
+	drawer.popMatrix();
+	
 	double mouseXChange = drawer.mouseX - drawer.width / 2;
 	double mouseYChange = drawer.mouseY - drawer.height / 2;
-	
+
 	double xs = -mainX + drawer.width/2 - width / 2;
 	double ys = -mainY + drawer.height/2 - height/2;
 
@@ -150,9 +168,9 @@ public class Player
 	lines[1].draw(drawer);
 	lines[2].draw(drawer);
 	lines[3].draw(drawer);
-	
+
 	// System.out.println(mouseXChange + " " + mouseYChange);
-	
+
 	for (Bullet b : bullets)
 	{
 	    b.draw(drawer);
@@ -170,11 +188,12 @@ public class Player
 	    direction += Math.PI;
 	}
 
-	arm.setmx(direction);
-	arm.setmy(direction);
-	arm.draw(drawer);
-	
+	//arm.setmx(direction);
+	//arm.setmy(direction);
+	//arm.draw(drawer);
+
 	//System.out.println(health);
+	jnum = 1;
     }
 
 }

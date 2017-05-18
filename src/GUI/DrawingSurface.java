@@ -46,8 +46,7 @@ public class DrawingSurface extends PApplet
 	player = new Player(0, 0, "noob", true);
 	target = new Player(110, 140, "target", false);
 	border = new Border(0, 0, 10, 10);
-	player.setPlayerImage(this);
-	target.setPlayerImage(this);
+	
     }
 
     public void runMe()
