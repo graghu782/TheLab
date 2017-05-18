@@ -6,7 +6,7 @@ import kim.shapes.Line;
 public class Bullet extends Line
 {
     // private double xCoord, yCoord;
-    private final static double LENGTH = 80;
+    private final static double LENGTH = 90;
     private final double SPEED = 40;
     double xTemp;
     double yTemp;
@@ -34,15 +34,17 @@ public class Bullet extends Line
 
     public void draw(PApplet drawer)
     {
-	double xTempr = x + (LENGTH * xTemp);
+	double xTemp2 = x + (LENGTH * xTemp);
 
-	double yTempr = y + (LENGTH * yTemp);
-	super.setPoint2((float) xTempr, (float) yTempr);
+	double yTemp2 = y + (LENGTH * yTemp);
+	super.setPoint2((float) xTemp2, (float) yTemp2);
 	
-	//drawer.strokeWeight(10);
-	//drawer.line((float) x, (float) y, (float) (xTempr), (float) (yTempr));
+	double xTemp1 = x + (20 * xTemp);
+	double yTemp1 = y + (20 * yTemp);
+	drawer.strokeWeight(1);
+	drawer.line((float) x, (float) y, (float) (xTemp1), (float) (yTemp1));
 
-	super.draw(drawer);
+//	super.draw(drawer);
 
 	x = x + (SPEED * xTemp);
 	y = y + (SPEED * yTemp);

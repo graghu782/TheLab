@@ -21,6 +21,7 @@ public class Player
     double direction;
     private int health;
     private int jnum;
+    double mouseXChange, mouseYChange;
 
     private PImage john;
     // private rect[] spriteRects;
@@ -47,6 +48,8 @@ public class Player
 	arm = new Arm(x, y, x, y);
 	direction = 0;
 	health = 100;
+	mouseXChange = 1;
+	mouseYChange = 0;
 
 	lines = new Line[4];
 	bullets = new ArrayList<Bullet>();
@@ -138,6 +141,10 @@ public class Player
 	{
 	    mainX = x;
 	    mainY = y;
+
+
+	    mouseXChange = drawer.mouseX - drawer.width / 2;
+	    mouseYChange = drawer.mouseY - drawer.height / 2;
 	}
 	if (name == "target") 
 	{
@@ -145,18 +152,16 @@ public class Player
 	}
 
 	//drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
-		//(float) (drawer.height / 2 - mainY + y - height / 2), (float) width, (float) height);
+	//(float) (drawer.height / 2 - mainY + y - height / 2), (float) width, (float) height);
 	drawer.pushMatrix();
 	drawer.translate((float)(drawer.width/2 -mainX+ x) , (float)(drawer.height/2-mainY+y));
 	drawer.rotate((float) direction);
 	//drawer.image(john,(float) (- mainX + x - width / 2),(float) (- mainY + y - height / 2), (float) width, (float) height);
 	drawer.image(john,(float) (- width / 2),(float) (- height / 2), (float) width, (float) height);
-	
+
 	drawer.rotate((float) -direction);
 	drawer.popMatrix();
-	
-	double mouseXChange = drawer.mouseX - drawer.width / 2;
-	double mouseYChange = drawer.mouseY - drawer.height / 2;
+
 
 	double xs = -mainX + drawer.width/2 - width / 2;
 	double ys = -mainY + drawer.height/2 - height/2;
