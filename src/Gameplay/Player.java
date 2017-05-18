@@ -134,11 +134,14 @@ public class Player
     {
 	health -= num;
     }
+    
+    public int getHealth()
+    {
+	return health;
+    }
 
     public void draw(PApplet drawer)
     {
-
-	// drawer.image(john, 0, 0, 300,300);
 	if (isMain)
 	{
 	    mainX = x;
@@ -147,10 +150,21 @@ public class Player
 	    mouseXChange = drawer.mouseX - drawer.width / 2;
 	    mouseYChange = drawer.mouseY - drawer.height / 2;
 	}
-
-	drawer.pushMatrix();
 	
+	double xs = -mainX + drawer.width / 2 - width / 2;
+	double ys = -mainY + drawer.height / 2 - height / 2;
+
+	lines[0] = new Line(x + xs, y + ys, x + width + xs, y + ys);
+	lines[1] = new Line(x + xs + width, y + ys, x + width + xs, y + height + ys);
+	lines[2] = new Line(x + width + xs, y + ys + height, x + xs, y + height + ys);
+	lines[3] = new Line(x + xs, y + ys, x + xs, y + ys + height);
+	
+	hud.updateHealth(health);
+	hud.draw(drawer, (float)(x + xs), (float)(y + ys));
+	
+	drawer.pushMatrix();
 	drawer.translate((float) (drawer.width / 2 - mainX + x), (float) (drawer.height / 2 - mainY + y));
+	
 	drawer.rotate((float) direction);
 	if (jnum == 1)
 	{
@@ -168,20 +182,11 @@ public class Player
 	    john = drawer.loadImage("john3.png");
 	    drawer.image(john, (float) (-width / 2), (float) (-height / 2), (float) width, (float) height);
 	}
+	
 
 	drawer.rotate((float) -direction);
 	drawer.popMatrix();
-
-	double xs = -mainX + drawer.width / 2 - width / 2;
-	double ys = -mainY + drawer.height / 2 - height / 2;
-
-	lines[0] = new Line(x + xs, y + ys, x + width + xs, y + ys);
-	lines[1] = new Line(x + xs + width, y + ys, x + width + xs, y + height + ys);
-	lines[2] = new Line(x + width + xs, y + ys + height, x + xs, y + height + ys);
-	lines[3] = new Line(x + xs, y + ys, x + xs, y + ys + height);
 	drawer.strokeWeight(10);
-
-	// System.out.println(mouseXChange + " " + mouseYChange);
 
 	for (Bullet b : bullets)
 	{
@@ -200,7 +205,6 @@ public class Player
 	    direction += Math.PI;
 	}
 	
-	hud.draw(drawer, (int)x, (int)y);
 	jnum = 1;
     }
 

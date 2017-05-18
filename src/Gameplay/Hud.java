@@ -6,7 +6,7 @@ public class Hud
 {
     private static final double MAX_HEALTH = 100.0;
 
-    private double health;
+    private int health;
     private double ratio;
     private String playerName;
 
@@ -19,10 +19,17 @@ public class Hud
     {
 	ratio = health / MAX_HEALTH;
     }
-
-    public void draw(PApplet drawer, int x, int y)
+    
+    public void updateHealth(int health)
     {
-	drawer.text(playerName, x, y);
+	this.health = health;
+    }
+
+    public void draw(PApplet drawer, float x, float y)
+    {
+	drawer.fill(0);
+	drawer.text(playerName, x, y - 25);
+	drawer.text("HP: " + health, x, y - 15);
 	// display rectangle which uses ratio to draw the health bar
     }
 }
