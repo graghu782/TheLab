@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,12 +15,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Networking.Client;
+
 public class ServerJoinPanel extends JPanel implements ActionListener
 {
     private Main w;
     private JTextField inputName;
     private JTextField inputIP;
-
+    private JButton joinButton;
+    private JButton menuButton;
+    
     public ServerJoinPanel(Main w)
     {
 	this.w = w;
@@ -31,8 +36,9 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	inputName = new JTextField("Input name here");
 	inputIP = new JTextField("Enter IP here");
 
-	JButton joinButton = new JButton("Join");
-	JButton menuButton = new JButton("Menu");
+	joinButton = new JButton("Join");
+	menuButton = new JButton("Menu");
+	
 	joinButton.addActionListener(this);
 	menuButton.addActionListener(this);
 
@@ -64,7 +70,22 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	String k = inputIP.getText();
-	w.changePanel("menu");
+	if(e.getSource() == joinButton) {
+	    String ip = inputIP.getText();
+	    String name = inputName.getText();
+	    
+	    try
+	    {
+		Client client = new Client(ip, 4444);
+		new Thread(client).start();
+	    }
+	    catch (IOException e1)
+	    {
+		e1.printStackTrace();
+	    }
+	}
+	if(e.getSource() == menuButton) {
+	    w.changePanel("menu");
+	}
     }
 }

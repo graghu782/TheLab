@@ -46,7 +46,8 @@ public class Client implements Runnable
 	synchronized(this){
 	    this.runningThread = Thread.currentThread();
 	}
-
+	
+	
 	try
 	{
 	    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -58,7 +59,7 @@ public class Client implements Runnable
 	}
 	
 	while(!isStopped) {
-	    pw.println("playerpos");
+	    pw.println("LOL");
 	    
 	}
     }
