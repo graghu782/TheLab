@@ -85,8 +85,12 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	if(e.getSource() == joinButton) {
 	    Server s = new Server(4444);
 	    new Thread(s).start();
+	    joinButton = null;
+	    w.changePanel("menu");
 	}
-	
-	w.changePanel("menu");
+	if(e.getSource() == menuButton){
+		w.changePanel("menu");
+
+	}
     }
 }
