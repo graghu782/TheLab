@@ -174,7 +174,7 @@ public class Player
 	arm.setmy(direction);
 	arm.draw(drawer);
 	
-	System.out.println(health);
+	//System.out.println(health);
     }
 
 }

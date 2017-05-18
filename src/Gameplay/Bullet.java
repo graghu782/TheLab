@@ -7,8 +7,8 @@ public class Bullet extends Line
 {
     private double direction;
     // private double xCoord, yCoord;
-    private double length;
-    private double speed;
+    private final static double LENGTH = 50;
+    private final double SPEED = 30;
     double xTemp;
     double yTemp;
     double xo;
@@ -21,7 +21,7 @@ public class Bullet extends Line
 
     public Bullet(double xCoord, double yCoord, double direction, double x, double y, Player p)
     {
-	super(xCoord, yCoord, Math.cos(direction), Math.sin(direction));
+	super(xCoord, yCoord, Math.cos(direction) *LENGTH+xCoord, Math.sin(direction)*LENGTH+yCoord);
 	this.direction = direction;
 	// this.xCoord = xCoord;
 	// this.yCoord = yCoord;
@@ -30,30 +30,30 @@ public class Bullet extends Line
 	
 	player = p;
 
-	length = 50;
-	speed = 40;
 	iters = 0;
 	xo = x;
 	yo = y;
 	xTemp = Math.cos(direction);
 	yTemp = Math.sin(direction);
+	//super.setPoint2((float)xTemp, (float)yTemp);
+
+	//System.out.println(x + " " + y + " " + xTemp*LENGTH + " " + yTemp*LENGTH);
     }
 
     public void draw(PApplet drawer)
     {
-	drawer.strokeWeight(3);
-	
-	double xTempr = x + (length * xTemp);
+	double xTempr = x + (LENGTH * xTemp);
 
-	double yTempr = y + (length * yTemp);
+	double yTempr = y + (LENGTH * yTemp);
 	super.setPoint2((float) xTempr, (float) yTempr);
-	drawer.strokeWeight(1);
+	
+	//drawer.strokeWeight(10);
 	//drawer.line((float) x, (float) y, (float) (xTempr), (float) (yTempr));
 
 	super.draw(drawer);
 
-	x = x + (speed * xTemp);
-	y = y + (speed * yTemp);
+	x = x + (SPEED * xTemp);
+	y = y + (SPEED * yTemp);
 	iters++;
     }
     
