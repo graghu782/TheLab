@@ -57,7 +57,7 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	double ratioY = getHeight() / 600.0;
 
 	Graphics2D g2 = (Graphics2D) g;
-
+ 
 	AffineTransform af = g2.getTransform();
 
 	g2.scale(ratioX, ratioY);

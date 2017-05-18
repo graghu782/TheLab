@@ -37,7 +37,7 @@ public class Main extends JFrame
 	setVisible(true);
 
 	cardPanel = new JPanel();
-	cl = new CardLayout();
+	cl = new CardLayout(); 
 	cardPanel.setLayout(cl);
 
 	menuPanel = new MenuPanel(this);

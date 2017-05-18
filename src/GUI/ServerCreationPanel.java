@@ -29,7 +29,7 @@ public class ServerCreationPanel extends JPanel implements ActionListener
     private JButton menuButton;
     
     public ServerCreationPanel(Main w)
-    {
+    { 
 	this.w = w;
 	JPanel p = new JPanel();
 	p.setBackground(new Color(0, 0, 0, 0)); // Panel is transparent
