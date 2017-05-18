@@ -25,22 +25,25 @@ public class Client implements Runnable
 
     public void run()
     {
-	synchronized(this){
+	synchronized (this)
+	{
 	    this.runningThread = Thread.currentThread();
 	}
 
+	while (!isStopped)
+	{
 
-	try
-	{
-	    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	    PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
-	    while(!isStopped) {
+	    try
+	    {
+		BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
 		pw.println("LOL");
+
 	    }
-	}
-	catch (IOException e)
-	{
-	    e.printStackTrace();
+	    catch (IOException e)
+	    {
+		e.printStackTrace();
+	    }
 	}
 
     }
