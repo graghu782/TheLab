@@ -5,7 +5,6 @@ import kim.shapes.Line;
 
 public class Bullet extends Line
 {
-    private double direction;
     // private double xCoord, yCoord;
     private final static double LENGTH = 80;
     private final double SPEED = 40;
@@ -15,18 +14,11 @@ public class Bullet extends Line
     double yo;
     Player player;
 
-    private Line l1;
-
     private int iters;
 
     public Bullet(double xCoord, double yCoord, double direction, double x, double y, Player p)
     {
 	super(xCoord, yCoord, Math.cos(direction) *LENGTH+xCoord, Math.sin(direction)*LENGTH+yCoord);
-	this.direction = direction;
-	// this.xCoord = xCoord;
-	// this.yCoord = yCoord;
-	
-	
 	
 	player = p;
 
