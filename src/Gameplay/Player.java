@@ -147,9 +147,11 @@ public class Player
 	//drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
 		//(float) (drawer.height / 2 - mainY + y - height / 2), (float) width, (float) height);
 	drawer.pushMatrix();
-	drawer.translate((float)(drawer.width/2) , (float)(drawer.height/2));
+	drawer.translate((float)(drawer.width/2 -mainX+ x) , (float)(drawer.height/2-mainY+y));
 	drawer.rotate((float) direction);
-	drawer.image(john,(float) (- mainX + x - width / 2),(float) (- mainY + y - height / 2), (float) width, (float) height);
+	//drawer.image(john,(float) (- mainX + x - width / 2),(float) (- mainY + y - height / 2), (float) width, (float) height);
+	drawer.image(john,(float) (- width / 2),(float) (- height / 2), (float) width, (float) height);
+	
 	drawer.rotate((float) -direction);
 	drawer.popMatrix();
 	
