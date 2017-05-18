@@ -23,24 +23,6 @@ public class Client implements Runnable
 
     }
 
-    public static void main(String[] args)
-    {
-	String hostName = "localhost";
-
-	try
-	{
-	    Socket s = new Socket(hostName, 4444);
-	    BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-	    PrintWriter pw = new PrintWriter(s.getOutputStream(), true);
-	    pw.println("hello");
-	    s.close();
-	}
-	catch (IOException e)
-	{
-	    System.err.println(e);
-	}
-    }
-
     public void run()
     {
 	synchronized(this){
