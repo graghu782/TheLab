@@ -26,6 +26,8 @@ public class Bullet extends Line
 	// this.xCoord = xCoord;
 	// this.yCoord = yCoord;
 	
+	
+	
 	player = p;
 
 	length = 50;
@@ -40,9 +42,11 @@ public class Bullet extends Line
     public void draw(PApplet drawer)
     {
 	drawer.strokeWeight(3);
+	
 	double xTempr = x + (length * xTemp);
 
 	double yTempr = y + (length * yTemp);
+	super.setPoint2((float) xTempr, (float) yTempr);
 	drawer.strokeWeight(1);
 	//drawer.line((float) x, (float) y, (float) (xTempr), (float) (yTempr));
 
