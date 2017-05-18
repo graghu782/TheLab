@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.w3c.dom.css.Rect;
 
+import GUI.EasySound2;
 import processing.core.PApplet;
 import processing.core.PImage;
 import kim.shapes.Line;
@@ -13,6 +14,8 @@ public class Player
 {
     // private static double mx, my;
     private boolean isMain;
+
+    private final EasySound2 gunshot = new EasySound2("gunshots2.wav");
     private double x, y, width, height;
     private Color color;
     private String name;
@@ -77,7 +80,7 @@ public class Player
     public void fire()
     {
 	bullets.add(new Bullet(400, 300, direction, x, y, this));
-
+	gunshot.play();
     }
 
     public ArrayList<Bullet> getBullets()
@@ -134,7 +137,7 @@ public class Player
     {
 	health -= num;
     }
-    
+
     public int getHealth()
     {
 	return health;
@@ -150,7 +153,7 @@ public class Player
 	    mouseXChange = drawer.mouseX - drawer.width / 2;
 	    mouseYChange = drawer.mouseY - drawer.height / 2;
 	}
-	
+
 	double xs = -mainX + drawer.width / 2 - width / 2;
 	double ys = -mainY + drawer.height / 2 - height / 2;
 
@@ -158,13 +161,13 @@ public class Player
 	lines[1] = new Line(x + xs + width, y + ys, x + width + xs, y + height + ys);
 	lines[2] = new Line(x + width + xs, y + ys + height, x + xs, y + height + ys);
 	lines[3] = new Line(x + xs, y + ys, x + xs, y + ys + height);
-	
+
 	hud.updateHealth(health);
 	hud.draw(drawer, (float)(x + xs), (float)(y + ys));
-	
+
 	drawer.pushMatrix();
 	drawer.translate((float) (drawer.width / 2 - mainX + x), (float) (drawer.height / 2 - mainY + y));
-	
+
 	drawer.rotate((float) direction);
 	if (jnum == 1)
 	{
@@ -182,7 +185,7 @@ public class Player
 	    john = drawer.loadImage("john3.png");
 	    drawer.image(john, (float) (-width / 2), (float) (-height / 2), (float) width, (float) height);
 	}
-	
+
 
 	drawer.rotate((float) -direction);
 	drawer.popMatrix();
@@ -204,7 +207,7 @@ public class Player
 	{
 	    direction += Math.PI;
 	}
-	
+
 	jnum = 1;
     }
 
