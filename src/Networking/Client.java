@@ -20,7 +20,6 @@ public class Client implements Runnable
     public Client(String hostname, int port) throws UnknownHostException, IOException
     {
 	socket = new Socket(hostname, port);
-
     }
 
     public void run()
@@ -30,20 +29,16 @@ public class Client implements Runnable
 	    this.runningThread = Thread.currentThread();
 	}
 
-	while (!isStopped)
+	try
 	{
-	    try
-	    {
-		BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
-		while(true) {
-		pw.println("LOL");
-		}
-	    }
-	    catch (IOException e)
-	    {
-		e.printStackTrace();
-	    }
+	    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	    PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
+	    pw.println("LOL?");
+	}
+	catch (IOException e)
+	{
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
     }
 }
