@@ -32,19 +32,18 @@ public class Client implements Runnable
 
 	while (!isStopped)
 	{
-
 	    try
 	    {
 		BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
+		while(true) {
 		pw.println("LOL");
-
+		}
 	    }
 	    catch (IOException e)
 	    {
 		e.printStackTrace();
 	    }
 	}
-
     }
 }
