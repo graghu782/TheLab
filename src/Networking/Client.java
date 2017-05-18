@@ -16,7 +16,7 @@ public class Client implements Runnable
     private PrintWriter pw;
     private Thread runningThread;
     private boolean isStopped;
-    
+
     public Client(String hostname, int port) throws UnknownHostException, IOException
     {
 	socket = new Socket(hostname, port);
@@ -28,21 +28,20 @@ public class Client implements Runnable
 	synchronized(this){
 	    this.runningThread = Thread.currentThread();
 	}
-	
-	
+
+
 	try
 	{
 	    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	    PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
+	    while(!isStopped) {
+		pw.println("LOL");
+	    }
 	}
 	catch (IOException e)
 	{
 	    e.printStackTrace();
 	}
-	
-	while(!isStopped) {
-	    pw.println("LOL");
-	    
-	}
+
     }
 }
