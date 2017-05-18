@@ -7,8 +7,8 @@ public class Bullet extends Line
 {
     private double direction;
     // private double xCoord, yCoord;
-    private final static double LENGTH = 50;
-    private final double SPEED = 30;
+    private final static double LENGTH = 80;
+    private final double SPEED = 40;
     double xTemp;
     double yTemp;
     double xo;
