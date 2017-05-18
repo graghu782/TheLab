@@ -24,6 +24,7 @@ public class Main extends JFrame
     private OptionPanel optionPanel;
     private ServerCreationPanel serverCreatePanel;
     private ServerJoinPanel serverJoinPanel;
+    private PendingPanel pendingPanel;
 
     private JFrame window;
     private DrawingSurface drawing;
@@ -44,12 +45,14 @@ public class Main extends JFrame
 	optionPanel = new OptionPanel(this);
 	serverCreatePanel = new ServerCreationPanel(this);
 	serverJoinPanel = new ServerJoinPanel(this);
+	pendingPanel = new PendingPanel(this);
 
 	cardPanel.add(menuPanel, "menu");
 	cardPanel.add(instructionsPanel, "instructions");
 	cardPanel.add(optionPanel, "game");
 	cardPanel.add(serverCreatePanel, "servermenu");
 	cardPanel.add(serverJoinPanel, "joinmenu");
+	cardPanel.add(pendingPanel, "pending");
 	add(cardPanel);
 		
 	setVisible(true);

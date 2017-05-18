@@ -83,6 +83,8 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	    {
 		e1.printStackTrace();
 	    }
+	    
+	    w.changePanel("pending");
 	}
 	if(e.getSource() == menuButton) {
 	    w.changePanel("menu");

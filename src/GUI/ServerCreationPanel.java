@@ -23,8 +23,6 @@ public class ServerCreationPanel extends JPanel implements ActionListener
     private Main w;
     
     private JTextArea IPText;
-    private JTextArea confirmText;
-    
     private InetAddress myIP;
     
     private JButton joinButton;
@@ -49,8 +47,6 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	    e.printStackTrace();
 	    IPText.append("Error getting your IP address!");
 	}
-	
-	confirmText = new JTextArea();
 
 	joinButton = new JButton("Start");
 	menuButton = new JButton("Menu");
@@ -64,9 +60,6 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	
 	p.add(joinButton);
 	p.add(menuButton);
-	
-	p.add(Box.createVerticalStrut(50));
-	p.add(confirmText);
 	add(p);
     }
     
@@ -96,7 +89,8 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	    Server s = new Server(4444);
 	    new Thread(s).start();
 	    joinButton = null;
-	    confirmText.append("Connected to " + myIP);
+	    
+	    w.changePanel("pending");
 	}
 	if(e.getSource() == menuButton){
 		w.changePanel("menu");
