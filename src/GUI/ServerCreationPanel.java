@@ -16,12 +16,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Networking.Server;
+
 public class ServerCreationPanel extends JPanel implements ActionListener
 {
     private Main w;
     private JTextArea IPText;
     private InetAddress myIP;
-
+    private JButton joinButton;
+    private JButton menuButton;
+    
     public ServerCreationPanel(Main w)
     {
 	this.w = w;
@@ -42,8 +46,9 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	    IPText.append("Error getting your IP address!");
 	}
 
-	JButton joinButton = new JButton("Start");
-	JButton menuButton = new JButton("Menu");
+	joinButton = new JButton("Start");
+	menuButton = new JButton("Menu");
+	
 	joinButton.addActionListener(this);
 	menuButton.addActionListener(this);
 
@@ -77,6 +82,11 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
+	if(e.getSource() == joinButton) {
+	    Server s = new Server(4444);
+	    new Thread(s).start();
+	}
+	
 	w.changePanel("menu");
     }
 }
