@@ -129,13 +129,7 @@ public class Player
 
     public void draw(PApplet drawer)
     {
-	if (jnum == 1){
-	    john = drawer.loadImage("john1.png");
-	}else if (jnum == 2){
-	    john = drawer.loadImage("john2.png");
-	}else{
-	    john = drawer.loadImage("john3.png");
-	}
+	
 	//drawer.image(john, 0, 0, 300,300);
 	if (isMain)
 	{
@@ -150,15 +144,22 @@ public class Player
 	{
 	    drawer.fill(255, 0, 0);
 	}
-
-	//drawer.rect((float) (drawer.width / 2 - mainX + x - width / 2),
-	//(float) (drawer.height / 2 - mainY + y - height / 2), (float) width, (float) height);
+	
 	drawer.pushMatrix();
 	drawer.translate((float)(drawer.width/2 -mainX+ x) , (float)(drawer.height/2-mainY+y));
 	drawer.rotate((float) direction);
-	//drawer.image(john,(float) (- mainX + x - width / 2),(float) (- mainY + y - height / 2), (float) width, (float) height);
-	drawer.image(john,(float) (- width / 2),(float) (- height / 2), (float) width, (float) height);
-
+	if (jnum == 1){
+	    john = drawer.loadImage("john1.png");
+	    drawer.image(john,(float) (- width / 2)+5,(float) (- height / 2)+2, (float) width-6, (float) height-4);
+	}else if (jnum == 2){
+	    john = drawer.loadImage("john2.png");
+	    drawer.image(john,(float) (- width / 2),(float) (- height / 2), (float) width, (float) height);
+	}else{
+	    john = drawer.loadImage("john3.png");
+	    drawer.image(john,(float) (- width / 2),(float) (- height / 2), (float) width, (float) height);
+	}
+	
+	
 	drawer.rotate((float) -direction);
 	drawer.popMatrix();
 
