@@ -60,6 +60,16 @@ public class Bullet extends Line
     {
 	return iters;
     }
+    
+    public double getX()
+    {
+	return x;
+    }
+    
+    public double getY()
+    {
+	return y;
+    }
 
     public void update(double mn, double mb)
     {

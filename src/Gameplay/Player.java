@@ -93,6 +93,11 @@ public class Player
 	return bullets;
     }
     
+    public String getName()
+    {
+	return name;
+    }
+    
     public void changeAmmo(int num)
     {
 	ammo += num;
@@ -146,6 +151,11 @@ public class Player
     public void decHealth(int num)
     {
 	health -= num;
+    }
+    
+    public void setHealth(int num)
+    {
+	health = num;
     }
 
     public int getHealth()

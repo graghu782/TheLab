@@ -28,7 +28,8 @@ public class Hud
     public void draw(PApplet drawer, float x, float y)
     {
 	drawer.fill(0);
-	drawer.text(playerName, x, y - 25);
+	
+	//drawer.text(playerName, x, y - 25);
 	drawer.text("HP: " + health, x, y - 15);
 	// display rectangle which uses ratio to draw the health bar
     }

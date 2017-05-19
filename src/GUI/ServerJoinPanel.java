@@ -24,7 +24,7 @@ public class ServerJoinPanel extends JPanel implements ActionListener
     private JTextField inputIP;
     private JButton joinButton;
     private JButton menuButton;
-    
+
     public ServerJoinPanel(Main w)
     {
 	this.w = w;
@@ -32,13 +32,13 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	p.setBackground(new Color(0, 0, 0, 0)); // Panel is transparent
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.add(Box.createVerticalStrut(150));
-	
+
 	inputName = new JTextField("Input name here");
 	inputIP = new JTextField("Enter IP here");
 
 	joinButton = new JButton("Join");
 	menuButton = new JButton("Menu");
-	
+
 	joinButton.addActionListener(this);
 	menuButton.addActionListener(this);
 
@@ -48,7 +48,7 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	p.add(menuButton);
 	add(p);
     }
-    
+
     public void paintComponent(Graphics g)
     {
 	super.paintComponent(g);
@@ -57,7 +57,7 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	double ratioY = getHeight() / 600.0;
 
 	Graphics2D g2 = (Graphics2D) g;
- 
+
 	AffineTransform af = g2.getTransform();
 
 	g2.scale(ratioX, ratioY);
@@ -70,10 +70,12 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	if(e.getSource() == joinButton) {
+	if (e.getSource() == joinButton)
+	{
 	    String ip = inputIP.getText();
 	    String name = inputName.getText();
-	    
+
+	    /*
 	    try
 	    {
 		Client client = new Client(ip, 4444);
@@ -83,10 +85,15 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	    {
 		e1.printStackTrace();
 	    }
+	    */
 	    
-	    //w.changePanel("pending");
+	    w.setIP(ip);
+	    w.setName(name);
+	    w.setIfServer(false);
+	    w.changePanel("game");
 	}
-	if(e.getSource() == menuButton) {
+	if (e.getSource() == menuButton)
+	{
 	    w.changePanel("menu");
 	}
     }

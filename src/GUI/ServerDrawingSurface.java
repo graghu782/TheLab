@@ -7,8 +7,9 @@ import Gameplay.Bullet;
 import Gameplay.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.net.*;
 
-public class DrawingSurface extends PApplet
+public class ServerDrawingSurface extends PApplet
 {
     private Player player;
     private Border border;
@@ -19,15 +20,33 @@ public class DrawingSurface extends PApplet
     public static final int DRAWING_HEIGHT = 600;
     public static final int MAP_WIDTH = 2400;
     public static final int MAP_HEIGHT = 1800;
-    private Player target;
     private double x, y;
 
     private ArrayList<Player> players;
 
     private int count;
+    
+    private String IP;
+    private String playerName;
+    
+    private Server s;
+    private Client c;
+    
+    private String input;
+    private String data[];
 
-    public DrawingSurface()
+    public ServerDrawingSurface()
     {
+	keysPressed = new boolean[4];
+	players = new ArrayList<Player>();
+	runSketch();
+    }
+    
+    public ServerDrawingSurface(String IP, String playerName)
+    {
+	this.IP = IP;
+	this.playerName = playerName;
+	
 	keysPressed = new boolean[4];
 	players = new ArrayList<Player>();
 	runSketch();
@@ -42,10 +61,10 @@ public class DrawingSurface extends PApplet
     {
 	background(255);
 	img = loadImage("background.bmp");
-	player = new Player(0, 0, "noob", true);
-	target = new Player(110, 140, "target", false);
+	player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
-	
+
+	s = new Server(this, 4444);
     }
 
     public void runMe()
@@ -78,29 +97,78 @@ public class DrawingSurface extends PApplet
 	float ratioY = (float) height / DRAWING_HEIGHT;
 
 	scale(ratioX, ratioY);
+	checkBullets();
 	
-	for (int i = 0; i < player.getBullets().size(); i++)
-	{
-	    ArrayList<Bullet> bas = player.getBullets();
-	    for(Player p : players)
-	    {
-		if(p.isHit(bas.get(i)))
-		{
-		    bas.remove(i);
-		    p.decHealth(10);
-		}
-	    }
-	    
-	    if(target.isHit(player.getBullets().get(i)))
-	    {
-		bas.remove(i);
-		target.decHealth(10);
-	    }
-	}
-
 	player.draw(this);
-	target.draw(this);
+	
+	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName());
+	for(Bullet b : player.getBullets())
+	{
+	    s.write(b.getX() + ":" + b.getY());
+	}
+	s.write("\n");
+	
+	c = s.available();
+	if(c != null)
+	{
+	    input = c.readString();
+	    input = input.substring(0, input.indexOf("\n"));
+	    
+	    data = input.split(":");
+	    
+	    Player receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), "", false);
+	    receivedPlayer.setHealth(Integer.parseInt(data[2]));
+	    
+	    receivedPlayer.draw(this);
+	}
+	
+	checkKeys();
+	popMatrix();
+    }
 
+    public void keyPressed()
+    {
+
+	if (key == 'w' || key == 'W')
+	{
+	    keysPressed[0] = true;
+	}
+	if (key == 'a' || key == 'A')
+	{
+	    keysPressed[1] = true;
+	}
+	if (key == 's' || key == 'S')
+	{
+	    keysPressed[2] = true;
+	}
+	if (key == 'd' || key == 'D')
+	{
+	    keysPressed[3] = true;
+	}
+    }
+
+    public void keyReleased()
+    {
+	if (key == 'w' || key == 'W')
+	{
+	    keysPressed[0] = false;
+	}
+	if (key == 'a' || key == 'A')
+	{
+	    keysPressed[1] = false;
+	}
+	if (key == 's' || key == 'S')
+	{
+	    keysPressed[2] = false;
+	}
+	if (key == 'd' || key == 'D')
+	{
+	    keysPressed[3] = false;
+	}
+    }
+    
+    public void checkKeys()
+    {
 	if (keysPressed[0])
 	{
 	    if (player.getY() > 1)
@@ -148,48 +216,22 @@ public class DrawingSurface extends PApplet
 		}
 	    }
 	}
-
-	popMatrix();
     }
-
-    public void keyPressed()
+    
+    public void checkBullets()
     {
+	for (int i = 0; i < player.getBullets().size(); i++)
+	{
+	    ArrayList<Bullet> bas = player.getBullets();
+	    for(Player p : players)
+	    {
+		if(p.isHit(bas.get(i)))
+		{
+		    bas.remove(i);
+		    p.decHealth(10);
+		}
+	    }
+	}
 
-	if (key == 'w' || key == 'W')
-	{
-	    keysPressed[0] = true;
-	}
-	if (key == 'a' || key == 'A')
-	{
-	    keysPressed[1] = true;
-	}
-	if (key == 's' || key == 'S')
-	{
-	    keysPressed[2] = true;
-	}
-	if (key == 'd' || key == 'D')
-	{
-	    keysPressed[3] = true;
-	}
-    }
-
-    public void keyReleased()
-    {
-	if (key == 'w' || key == 'W')
-	{
-	    keysPressed[0] = false;
-	}
-	if (key == 'a' || key == 'A')
-	{
-	    keysPressed[1] = false;
-	}
-	if (key == 's' || key == 'S')
-	{
-	    keysPressed[2] = false;
-	}
-	if (key == 'd' || key == 'D')
-	{
-	    keysPressed[3] = false;
-	}
     }
 }

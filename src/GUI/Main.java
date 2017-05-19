@@ -27,7 +27,13 @@ public class Main extends JFrame
     private PendingPanel pendingPanel;
 
     private JFrame window;
-    private DrawingSurface drawing;
+    
+    private ServerDrawingSurface drawing1;
+    private ClientDrawingSurface drawing2;
+    
+    private String IP;
+    private String playerName = "";
+    private boolean createdServer;
 
     public Main(String title)
     {
@@ -62,6 +68,21 @@ public class Main extends JFrame
     {
 	Main w = new Main("The Lab");
     }
+    
+    public void setIP(String s)
+    {
+	IP = s;
+    }
+    
+    public void setIfServer(boolean b)
+    {
+	createdServer = b;
+    }
+    
+    public void setName(String s)
+    {
+	playerName = s;
+    }
 
     public void changePanel(String s)
     {
@@ -73,10 +94,24 @@ public class Main extends JFrame
 	{
 	    setSize(300, 100);
 	    setBounds(200, 200, 800, 100);
-	    drawing = new DrawingSurface();
-
-	    PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
-	    PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+	    
+	    PSurfaceAWT surf;
+	    PSurfaceAWT.SmoothCanvas canvas;
+	    
+	    if(createdServer)
+	    {
+		drawing1 = new ServerDrawingSurface(IP, playerName);
+		
+		    surf = (PSurfaceAWT) drawing1.getSurface();
+		    canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+	    }
+	    else
+	    {
+		drawing2 = new ClientDrawingSurface(IP, playerName);
+		
+		    surf = (PSurfaceAWT) drawing2.getSurface();
+		    canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+	    }
 
 	    window = (JFrame) canvas.getFrame();
 
@@ -86,9 +121,14 @@ public class Main extends JFrame
 	    window.setResizable(false);
 	    window.setVisible(true);
 	}
-	else if (drawing != null && window != null)
+	else if (drawing1 != null && window != null)
 	{
-	    drawing.noLoop();
+	    drawing1.noLoop();
+	    window.dispose();
+	}
+	else if (drawing2 != null && window != null)
+	{
+	    drawing2.noLoop();
 	    window.dispose();
 	}
     }

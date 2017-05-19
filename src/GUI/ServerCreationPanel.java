@@ -21,21 +21,21 @@ import Networking.Server;
 public class ServerCreationPanel extends JPanel implements ActionListener
 {
     private Main w;
-    
+
     private JTextArea IPText;
     private InetAddress myIP;
-    
+
     private JButton joinButton;
     private JButton menuButton;
-    
+
     public ServerCreationPanel(Main w)
-    { 
+    {
 	this.w = w;
 	JPanel p = new JPanel();
 	p.setBackground(new Color(0, 0, 0, 0)); // Panel is transparent
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.add(Box.createVerticalStrut(150));
-	
+
 	IPText = new JTextArea();
 	try
 	{
@@ -50,19 +50,19 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 
 	joinButton = new JButton("Start");
 	menuButton = new JButton("Menu");
-	
+
 	joinButton.addActionListener(this);
 	menuButton.addActionListener(this);
 
 	p.add(IPText);
-	
+
 	p.add(Box.createVerticalStrut(50));
-	
+
 	p.add(joinButton);
 	p.add(menuButton);
 	add(p);
     }
-    
+
     public void paintComponent(Graphics g)
     {
 	super.paintComponent(g);
@@ -84,16 +84,21 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	if(e.getSource() == joinButton) 
+	if (e.getSource() == joinButton)
 	{
+	    /*
 	    Server s = new Server(4444);
 	    new Thread(s).start();
 	    joinButton = null;
+	    */
 	    
-	//    w.changePanel("pending");
+	    w.setIP(myIP.toString().substring(myIP.toString().indexOf("/")));
+	    w.setIfServer(true);
+	    w.changePanel("game");
 	}
-	if(e.getSource() == menuButton){
-		w.changePanel("menu");
+	if (e.getSource() == menuButton)
+	{
+	    w.changePanel("menu");
 
 	}
     }
