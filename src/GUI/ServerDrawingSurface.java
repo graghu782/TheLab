@@ -102,10 +102,10 @@ public class ServerDrawingSurface extends PApplet
 	player.draw(this);
 	
 	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName());
-	for(Bullet b : player.getBullets())
-	{
-	    s.write(b.getX() + ":" + b.getY());
-	}
+//	for(Bullet b : player.getBullets())
+//	{
+//	    s.write(b.getX() + ":" + b.getY());
+//	}
 	s.write("\n");
 	
 	c = s.available();
