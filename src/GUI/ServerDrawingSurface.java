@@ -64,6 +64,7 @@ public class ServerDrawingSurface extends PApplet
 	player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
 
+	frameRate(20);
 	s = new Server(this, 4444);
     }
 
