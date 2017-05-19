@@ -114,7 +114,7 @@ public class ServerDrawingSurface extends PApplet
 
 	    data = input.split(":");
 
-	    if(data.length > 4 && data[0].equals("playerInfo")) {
+	    if(data.length > 5 && data[0].equals("playerInfo")) {
 		Player receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
 		receivedPlayer.setHealth((int)Double.parseDouble(data[3]));
 		receivedPlayer.setDirection(Double.parseDouble(data[5]));
