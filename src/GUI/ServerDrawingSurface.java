@@ -120,6 +120,7 @@ public class ServerDrawingSurface extends PApplet
 		receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
 		receivedPlayer.setHealth((int)Double.parseDouble(data[3]));
 		receivedPlayer.setDirection(Double.parseDouble(data[5]));
+		/*
 		if(data.length > 6) {
 		    if(data[6].equals("bulletInfo")) {
 			for(int x = 6; x < data.length-5; x++) {
@@ -127,6 +128,7 @@ public class ServerDrawingSurface extends PApplet
 			}
 		    }
 		}
+		*/
 	    }
 	    
 	    if(receivedPlayer != null)
@@ -143,11 +145,13 @@ public class ServerDrawingSurface extends PApplet
 	s.write("playerInfo:");
 	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":"
 		+ player.getDirection() + ":");
+	/*
 	for (Bullet b : player.getBullets())
 	{
 	    s.write("bulletInfo");
 	    s.write(b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + b.getX() + ":" + b.getY());
 	}
+	*/
     }
 
     public void keyPressed()
