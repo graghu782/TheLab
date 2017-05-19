@@ -109,36 +109,19 @@ public class ClientDrawingSurface extends PApplet
 	if (c.available() > 0)
 	{
 	    input = c.readString();
-	    // if(input.indexOf("\n") >= 0);
-	    // input = input.substring(0, input.indexOf("\n"));
 
 	    data = input.split(":");
 
-	    if (data.length > 5 && data[0].equals("playerInfo"))
+	    if (data.length > 5)
 	    {
-		receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4],
-			false);
+		receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
 		receivedPlayer.setHealth((int) Double.parseDouble(data[3]));
 		receivedPlayer.setDirection(Double.parseDouble(data[5]));
-//		if (data.length > 6)
-//		{
-//		    if (data[6].equals("bulletInfo"))
-//		    {
-//			for (int x = 6; x < data.length - 5; x++)
-//			{
-//			    receivedPlayer.getBullets()
-//				    .add(new Bullet(Double.parseDouble(data[x]), Double.parseDouble(data[x + 1]),
-//					    Double.parseDouble(data[x + 2]), Double.parseDouble(data[x + 3]),
-//					    Double.parseDouble(data[x + 4]), receivedPlayer));
-//			}
-//		    }
-//		}
 	    }
-	    
-	    
-	    if(receivedPlayer != null)
-		receivedPlayer.draw(this);
 	}
+
+	if (receivedPlayer != null)
+	    receivedPlayer.draw(this);
 
 	checkKeys();
 	popMatrix();
@@ -149,11 +132,6 @@ public class ClientDrawingSurface extends PApplet
 	c.write("playerInfo:");
 	c.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":"
 		+ player.getDirection() + ":");
-//	for (Bullet b : player.getBullets())
-//	{
-//	    c.write("bulletInfo");
-//	    c.write(b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + b.getX() + ":" + b.getY());
-//	}
     }
 
     public void keyPressed()
