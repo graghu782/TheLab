@@ -118,10 +118,13 @@ public class ServerDrawingSurface extends PApplet
 		Player receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
 		receivedPlayer.setHealth((int)Double.parseDouble(data[3]));
 		receivedPlayer.setDirection(Double.parseDouble(data[5]));
-		for(int x = 6; x < data.length-5; x++) {
-		    receivedPlayer.getBullets().add(new Bullet(Double.parseDouble(data[x]), Double.parseDouble(data[x+1]), Double.parseDouble(data[x+2]), Double.parseDouble(data[x+3]), Double.parseDouble(data[x+4]), receivedPlayer));
+		if(data.length > 6) {
+		    if(data[6].equals("bulletInfo")) {
+			for(int x = 6; x < data.length-5; x++) {
+			    receivedPlayer.getBullets().add(new Bullet(Double.parseDouble(data[x]), Double.parseDouble(data[x+1]), Double.parseDouble(data[x+2]), Double.parseDouble(data[x+3]), Double.parseDouble(data[x+4]), receivedPlayer));
+			}
+		    }
 		}
-		
 		receivedPlayer.draw(this);
 	    }
 
@@ -138,6 +141,7 @@ public class ServerDrawingSurface extends PApplet
 		+ player.getDirection() + ":");
 	for (Bullet b : player.getBullets())
 	{
+	    s.write("bulletInfo");
 	    s.write(b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + b.getX() + ":" + b.getY());
 	}
 	s.write("\n");
