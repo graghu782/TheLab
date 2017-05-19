@@ -29,7 +29,7 @@ public class Hud
     {
 	drawer.fill(0);
 	
-	//drawer.text(playerName, x, y - 25);
+	drawer.text(playerName, x, y - 25);
 	drawer.text("HP: " + health, x, y - 15);
 	// display rectangle which uses ratio to draw the health bar
     }

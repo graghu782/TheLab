@@ -25,13 +25,13 @@ public class ServerDrawingSurface extends PApplet
     private ArrayList<Player> players;
 
     private int count;
-    
+
     private String IP;
     private String playerName;
-    
+
     private Server s;
     private Client c;
-    
+
     private String input;
     private String data[];
 
@@ -41,12 +41,12 @@ public class ServerDrawingSurface extends PApplet
 	players = new ArrayList<Player>();
 	runSketch();
     }
-    
+
     public ServerDrawingSurface(String IP, String playerName)
     {
 	this.IP = IP;
 	this.playerName = playerName;
-	
+
 	keysPressed = new boolean[4];
 	players = new ArrayList<Player>();
 	runSketch();
@@ -86,8 +86,10 @@ public class ServerDrawingSurface extends PApplet
 	y = player.getY();
 
 	background(255);
-	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH), (float) (MAP_HEIGHT + DRAWING_HEIGHT));
-	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2, DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
+	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH),
+		(float) (MAP_HEIGHT + DRAWING_HEIGHT));
+	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2,
+		DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
 	border.draw(this);
 	fill(255);
 
@@ -98,30 +100,37 @@ public class ServerDrawingSurface extends PApplet
 
 	scale(ratioX, ratioY);
 	checkBullets();
-	
+
 	player.draw(this);
-	
-	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName());
-//	for(Bullet b : player.getBullets())
-//	{
-//	    s.write(b.getX() + ":" + b.getY());
-//	}
+
+	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":"
+		+ player.getDirection() + ":");
+	for (Bullet b : player.getBullets())
+	{
+	    s.write(b.getX() + ":" + b.getY() + ":");
+	}
 	s.write("\n");
-	
+
 	c = s.available();
-	if(c != null)
+	if (c != null)
 	{
 	    input = c.readString();
-	    input = input.substring(0, input.indexOf("\n"));
-	    
+	    if(input.indexOf("\n") >= 0)
+		input = input.substring(0, input.indexOf("\n"));
+
 	    data = input.split(":");
-	    
-	    Player receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), "", false);
-	    receivedPlayer.setHealth(Integer.parseInt(data[2]));
-	    
-	    receivedPlayer.draw(this);
+
+	    if (data.length > 4)
+	    {
+		Player receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[3],
+			false);
+		receivedPlayer.setHealth((int)Double.parseDouble(data[2]));
+		receivedPlayer.setDirection(Double.parseDouble(data[4]));
+
+		receivedPlayer.draw(this);
+	    }
 	}
-	
+
 	checkKeys();
 	popMatrix();
     }
@@ -166,7 +175,7 @@ public class ServerDrawingSurface extends PApplet
 	    keysPressed[3] = false;
 	}
     }
-    
+
     public void checkKeys()
     {
 	if (keysPressed[0])
@@ -197,7 +206,7 @@ public class ServerDrawingSurface extends PApplet
 	    count++;
 	    if (count % 3 == 0)
 	    {
-		if(player.getAmmo() > 0)
+		if (player.getAmmo() > 0)
 		{
 		    player.fire();
 		    count = 0;
@@ -208,24 +217,24 @@ public class ServerDrawingSurface extends PApplet
 	else
 	{
 	    count++;
-	    if(count % 3 == 0)
+	    if (count % 3 == 0)
 	    {
-		if(player.getAmmo() < 16)
+		if (player.getAmmo() < 16)
 		{
 		    player.changeAmmo(1);
 		}
 	    }
 	}
     }
-    
+
     public void checkBullets()
     {
 	for (int i = 0; i < player.getBullets().size(); i++)
 	{
 	    ArrayList<Bullet> bas = player.getBullets();
-	    for(Player p : players)
+	    for (Player p : players)
 	    {
-		if(p.isHit(bas.get(i)))
+		if (p.isHit(bas.get(i)))
 		{
 		    bas.remove(i);
 		    p.decHealth(10);

@@ -127,8 +127,13 @@ public class Player
     {
 	return height;
     }
+    
+    public void setDirection(double d)
+    {
+	direction = d;
+    }
 
-    public double getDir()
+    public double getDirection()
     {
 	return direction;
     }

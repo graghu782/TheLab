@@ -10,12 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
+import javax.swing.*;
 import Networking.Server;
 
 public class ServerCreationPanel extends JPanel implements ActionListener
@@ -27,6 +22,8 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 
     private JButton joinButton;
     private JButton menuButton;
+    
+    private JTextField inputName;
 
     public ServerCreationPanel(Main w)
     {
@@ -47,6 +44,8 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	    e.printStackTrace();
 	    IPText.append("Error getting your IP address!");
 	}
+	
+	inputName = new JTextField("Input Name here");
 
 	joinButton = new JButton("Start");
 	menuButton = new JButton("Menu");
@@ -56,6 +55,10 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 
 	p.add(IPText);
 
+	p.add(Box.createVerticalStrut(50));
+	
+	p.add(inputName);
+	
 	p.add(Box.createVerticalStrut(50));
 
 	p.add(joinButton);
@@ -94,6 +97,7 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	    
 	    w.setIP(myIP.toString().substring(myIP.toString().indexOf("/")));
 	    w.setIfServer(true);
+	    w.setName(inputName.getText());
 	    w.changePanel("game");
 	}
 	if (e.getSource() == menuButton)
