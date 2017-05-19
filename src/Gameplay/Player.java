@@ -17,12 +17,16 @@ public class Player
 
     private final EasySound2 gunshot = new EasySound2("gunshots2.wav");
     private double x, y, width, height;
+    private double xCenter, yCenter;
+    private double direction;
+    
     private Color color;
     private String name;
-    private double xCenter, yCenter;
-    double direction;
+    
     private int health;
     private int jnum;
+    private int ammo;
+    
     double mouseXChange, mouseYChange;
 
     private PImage john;
@@ -56,6 +60,7 @@ public class Player
 	lines = new Line[4];
 	bullets = new ArrayList<Bullet>();
 	hud = new Hud(name);
+	ammo = 16;
 
 	// Sprites
 	// spriteRects = new Rect[2];
@@ -87,15 +92,20 @@ public class Player
     {
 	return bullets;
     }
+    
+    public void changeAmmo(int num)
+    {
+	ammo += num;
+    }
+    
+    public int getAmmo()
+    {
+	return ammo;
+    }
 
     public double getX()
     {
 	return x;
-    }
-
-    public void turn(double dir)
-    {
-
     }
 
     public double getY()

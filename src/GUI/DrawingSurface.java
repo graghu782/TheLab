@@ -15,7 +15,6 @@ public class DrawingSurface extends PApplet
     private boolean[] keysPressed;
     private PImage img;
 
-
     public static final int DRAWING_WIDTH = 800;
     public static final int DRAWING_HEIGHT = 600;
     public static final int MAP_WIDTH = 2400;
@@ -130,8 +129,23 @@ public class DrawingSurface extends PApplet
 	    count++;
 	    if (count % 3 == 0)
 	    {
-		player.fire();
-		count = 0;
+		if(player.getAmmo() > 0)
+		{
+		    player.fire();
+		    count = 0;
+		    player.changeAmmo(-1);
+		}
+	    }
+	}
+	else
+	{
+	    count++;
+	    if(count % 3 == 0)
+	    {
+		if(player.getAmmo() < 16)
+		{
+		    player.changeAmmo(1);
+		}
 	    }
 	}
 
