@@ -135,7 +135,9 @@ public class ClientDrawingSurface extends PApplet
 		}
 	    }
 	    
-	    receivedPlayer.draw(this);
+	    
+	    if(receivedPlayer != null)
+		receivedPlayer.draw(this);
 	}
 
 	checkKeys();

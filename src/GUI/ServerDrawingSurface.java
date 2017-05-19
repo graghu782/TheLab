@@ -129,7 +129,8 @@ public class ServerDrawingSurface extends PApplet
 		}
 	    }
 	    
-	    receivedPlayer.draw(this);
+	    if(receivedPlayer != null)
+		receivedPlayer.draw(this);
 
 	}
 
