@@ -12,6 +12,7 @@ public class Bullet extends Line
     double yTemp;
     double xo;
     double yo;
+    double direction;
     Player player;
 
     private int iters;
@@ -19,9 +20,8 @@ public class Bullet extends Line
     public Bullet(double xCoord, double yCoord, double direction, double x, double y, Player p)
     {
 	super(xCoord, yCoord, Math.cos(direction) *LENGTH+xCoord, Math.sin(direction)*LENGTH+yCoord);
-	
 	player = p;
-
+	this.direction = direction;
 	iters = 0;
 	xo = x;
 	yo = y;
@@ -63,14 +63,28 @@ public class Bullet extends Line
     
     public double getX()
     {
-	return x;
+	return xo;
     }
     
     public double getY()
     {
-	return y;
+	return yo;
     }
 
+    public double getXCoord() {
+	return x;
+    }
+    
+    public double getYCoord() {
+	return y;
+    }
+    
+    public double getDirection() {
+	return direction;
+    }
+    
+    
+    
     public void update(double mn, double mb)
     {
 	x += xo - mn;

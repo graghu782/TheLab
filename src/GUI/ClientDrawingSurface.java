@@ -102,13 +102,7 @@ public class ClientDrawingSurface extends PApplet
 
 	player.draw(this);
 
-	c.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":"
-		+ player.getDirection() + ":");
-	for (Bullet b : player.getBullets())
-	{
-	    c.write(b.getX() + ":" + b.getY() + ":");
-	}
-	c.write("\n");
+	sendPlayerInfo();
 
 	if (c.available() > 0)
 	{
@@ -118,13 +112,15 @@ public class ClientDrawingSurface extends PApplet
 
 	    data = input.split(":");
 
-	    if (data.length > 4)
+	    if (data[0].equals("playerInfo"))
 	    {
-		Player receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[3],
-			false);
-		receivedPlayer.setHealth((int)Double.parseDouble(data[2]));
-		receivedPlayer.setDirection(Double.parseDouble(data[4]));
-
+		Player receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
+		receivedPlayer.setHealth((int)Double.parseDouble(data[3]));
+		receivedPlayer.setDirection(Double.parseDouble(data[5]));
+		for(int x = 6; x < data.length-5; x++) {
+		    receivedPlayer.getBullets().add(new Bullet(Double.parseDouble(data[x]), Double.parseDouble(data[x+1]), Double.parseDouble(data[x+2]), Double.parseDouble(data[x+3]), Double.parseDouble(data[x+4]), receivedPlayer));
+		}
+		
 		receivedPlayer.draw(this);
 	    }
 	}
@@ -133,6 +129,17 @@ public class ClientDrawingSurface extends PApplet
 	popMatrix();
     }
 
+    public void sendPlayerInfo() {
+	c.write("playerInfo:");
+	c.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":"
+		+ player.getDirection() + ":");
+	for (Bullet b : player.getBullets())
+	{
+	    c.write(b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + b.getX() + ":" + b.getY());
+	}
+	c.write("\n");
+    }
+    
     public void keyPressed()
     {
 
