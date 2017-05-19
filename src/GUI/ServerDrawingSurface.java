@@ -12,6 +12,7 @@ import processing.net.*;
 public class ServerDrawingSurface extends PApplet
 {
     private Player player;
+    private Player receivedPlayer;
     private Border border;
     private boolean[] keysPressed;
     private PImage img;
@@ -116,7 +117,7 @@ public class ServerDrawingSurface extends PApplet
 	    data = input.split(":");
 
 	    if(data.length > 5 && data[0].equals("playerInfo")) {
-		Player receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
+		receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
 		receivedPlayer.setHealth((int)Double.parseDouble(data[3]));
 		receivedPlayer.setDirection(Double.parseDouble(data[5]));
 		if(data.length > 6) {
@@ -126,8 +127,9 @@ public class ServerDrawingSurface extends PApplet
 			}
 		    }
 		}
-		receivedPlayer.draw(this);
 	    }
+	    
+	    receivedPlayer.draw(this);
 
 	}
 

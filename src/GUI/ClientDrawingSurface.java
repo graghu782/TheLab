@@ -12,6 +12,7 @@ import processing.net.*;
 public class ClientDrawingSurface extends PApplet
 {
     private Player player;
+    private Player receivedPlayer;
     private Border border;
     private boolean[] keysPressed;
     private PImage img;
@@ -62,7 +63,7 @@ public class ClientDrawingSurface extends PApplet
 	img = loadImage("background.bmp");
 	player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
-	
+
 	frameRate(20);
 	c = new Client(this, IP, 4444);
     }
@@ -108,32 +109,41 @@ public class ClientDrawingSurface extends PApplet
 	if (c.available() > 0)
 	{
 	    input = c.readString();
-//	    if(input.indexOf("\n") >= 0);
-//	    	input = input.substring(0, input.indexOf("\n"));
+	    // if(input.indexOf("\n") >= 0);
+	    // input = input.substring(0, input.indexOf("\n"));
 
 	    data = input.split(":");
 
 	    if (data.length > 5 && data[0].equals("playerInfo"))
 	    {
-		Player receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
-		receivedPlayer.setHealth((int)Double.parseDouble(data[3]));
+		receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4],
+			false);
+		receivedPlayer.setHealth((int) Double.parseDouble(data[3]));
 		receivedPlayer.setDirection(Double.parseDouble(data[5]));
-		if(data.length > 6) {
-		    if(data[6].equals("bulletInfo")) {
-			for(int x = 6; x < data.length-5; x++) {
-			    receivedPlayer.getBullets().add(new Bullet(Double.parseDouble(data[x]), Double.parseDouble(data[x+1]), Double.parseDouble(data[x+2]), Double.parseDouble(data[x+3]), Double.parseDouble(data[x+4]), receivedPlayer));
+		if (data.length > 6)
+		{
+		    if (data[6].equals("bulletInfo"))
+		    {
+			for (int x = 6; x < data.length - 5; x++)
+			{
+			    receivedPlayer.getBullets()
+				    .add(new Bullet(Double.parseDouble(data[x]), Double.parseDouble(data[x + 1]),
+					    Double.parseDouble(data[x + 2]), Double.parseDouble(data[x + 3]),
+					    Double.parseDouble(data[x + 4]), receivedPlayer));
 			}
 		    }
 		}
-		receivedPlayer.draw(this);
 	    }
+	    
+	    receivedPlayer.draw(this);
 	}
 
 	checkKeys();
 	popMatrix();
     }
 
-    public void sendPlayerInfo() {
+    public void sendPlayerInfo()
+    {
 	c.write("playerInfo:");
 	c.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":"
 		+ player.getDirection() + ":");
@@ -143,7 +153,7 @@ public class ClientDrawingSurface extends PApplet
 	    c.write(b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + b.getX() + ":" + b.getY());
 	}
     }
-    
+
     public void keyPressed()
     {
 
