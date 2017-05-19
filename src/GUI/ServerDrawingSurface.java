@@ -109,8 +109,8 @@ public class ServerDrawingSurface extends PApplet
 	if (c != null)
 	{
 	    input = c.readString();
-	    if(input.indexOf("\n") >= 0);
-	    	input = input.substring(0, input.indexOf("\n"));
+//	    if(input.indexOf("\n") >= 0);
+//	    	input = input.substring(0, input.indexOf("\n"));
 
 	    data = input.split(":");
 
@@ -144,7 +144,6 @@ public class ServerDrawingSurface extends PApplet
 	    s.write("bulletInfo");
 	    s.write(b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + b.getX() + ":" + b.getY());
 	}
-	s.write("\n");
     }
 
     public void keyPressed()
