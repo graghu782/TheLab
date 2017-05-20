@@ -92,8 +92,7 @@ public class Player
     {
 	//bullets.add(new Bullet(400, 300, direction, x, y, this));
 
-	//bullets.add(new Bullet(mainX - x+width/2+400, mainY - y+height/2+300, direction, this));
-	
+	updateMain();
 	bullets.add(new Bullet(x,y,direction,this));
 	
 	//gunshot.play();
@@ -178,18 +177,21 @@ public class Player
     {
 	return health;
     }
-
-    public void draw(PApplet drawer)
-    {
+    public void updateMain(){
 	if (isMain)
 	{
 	    mainX = x;
 	    mainY = y;
+	}
+    }
 
+    public void draw(PApplet drawer)
+    {
+	if (isMain){
 	    mouseXChange = drawer.mouseX - drawer.width / 2;
 	    mouseYChange = drawer.mouseY - drawer.height / 2;
 	}
-
+	updateMain();
 	double xs = -mainX + drawer.width / 2 - width / 2;
 	double ys = -mainY + drawer.height / 2 - height / 2;
 

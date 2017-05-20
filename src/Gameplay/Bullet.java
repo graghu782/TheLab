@@ -17,8 +17,8 @@ public class Bullet extends Line
 
     private int iters;
 
-    /*
-     *  public Bullet(double xCoord, double yCoord, double direction, double x, double y, Player p)
+/*
+    public Bullet(double xCoord, double yCoord, double direction, double x, double y, Player p)
 
     {
 	super(xCoord, yCoord, Math.cos(direction) *LENGTH+xCoord, Math.sin(direction)*LENGTH+yCoord);
@@ -33,13 +33,17 @@ public class Bullet extends Line
 
 	//System.out.println(x + " " + y + " " + xTemp*LENGTH + " " + yTemp*LENGTH);
     }
-     */
+    */
+
+
+    
     public Bullet(double x, double y, double direction, Player p)
 
     {
 	//super(x, y, Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 	super(p.getMainX() - x+400, p.getMainY() - y+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 	//super(- x+p.getWidth()/2+400, - y+p.getHeight()/2+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
+
 	
 	player = p;
 	this.direction = direction;
@@ -53,7 +57,7 @@ public class Bullet extends Line
 	//System.out.println(x + " " + y + " " + xTemp*LENGTH + " " + yTemp*LENGTH);
     }
 
-
+     
 
 
 
