@@ -42,10 +42,6 @@ public class MenuPanel extends JPanel implements ActionListener
 
 	title = new JLabel();
 	title.setIcon(new ImageIcon("title.png"));
-	
-	background = new JLabel();
-	background.setIcon(new ImageIcon("MenuBackground.jpg"));
-	w.setContentPane(background);
 
 	sandbox.addActionListener(this);
 	startServer.addActionListener(this);
