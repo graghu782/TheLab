@@ -117,6 +117,7 @@ public class Main extends JFrame
 	else if (drawing != null && window != null)
 	{
 	    drawing.noLoop();
+	    drawing.dispose();
 	    window.dispose();
 	}
     }
