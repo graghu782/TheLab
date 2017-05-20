@@ -12,8 +12,7 @@ public class Map extends PApplet
 	public Map()
 	{
 		obstacles = new ArrayList<Obstacle>();
-		width = 3200;
-		height = 2400;
+		obstacles.add(new Obstacle(400, 0, 420, 800));
 	}
 	
 	public void draw(PApplet drawer)

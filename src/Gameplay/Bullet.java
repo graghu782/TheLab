@@ -40,11 +40,8 @@ public class Bullet extends Line
     public Bullet(double x, double y, double direction, Player p)
 
     {
-	//super(x, y, Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 	super(p.getMainX() - x+400, p.getMainY() - y+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
-	//super(- x+p.getWidth()/2+400, - y+p.getHeight()/2+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 
-	
 	player = p;
 	this.direction = direction;
 	iters = 0;
@@ -52,9 +49,6 @@ public class Bullet extends Line
 	yo = y;
 	xTemp = Math.cos(direction);
 	yTemp = Math.sin(direction);
-	//super.setPoint2((float)xTemp, (float)yTemp);
-
-	//System.out.println(x + " " + y + " " + xTemp*LENGTH + " " + yTemp*LENGTH);
     }
 
      

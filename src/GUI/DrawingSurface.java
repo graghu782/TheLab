@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import Gameplay.Border;
 import Gameplay.Bullet;
+import Map.Obstacle;
 import Gameplay.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -29,6 +30,8 @@ public class DrawingSurface extends PApplet
 
     protected String IP;
     protected String playerName;
+    
+    protected Obstacle[] obstacles;
     
     private Timer timeRemaining;
     private int interval;
@@ -66,6 +69,10 @@ public class DrawingSurface extends PApplet
 	}, 1000, 1000);
 
 	frameRate(20);
+	
+	
+	obstacles = new Obstacle[1];
+	obstacles[0] = new Obstacle(400, 0, 420, 800);
     }
 
     public void runMe()
