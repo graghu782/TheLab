@@ -25,7 +25,7 @@ public class Main extends JFrame
     private ServerCreationPanel serverCreatePanel;
     private ServerJoinPanel serverJoinPanel;
     private PendingPanel pendingPanel;
-
+ 
     private JFrame window;
     
     private DrawingSurface drawing;

@@ -72,7 +72,7 @@ public class ClientDrawing extends DrawingSurface
 		    if(data.length > 6)
 		    {
 			for(int i = 6; i < data.length - 2; i++)
-			{
+ 			{
 			    
 			}
 		    }

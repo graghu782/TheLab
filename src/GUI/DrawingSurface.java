@@ -22,7 +22,7 @@ public class DrawingSurface extends PApplet
     public static final int MAP_WIDTH = 2400;
     public static final int MAP_HEIGHT = 1800;
     protected double x, y;
-
+ 
     protected ArrayList<Player> players;
 
     protected int count;
