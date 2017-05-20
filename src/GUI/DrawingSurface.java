@@ -1,13 +1,14 @@
 package GUI;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Gameplay.Border;
 import Gameplay.Bullet;
 import Gameplay.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.net.Client;
 
 public class DrawingSurface extends PApplet
 {
@@ -21,18 +22,21 @@ public class DrawingSurface extends PApplet
     public static final int DRAWING_HEIGHT = 600;
     public static final int MAP_WIDTH = 2400;
     public static final int MAP_HEIGHT = 1800;
+    protected int count;
     protected double x, y;
  
     protected Player[] players;
 
-    protected int count;
-
     protected String IP;
     protected String playerName;
+    
+    private Timer timeRemaining;
+    private int interval;
 
     public DrawingSurface()
     {
 	keysPressed = new boolean[4];
+	timeRemaining = new Timer();
 	players = new Player[4];
 	runSketch();
     }
@@ -48,6 +52,18 @@ public class DrawingSurface extends PApplet
 	img = loadImage("background.bmp");
 	player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
+	
+	interval = 180;
+	
+	timeRemaining.scheduleAtFixedRate(new TimerTask()
+	{
+    		public void run()
+    		{
+    		    if(interval == 1)
+    			timeRemaining.cancel();
+    		    interval--;
+    		}
+	}, 1000, 1000);
 
 	frameRate(20);
     }
@@ -69,8 +85,18 @@ public class DrawingSurface extends PApplet
 	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH), (float) (MAP_HEIGHT + DRAWING_HEIGHT));
 	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2, DRAWING_HEIGHT / 2 - y - 5 - player.getHeight() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
 	border.draw(this);
-	fill(255);
+	
+	fill(0);
+	text("Time remaining: " + interval, 675, 550);
+	if(interval < 1)
+	{
+	    textSize(72);
+	    text("GAME OVER", 200, 100);
+	    textSize(11);
+	    noLoop();
+	}
 
+	fill(255);
 	float ratioX = (float) width / DRAWING_WIDTH;
 	float ratioY = (float) height / DRAWING_HEIGHT;
 
