@@ -92,7 +92,10 @@ public class Player
     {
 	//bullets.add(new Bullet(400, 300, direction, x, y, this));
 
-	bullets.add(new Bullet(mainX - x+width/2+400, mainY - y+height/2+300, direction, this));
+	//bullets.add(new Bullet(mainX - x+width/2+400, mainY - y+height/2+300, direction, this));
+	
+	bullets.add(new Bullet(x,y,direction,this));
+	
 	//gunshot.play();
     }
 

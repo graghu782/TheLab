@@ -38,8 +38,7 @@ public class Bullet extends Line
 
     {
 	//super(x, y, Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
-	super(p.getMainX() - x+p.getWidth()/2+400, p.getMainY() - y+p.getWidth()/2+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
-	System.out.println(p.getMainX()-x+p.getWidth()/2+400);
+	super(p.getMainX() - x+400, p.getMainY() - y+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 	//super(- x+p.getWidth()/2+400, - y+p.getHeight()/2+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 	
 	player = p;
