@@ -179,12 +179,12 @@ public class DrawingSurface extends PApplet
 	for (int i = 0; i < player.getBullets().size(); i++)
 	{
 	    ArrayList<Bullet> bas = player.getBullets();
-	    for (Player p : players)
+	    for(int x = 0; x < players.length; x++)
 	    {
-		if (p.isHit(bas.get(i)))
+		if (players[x] != null && players[x].isHit(bas.get(i)))
 		{
 		    bas.remove(i);
-		    p.decHealth(10);
+		    players[x].decHealth(10);
 		}
 	    }
 	}

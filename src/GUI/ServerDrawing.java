@@ -54,18 +54,28 @@ public class ServerDrawing extends DrawingSurface
 	for(int i = 0; i < s.clientCount; i++) {
 	    if(s.clients[i] != null) {
 		input = s.clients[i].readString();
-
-		data = input.split(":");
-		try {
-		    players[i] = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[2], false);
-		    players[i].setHealth((int)Double.parseDouble(data[3]));
-		    players[i].setDirection(Double.parseDouble(data[4])); 
-		} catch(Exception e) {
-		    if(players[i] != null) {
-			players[i].draw(this);
+		if(input != null) {
+		    data = input.split(":");
+		    try {
+			if(players[i] != null) {
+			    players[i].update(Double.parseDouble(data[0]), Double.parseDouble(data[1]));
+			}
+			else {
+			    players[i] = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[2], false);   
+			}
+			players[i].setHealth((int)Double.parseDouble(data[3]));
+			players[i].setDirection(Double.parseDouble(data[4])); 
+		    } catch(Exception e) {
+			if(players[i] != null) {
+			    players[i].draw(this);
+			}
 		    }
 		}
 
+	    }
+	    
+	    if(players[i] != null) {
+		players[i].draw(this);
 	    }
 	}
 
@@ -74,12 +84,12 @@ public class ServerDrawing extends DrawingSurface
 
     public void sendPlayerInfo()
     {
-	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":" + player.getDirection() + ":");
+	s.write(player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
 
-	for(Bullet b : player.getBullets())
-	{
-	    if(c != null)
-		c.write(b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
-	}
+//	for(Bullet b : player.getBullets())
+//	{
+//	    if(s != null)
+//		s.write(b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
+//	}
     }
 }

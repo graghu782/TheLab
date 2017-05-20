@@ -66,7 +66,7 @@ public class Player
 	// spriteRects = new Rect[2];
 	// spriteRects[0] = new rect(0,99,41,46);
     }
-
+    
     public void move(double x, double y)
     {
 	this.x += x;
@@ -88,6 +88,11 @@ public class Player
 	return mainY;
     }
 
+    public void update(double x, double y) {
+	this.x = x;
+	this.y = y;
+    }
+    
     public void fire()
     {
 	//bullets.add(new Bullet(400, 300, direction, x, y, this));

@@ -55,36 +55,24 @@ public class ClientDrawing extends DrawingSurface
 	super.draw();
 	sendPlayerInfo();
 
-//	if (c.available() > 0)
-//	{
-//	    input = c.readString();
-//
-//	    data = input.split(":");
-//
-//	    try
-//	    {
-//		receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[3], false);
-//		receivedPlayer.setHealth((int) Double.parseDouble(data[2]));
-//		receivedPlayer.setDirection(Double.parseDouble(data[4]));
-//		
-//		if(data.length > 6)
-//		{
-//		    for(int i = 6; i < data.length - 2; i++)
-//		    {
-//			
-//		    }
-//        	}
-//	    }
-//	    catch (Exception e)
-//	    {
-//		if (receivedPlayer != null)
-//		    receivedPlayer.draw(this);
-//	    }
-//	}
-	
-	if(c != null)
-	    if (receivedPlayer != null)
-		receivedPlayer.draw(this);
+	if (c.available() > 0)
+	{
+	    input = c.readString();
+
+	    data = input.split(":");
+
+	    try
+	    {
+		receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[2], false);
+		receivedPlayer.setHealth((int) Double.parseDouble(data[3]));
+		receivedPlayer.setDirection(Double.parseDouble(data[4]));
+	    }
+	    catch (Exception e)
+	    {
+		if (receivedPlayer != null)
+		    receivedPlayer.draw(this);
+	    }
+	}
 	
 	popMatrix();
     }
