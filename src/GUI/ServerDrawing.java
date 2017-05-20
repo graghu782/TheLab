@@ -25,7 +25,7 @@ public class ServerDrawing extends DrawingSurface
     public ServerDrawing(String IP, String playerName)
     {
 	super();
-	
+
 	this.IP = IP;
 	this.playerName = playerName;
     }
@@ -33,7 +33,7 @@ public class ServerDrawing extends DrawingSurface
     public void setup()
     {
 	super.setup();
-	
+
 	s = new Server(this, 4444);
     }
 
@@ -45,50 +45,37 @@ public class ServerDrawing extends DrawingSurface
     public void draw()
     {
 	pushMatrix();
-	
+
 	super.draw();
 	sendPlayerInfo();
 
 	c = s.available();
-	if (c != null)
-	{
-	    input = c.readString();
 
-	    data = input.split(":");
+	for(int i = 0; i < s.clientCount; i++) {
+	    if(s.clients[i] != null) {
+		input = s.clients[i].readString();
 
-	    try
-	    {
-		receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[3], false);
-		receivedPlayer.setHealth((int) Double.parseDouble(data[2]));
-		receivedPlayer.setDirection(Double.parseDouble(data[4]));
-		    
-		if(data.length > 6)
-		{
-		    for(int i = 6; i < data.length - 2; i++)
-		    {
-			
+		data = input.split(":");
+		try {
+		    players[i] = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[2], false);
+		    players[i].setHealth((int)Double.parseDouble(data[3]));
+		    players[i].setDirection(Double.parseDouble(data[4])); 
+		} catch(Exception e) {
+		    if(players[i] != null) {
+			players[i].draw(this);
 		    }
 		}
+
 	    }
-	    catch (Exception e)
-	    {
-		 if (receivedPlayer != null)
-		     receivedPlayer.draw(this);
-	    }
-	    
 	}
 
-	if(c != null)
-	    if (receivedPlayer != null)
-		receivedPlayer.draw(this);
-	
 	popMatrix();
     }
 
     public void sendPlayerInfo()
     {
 	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":" + player.getDirection() + ":");
-	
+
 	for(Bullet b : player.getBullets())
 	{
 	    if(c != null)

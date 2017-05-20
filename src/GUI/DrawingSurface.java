@@ -23,7 +23,7 @@ public class DrawingSurface extends PApplet
     public static final int MAP_HEIGHT = 1800;
     protected double x, y;
  
-    protected ArrayList<Player> players;
+    protected Player[] players;
 
     protected int count;
 
@@ -33,7 +33,7 @@ public class DrawingSurface extends PApplet
     public DrawingSurface()
     {
 	keysPressed = new boolean[4];
-	players = new ArrayList<Player>();
+	players = new Player[4];
 	runSketch();
     }
 
