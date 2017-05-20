@@ -41,7 +41,7 @@ public class MenuPanel extends JPanel implements ActionListener
 	joinServer = new JButton("Join Server");
 
 	title = new JLabel();
-	title.setIcon(new ImageIcon("title.png"));
+	title.setIcon(new ImageIcon("LabTitle.png"));
 
 	sandbox.addActionListener(this);
 	startServer.addActionListener(this);
