@@ -81,11 +81,19 @@ public class Player
 	}
 
     }
+    public double getMainX(){
+	return mainX;
+    }
+    public double getMainY(){
+	return mainY;
+    }
 
     public void fire()
     {
-	bullets.add(new Bullet(400, 300, direction, x, y, this));
-	gunshot.play();
+	//bullets.add(new Bullet(400, 300, direction, x, y, this));
+
+	bullets.add(new Bullet(mainX - x+width/2+400, mainY - y+height/2+300, direction, this));
+	//gunshot.play();
     }
 
     public ArrayList<Bullet> getBullets()
@@ -123,7 +131,7 @@ public class Player
 	return width;
     }
 
-    public double getLength()
+    public double getHeight()
     {
 	return height;
     }

@@ -67,7 +67,7 @@ public class DrawingSurface extends PApplet
 
 	background(255);
 	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH), (float) (MAP_HEIGHT + DRAWING_HEIGHT));
-	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2, DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
+	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2, DRAWING_HEIGHT / 2 - y - 5 - player.getHeight() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
 	border.draw(this);
 	fill(255);
 
@@ -139,7 +139,7 @@ public class DrawingSurface extends PApplet
 	}
 	if (keysPressed[2])
 	{
-	    if (player.getY() + player.getLength() < MAP_HEIGHT - 1)
+	    if (player.getY() + player.getHeight() < MAP_HEIGHT - 1)
 		player.move(0, 10);
 	}
 	if (keysPressed[3])
