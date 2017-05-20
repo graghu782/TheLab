@@ -114,9 +114,18 @@ public class ClientDrawingSurface extends PApplet
 
 	    if (data.length > 5)
 	    {
-		receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4], false);
-		receivedPlayer.setHealth((int) Double.parseDouble(data[3]));
-		receivedPlayer.setDirection(Double.parseDouble(data[5]));
+		try
+		{
+		    receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4],
+			    false);
+		    receivedPlayer.setHealth((int) Double.parseDouble(data[3]));
+		    receivedPlayer.setDirection(Double.parseDouble(data[5]));
+		}
+		catch (Exception e)
+		{
+		    if (receivedPlayer != null)
+			receivedPlayer.draw(this);
+		}
 	    }
 	}
 
