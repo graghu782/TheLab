@@ -7,47 +7,31 @@ import Gameplay.Bullet;
 import Gameplay.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.net.*;
+import processing.net.Client;
 
-public class ServerDrawingSurface extends PApplet
+public class DrawingSurface extends PApplet
 {
-    private Player player;
-    private Player receivedPlayer;
-    private Border border;
-    private boolean[] keysPressed;
-    private PImage img;
+    protected Player player;
+    protected Player receivedPlayer;
+    protected Border border;
+    protected boolean[] keysPressed;
+    protected PImage img;
 
     public static final int DRAWING_WIDTH = 800;
     public static final int DRAWING_HEIGHT = 600;
     public static final int MAP_WIDTH = 2400;
     public static final int MAP_HEIGHT = 1800;
-    private double x, y;
+    protected double x, y;
 
-    private ArrayList<Player> players;
+    protected ArrayList<Player> players;
 
-    private int count;
+    protected int count;
 
-    private String IP;
-    private String playerName;
+    protected String IP;
+    protected String playerName;
 
-    private Server s;
-    private Client c;
-
-    private String input;
-    private String data[];
-
-    public ServerDrawingSurface()
+    public DrawingSurface()
     {
-	keysPressed = new boolean[4];
-	players = new ArrayList<Player>();
-	runSketch();
-    }
-
-    public ServerDrawingSurface(String IP, String playerName)
-    {
-	this.IP = IP;
-	this.playerName = playerName;
-
 	keysPressed = new boolean[4];
 	players = new ArrayList<Player>();
 	runSketch();
@@ -66,7 +50,6 @@ public class ServerDrawingSurface extends PApplet
 	border = new Border(0, 0, 10, 10);
 
 	frameRate(20);
-	s = new Server(this, 4444);
     }
 
     public void runMe()
@@ -76,26 +59,17 @@ public class ServerDrawingSurface extends PApplet
 	super.initSurface();
 	super.surface.startThread();
     }
-
-    // The statements in draw() are executed 60 times a second until the
-    // program is stopped. Each statement is executed in
-    // sequence and after the last line is read, the first
-    // line is executed again.s
-
+    
     public void draw()
     {
 	x = player.getX();
 	y = player.getY();
 
 	background(255);
-	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH),
-		(float) (MAP_HEIGHT + DRAWING_HEIGHT));
-	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2,
-		DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
+	image(img, (float) (-x), (float) (-y), (float) (MAP_WIDTH + DRAWING_WIDTH), (float) (MAP_HEIGHT + DRAWING_HEIGHT));
+	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2, DRAWING_HEIGHT / 2 - y - 5 - player.getLength() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
 	border.draw(this);
 	fill(255);
-
-	pushMatrix();
 
 	float ratioX = (float) width / DRAWING_WIDTH;
 	float ratioY = (float) height / DRAWING_HEIGHT;
@@ -105,46 +79,9 @@ public class ServerDrawingSurface extends PApplet
 
 	player.draw(this);
 
-	sendPlayerInfo();
-
-	c = s.available();
-	if (c != null)
-	{
-	    input = c.readString();
-
-	    data = input.split(":");
-
-	    if (data.length > 5)
-	    {
-		try
-		{
-		    receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[4],
-			    false);
-		    receivedPlayer.setHealth((int) Double.parseDouble(data[3]));
-		    receivedPlayer.setDirection(Double.parseDouble(data[5]));
-		}
-		catch (Exception e)
-		{
-		    if (receivedPlayer != null)
-			receivedPlayer.draw(this);
-		}
-	    }
-	}
-
-	if (receivedPlayer != null)
-	    receivedPlayer.draw(this);
-
 	checkKeys();
-	popMatrix();
     }
-
-    public void sendPlayerInfo()
-    {
-	s.write("playerInfo:");
-	s.write(player.getX() + ":" + player.getY() + ":" + player.getHealth() + ":" + player.getName() + ":"
-		+ player.getDirection() + ":");
-    }
-
+    
     public void keyPressed()
     {
 

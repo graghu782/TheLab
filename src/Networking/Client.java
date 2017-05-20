@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import GUI.ServerDrawingSurface;
+import GUI.ServerDrawing;
 
 public class Client implements Runnable
 {

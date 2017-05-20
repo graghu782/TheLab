@@ -28,8 +28,7 @@ public class Main extends JFrame
 
     private JFrame window;
     
-    private ServerDrawingSurface drawing1;
-    private ClientDrawingSurface drawing2;
+    private DrawingSurface drawing;
     
     private String IP;
     private String playerName = "";
@@ -95,23 +94,17 @@ public class Main extends JFrame
 	    setSize(300, 100);
 	    setBounds(200, 200, 800, 100);
 	    
-	    PSurfaceAWT surf;
-	    PSurfaceAWT.SmoothCanvas canvas;
-	    
 	    if(createdServer)
 	    {
-		drawing1 = new ServerDrawingSurface(IP, playerName);
-		
-		    surf = (PSurfaceAWT) drawing1.getSurface();
-		    canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+		drawing = new ServerDrawing(IP, playerName);
 	    }
 	    else
 	    {
-		drawing2 = new ClientDrawingSurface(IP, playerName);
-		
-		    surf = (PSurfaceAWT) drawing2.getSurface();
-		    canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+		drawing = new ClientDrawing(IP, playerName);
 	    }
+	    
+	    PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();;
+	    PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 
 	    window = (JFrame) canvas.getFrame();
 
@@ -121,14 +114,9 @@ public class Main extends JFrame
 	    window.setResizable(false);
 	    window.setVisible(true);
 	}
-	else if (drawing1 != null && window != null)
+	else if (drawing != null && window != null)
 	{
-	    drawing1.noLoop();
-	    window.dispose();
-	}
-	else if (drawing2 != null && window != null)
-	{
-	    drawing2.noLoop();
+	    drawing.noLoop();
 	    window.dispose();
 	}
     }
