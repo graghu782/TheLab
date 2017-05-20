@@ -72,14 +72,15 @@ public class ServerDrawing extends DrawingSurface
 	    }
 	    catch (Exception e)
 	    {
-		if(c != null)
-		{
-		    if (receivedPlayer != null)
-			receivedPlayer.draw(this);
-		}
+		 if (receivedPlayer != null)
+		     receivedPlayer.draw(this);
 	    }
 	    
 	}
+
+	if(c != null)
+	    if (receivedPlayer != null)
+		receivedPlayer.draw(this);
 	
 	popMatrix();
     }
