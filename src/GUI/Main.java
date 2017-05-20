@@ -1,16 +1,11 @@
 package GUI;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.*;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import processing.awt.PSurfaceAWT;
 
@@ -33,13 +28,15 @@ public class Main extends JFrame
     private String IP;
     private String playerName = "";
     private boolean createdServer;
+    
+    private JLabel background;
 
     public Main(String title)
     {
 	super(title);
 	setBounds(250, 250, 800, 600);
+	setLocationRelativeTo(null);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setVisible(true);
 
 	cardPanel = new JPanel();
 	cl = new CardLayout(); 
@@ -58,8 +55,9 @@ public class Main extends JFrame
 	cardPanel.add(serverCreatePanel, "servermenu");
 	cardPanel.add(serverJoinPanel, "joinmenu");
 	cardPanel.add(pendingPanel, "pending");
+	
 	add(cardPanel);
-		
+
 	setVisible(true);
     }
 

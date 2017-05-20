@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Networking.Server;
@@ -17,32 +19,50 @@ public class MenuPanel extends JPanel implements ActionListener
     private JButton startServer;
     private JButton joinServer;
     private JButton instructions;
+    
+    private JLabel title;
+    private JLabel background;
 
     public MenuPanel(Main w)
     {
 	this.w = w;
-	JPanel p = new JPanel();
-	p.setBackground(new Color(0, 0, 0, 0)); // Panel is transparent
+	
+	
+	JPanel mainPanel = new JPanel(new BorderLayout());
+	JPanel buttonPanel = new JPanel();
+	buttonPanel.setBackground(new Color(0, 0, 0, 0)); // Panel is transparent
 
-	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-	p.add(Box.createVerticalStrut(300)); // Move down by 300 pixels
+	buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+	// Move down by 300 pixels
 
 	sandbox = new JButton("Sandbox");
 	instructions = new JButton("Instructions");
 	startServer = new JButton("Start Server");
 	joinServer = new JButton("Join Server");
 
+	title = new JLabel();
+	title.setIcon(new ImageIcon("title.png"));
+	
+	background = new JLabel();
+	background.setIcon(new ImageIcon("MenuBackground.jpg"));
+	w.setContentPane(background);
 
 	sandbox.addActionListener(this);
 	startServer.addActionListener(this);
 	joinServer.addActionListener(this);
 	instructions.addActionListener(this);
 
-	p.add(sandbox);
-	p.add(startServer);
-	p.add(joinServer);
-	p.add(instructions);
-	add(p);
+	
+	buttonPanel.add(Box.createHorizontalStrut(100));
+	buttonPanel.add(sandbox);
+	buttonPanel.add(startServer);
+	buttonPanel.add(joinServer);
+	buttonPanel.add(instructions);
+	
+	mainPanel.add(buttonPanel, BorderLayout.CENTER);
+	mainPanel.add(title, BorderLayout.NORTH);
+	
+	add(mainPanel);
     }
 
     public void paintComponent(Graphics g)
@@ -58,8 +78,11 @@ public class MenuPanel extends JPanel implements ActionListener
 
 	g2.scale(ratioX, ratioY);
 
+
+	/*
 	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 45));
 	g.drawString("The Lab", 315, 115);
+	*/
 
 	g2.setTransform(af);
     }
