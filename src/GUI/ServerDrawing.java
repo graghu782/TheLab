@@ -75,10 +75,6 @@ public class ServerDrawing extends DrawingSurface
 		}
 
 	    }
-	    
-	    if(players[i] != null) {
-		players[i].draw(this);
-	    }
 	}
 
 	popMatrix();
@@ -91,7 +87,6 @@ public class ServerDrawing extends DrawingSurface
 	for(int i = 0; i < s.clientCount; i++) {
 	    if(players[i] != null) {
 		s.write(players[i].getX() + ":" + players[i].getY() + ":" + players[i].getName() + ":" + players[i].getHealth() + ":" + players[i].getDirection() + ":");
-
 	    }
 	}
 //	for(Bullet b : player.getBullets())

@@ -40,7 +40,7 @@ public class DrawingSurface extends PApplet
     {
 	keysPressed = new boolean[4];
 	timeRemaining = new Timer();
-	players = new Player[4];
+	players = new Player[3];
 	runSketch();
     }
 
