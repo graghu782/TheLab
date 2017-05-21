@@ -81,14 +81,19 @@ public class Player
 	}
 
     }
-    public double getMainX(){
+    
+    public double getMainX()
+    {
 	return mainX;
     }
-    public double getMainY(){
+    
+    public double getMainY()
+    {
 	return mainY;
     }
 
-    public void update(double x, double y) {
+    public void update(double x, double y) 
+    {
 	this.x = x;
 	this.y = y;
     }
@@ -106,6 +111,11 @@ public class Player
     public ArrayList<Bullet> getBullets()
     {
 	return bullets;
+    }
+    
+    public void addBullet(Bullet b)
+    {
+	bullets.add(b);
     }
     
     public String getName()

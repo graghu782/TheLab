@@ -15,6 +15,8 @@ public class ServerDrawing extends DrawingSurface
 
     private String input;
     private String data[];
+    private String bulletData;
+    private String playerData;
     
     private Timer timeRemaining;
     private int interval;
@@ -73,6 +75,7 @@ public class ServerDrawing extends DrawingSurface
 	
 	sendPlayerInfo();
 	sendTimerInfo();
+	//sendBulletInfo();
 	c = s.available();
 
 	for(int i = 0; i < s.clientCount; i++) 
@@ -85,15 +88,25 @@ public class ServerDrawing extends DrawingSurface
 		{
 		    if(input != null)
 		    {
-			input = input.substring(0, input.indexOf("#"));
-			data = input.split(":");
-		    
-			if(data[0].equals("playerinfo"))
+			playerData = input.substring(0, input.indexOf("#"));
+			data = playerData.split(":");
+			
+			players[i] = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);   
+			players[i].setHealth((int)Double.parseDouble(data[4]));
+			players[i].setDirection(Double.parseDouble(data[5])); 
+			
+			input = input.substring(input.indexOf("#") + 1);
+			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
+			data = bulletData.split(":");
+			
+			int j = 0;
+			while(j*4+3 < data.length)
 			{
-			    players[i] = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);   
-			    players[i].setHealth((int)Double.parseDouble(data[4]));
-			    players[i].setDirection(Double.parseDouble(data[5])); 
-			} 
+			    Bullet b = new Bullet(Double.parseDouble(data[j*4+1]), Double.parseDouble(data[j*4+2]), Double.parseDouble(data[j*4+3]), players[i]);
+			    players[i].addBullet(b);
+			    
+			    j++;
+			}
 		    }
 		}
 		catch(Exception e)
@@ -107,6 +120,10 @@ public class ServerDrawing extends DrawingSurface
 	    if(players[i] != null) 
 	    {
 		players[i].draw(this);
+		for(Bullet b : players[i].getBullets())
+		{
+		    b.draw(this);
+		}
 	    }
 	}
 

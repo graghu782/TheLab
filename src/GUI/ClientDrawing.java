@@ -21,6 +21,7 @@ public class ClientDrawing extends DrawingSurface
     private String bulletData;
 
     private ArrayList<Player> playerList;
+    private ArrayList<Bullet> bulletList;
     private int timeRemaining;
     
     public ClientDrawing()
@@ -32,6 +33,7 @@ public class ClientDrawing extends DrawingSurface
     {
 	super();
 	playerList = new ArrayList<Player>();
+	bulletList = new ArrayList<Bullet>();
 	this.IP = IP;
 	this.playerName = playerName;
     }
@@ -56,6 +58,9 @@ public class ClientDrawing extends DrawingSurface
 
 	super.draw();
 	sendPlayerInfo();
+	
+	if(player.getBullets().size() != 0)
+	    sendBulletInfo();
 
 	if (c.available() > 0)
 	{
@@ -70,7 +75,7 @@ public class ClientDrawing extends DrawingSurface
 	    {
 		if(!data[i*6+3].equals(player.getName())) 
 		{
-		    Player temp = new Player(Double.parseDouble(data[i*6 + 1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
+		    Player temp = new Player(Double.parseDouble(data[i*6+1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
 		    temp.setHealth((int)Double.parseDouble(data[i*6+4]));
 		    temp.setDirection(Double.parseDouble(data[i*6+5])); 
 		    playerList.add(temp);
@@ -88,20 +93,28 @@ public class ClientDrawing extends DrawingSurface
 		timeRemaining = (int)Double.parseDouble(data[1]);
 	    }
 	    
+	    /*
 	    input = input.substring(input.indexOf("#") + 1);
 	    bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
 	    data = bulletData.split(":");
+	    bulletList.clear();
 	    
 	    i = 0;
 	    while(i*4+3 < data.length)
 	    {
-		
+		Bullet b = new Bullet(Double.parseDouble(data[i*4+1]), Double.parseDouble(data[i*4+2]), Double.parseDouble(data[i*4+3]), player);
+		bulletList.add(b);
 	    }
+	    */
 	}
 
 	for(int i = 0; i < playerList.size(); i++) 
 	{
 	    playerList.get(i).draw(this);
+	}
+	for(Bullet b : bulletList)
+	{
+	    b.draw(this);
 	}
 	text("Time remaining: " + timeRemaining, 675, 550);
 
@@ -111,6 +124,16 @@ public class ClientDrawing extends DrawingSurface
     public void sendPlayerInfo()
     {	
 	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
+	c.write("#");
+    }
+    
+    public void sendBulletInfo()
+    {
+	for(Bullet b : player.getBullets())
+	{
+	    c.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
+	}
+	
 	c.write("#");
     }
 }
