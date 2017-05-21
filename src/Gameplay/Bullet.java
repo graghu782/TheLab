@@ -42,8 +42,8 @@ public class Bullet extends Line
     {
 	//double xs = -player.getMainX() + drawer.width / 2 - player.getWidth() / 2;
 	//double ys = -player.getMainY() + drawer.height / 2 - player.getHeight() / 2;
-	//super(p.getMainX() - x+400, p.getMainY() - y+300,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
-	super(p.getX() -x+ 400 , p.getY() + 300 -y,  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
+	super(x + 400-p.getX(),y + 300-p.getY(),  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
+	//super(400 - p.getMainX() + x , 300 -p.getMainY()+y,  Math.cos(direction) *LENGTH+400 - p.getMainX() + x, Math.sin(direction)*LENGTH+300 -p.getMainY()+y);
 
 	player = p;
 	this.direction = direction;
@@ -65,27 +65,28 @@ public class Bullet extends Line
     public void draw(PApplet drawer)
     {
 	
-	double mn = -player.getMainX()+player.getX();
-	double mb = -player.getMainY()+player.getY();
+	double mn = -player.getMainX()+player.getMainX();
+	double mb = -player.getMainY()+player.getMainY();
 	
 	
 	
-	double xTemp2 = mn + x + (LENGTH * xTemp);
+	double xTemp2 =  + x + (LENGTH * xTemp);
 
-	double yTemp2 = mb + y + (LENGTH * yTemp);
+	double yTemp2 =  + y + (LENGTH * yTemp);
 	
 	
 	super.setPoint2((float) xTemp2, (float) yTemp2);
-
-	double xTemp1 = x + (20 * xTemp);
-	double yTemp1 = y + (20 * yTemp);
-	drawer.strokeWeight(1);
-	drawer.line((float)(x + mn), (float)(y + mb), (float) (xTemp1), (float) (yTemp1));
+	
+	double xTemp1 = x +mn  + (20 * xTemp);
+	double yTemp1 = y +mb  + (20 * yTemp);
+	drawer.strokeWeight(1); 
+	drawer.line((float)(x + mn), (float)(y +mb), (float) (xTemp1), (float) (yTemp1));
 
 	//super.draw(drawer);
-
-	x = x + (SPEED * xTemp);
-	y = y + (SPEED * yTemp);
+	{
+	x =   +x + (SPEED * xTemp);
+	y =   +y + (SPEED * yTemp);
+	}
 	iters++;
     }
 
