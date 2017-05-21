@@ -71,15 +71,6 @@ public class Player
     {
 	this.x += x;
 	this.y += y;
-	if (jnum != 2)
-	{
-	    jnum = 2;
-	}
-	else
-	{
-	    jnum = 3;
-	}
-
     }
     
     public double getMainX()
@@ -106,6 +97,11 @@ public class Player
 	bullets.add(new Bullet(x,y,direction,this));
 	
 	//gunshot.play();
+    }
+    
+    public void changeAnimation(int num)
+    {
+	jnum = num;
     }
 
     public ArrayList<Bullet> getBullets()

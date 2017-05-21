@@ -31,9 +31,15 @@ public class DrawingSurface extends PApplet
     protected String playerName;
     
     protected Obstacle[] obstacles;
+    
+    private Timer animationTimer;
+    private int interval;
 
     public DrawingSurface()
     {
+	animationTimer = new Timer();
+	interval = 1;
+	
 	keysPressed = new boolean[4];
 	players = new Player[3];
 	runSketch();
@@ -55,6 +61,18 @@ public class DrawingSurface extends PApplet
 	
 	obstacles = new Obstacle[1];
 	obstacles[0] = new Obstacle(400, 0, 420, 800);
+	
+	animationTimer.scheduleAtFixedRate(new TimerTask()
+	{
+		public void run()
+		{
+		    if(interval == 2)
+			interval = 3;
+		    else
+			interval = 2;
+		}
+	}, 500, 500);
+	
     }
 
     public void runMe()
@@ -77,6 +95,15 @@ public class DrawingSurface extends PApplet
 	
 	float ratioX = (float) width / DRAWING_WIDTH;
 	float ratioY = (float) height / DRAWING_HEIGHT;
+	
+	if(isMoving())
+	{
+	    player.changeAnimation(interval);
+	}
+	else
+	{
+	    player.changeAnimation(1);
+	}
 
 	scale(ratioX, ratioY);
 
@@ -124,6 +151,15 @@ public class DrawingSurface extends PApplet
 	{
 	    keysPressed[3] = false;
 	}
+    }
+    
+    public boolean isMoving()
+    {
+	if(keysPressed[0] || keysPressed[1] || keysPressed[2] || keysPressed[3])
+	{
+	    return true;
+	}
+	else return false;
     }
 
     public void checkKeys()
