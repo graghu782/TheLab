@@ -66,6 +66,7 @@ public class ClientDrawing extends DrawingSurface
 		    {
 			if(players[i] != null) {
 			    players[i].update(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]));
+			    players[i].changeName(data[i*5+2]);
 			}
 			else {
 			    players[i] = new Player(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]), data[i*5+2], false);   

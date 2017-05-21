@@ -59,6 +59,7 @@ public class ServerDrawing extends DrawingSurface
 		    try {
 			if(players[i] != null) {
 			    players[i].update(Double.parseDouble(data[0]), Double.parseDouble(data[1]));
+			    players[i].changeName(data[i*5+2]);
 			}
 			else {
 			    players[i] = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[2], false);   

@@ -113,6 +113,10 @@ public class Player
 	return name;
     }
     
+    public void changeName(String name) {
+	this.name = name;
+    }
+    
     public void changeAmmo(int num)
     {
 	ammo += num;
