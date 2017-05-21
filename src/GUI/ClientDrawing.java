@@ -15,7 +15,7 @@ public class ClientDrawing extends DrawingSurface
 
     private String input;
     private String data[];
-    
+
     private String playerData;
     private String timerData;
     private String bulletData;
@@ -24,7 +24,7 @@ public class ClientDrawing extends DrawingSurface
     private ArrayList<Bullet> bulletList;
     private int timeRemaining;
     private int eliminations;
-    
+
     public ClientDrawing()
     {
 	super();
@@ -47,7 +47,7 @@ public class ClientDrawing extends DrawingSurface
 	{
 	    c = new Client(this, IP, 4444);
 	}
-	catch(NullPointerException e)
+	catch (NullPointerException e)
 	{
 	    c.dispose();
 	}
@@ -59,74 +59,72 @@ public class ClientDrawing extends DrawingSurface
 
 	super.draw();
 	sendPlayerInfo();
-	
-	if(player.getBullets().size() != 0)
+
+	if (player.getBullets().size() != 0)
 	    sendBulletInfo();
 
 	if (c.available() > 0)
 	{
 	    input = c.readString();
-	    
+
 	    try
 	    {
-		if(input.indexOf("#") >= 0)
+
+		// Process Player info
+		playerData = input.substring(0, input.indexOf("#"));
+		data = playerData.split(":");
+		playerList.clear();
+
+		int i = 0;
+		while (i * 6 + 5 < data.length)
 		{
-		    //Process Player info
-		    playerData = input.substring(0, input.indexOf("#"));
-		    data = playerData.split(":");
-		    playerList.clear();
-		    
-		    int i = 0;
-		    while(i*6+5 < data.length) 
+		    if (!data[i * 6 + 3].equals(player.getName()))
 		    {
-			if(!data[i*6+3].equals(player.getName())) 
-			{
-			    Player temp = new Player(Double.parseDouble(data[i*6+1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
-			    temp.setHealth((int)Double.parseDouble(data[i*6+4]));
-			    temp.setDirection(Double.parseDouble(data[i*6+5])); 
-			    playerList.add(temp);
-			}
-			
-			i++;
+			Player temp = new Player(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]), data[i * 6 + 3], false);
+			temp.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
+			temp.setDirection(Double.parseDouble(data[i * 6 + 5]));
+			playerList.add(temp);
 		    }
-		    
-		    //Process Timer info
-		    input = input.substring(input.indexOf("#") + 1);
-		    timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
-		    System.out.println(timerData);
-		    data = timerData.split(":");
-		    
-		    if(data[0].equals("timerinfo"))
+
+		    i++;
+		}
+
+		// Process Timer info
+		input = input.substring(input.indexOf("#") + 1);
+		timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+		data = timerData.split(":");
+
+		if (data[0].equals("timerinfo"))
+		{
+		    timeRemaining = (int) Double.parseDouble(data[1]);
+		}
+
+		// Process Bullet info
+		input = input.substring(input.indexOf("#") + 1);
+		if (input.indexOf("bulletinfo") >= 0 && input.indexOf("#") >= 0)
+		{
+		    bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
+		    data = bulletData.split(":");
+		    bulletList.clear();
+
+		    int j = 0;
+		    while (i * 4 + 3 < data.length)
 		    {
-			timeRemaining = (int)Double.parseDouble(data[1]);
-		    }
-		    
-		    //Process Bullet info
-		    input = input.substring(input.indexOf("#") + 1);
-		    if(input.indexOf("bulletinfo") >= 0 && input.indexOf("#") >= 0)
-		    {
-			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
-			data = bulletData.split(":");
-			bulletList.clear();
-		    
-			int j = 0;
-			while(i*4+3 < data.length)
-			{
-			    Bullet b = new Bullet(Double.parseDouble(data[j*4+1]), Double.parseDouble(data[j*4+2]), Double.parseDouble(data[j*4+3]), player);
-			    bulletList.add(b);
-			    j++;
-			}
+			Bullet b = new Bullet(Double.parseDouble(data[j * 4 + 1]), Double.parseDouble(data[j * 4 + 2]), Double.parseDouble(data[j * 4 + 3]), player);
+			bulletList.add(b);
+			j++;
 		    }
 		}
+
 	    }
-	    catch(Exception e)
+	    catch (Exception e)
 	    {
-		
+
 	    }
 	}
-	
+
 	text("Time remaining: " + timeRemaining, 675, 550);
-	if(timeRemaining < 1)
+	if (timeRemaining < 1)
 	{
 	    textSize(72);
 	    text("GAME OVER", 200, 100);
@@ -134,11 +132,12 @@ public class ClientDrawing extends DrawingSurface
 	    noLoop();
 	}
 
-	for(int i = 0; i < playerList.size(); i++) 
+	for (int i = 0; i < playerList.size(); i++)
 	{
 	    playerList.get(i).draw(this);
 	}
-	for(Bullet b : bulletList)
+	
+	for (Bullet b : bulletList)
 	{
 	    b.draw(this);
 	}
@@ -147,18 +146,18 @@ public class ClientDrawing extends DrawingSurface
     }
 
     public void sendPlayerInfo()
-    {	
+    {
 	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
 	c.write("#");
     }
-    
+
     public void sendBulletInfo()
     {
-	for(Bullet b : player.getBullets())
+	for (Bullet b : player.getBullets())
 	{
 	    c.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
 	}
-	
+
 	c.write("#");
     }
 }
