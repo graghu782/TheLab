@@ -66,56 +66,72 @@ public class ClientDrawing extends DrawingSurface
 	if (c.available() > 0)
 	{
 	    input = c.readString();
-	    System.out.println(input);
 	    
-	    if(input.indexOf("#") >= 0)
+	    try
 	    {
-		playerData = input.substring(0, input.indexOf("#"));
-		data = playerData.split(":");
-		playerList.clear();
-	    
-		int i = 0;
-		while(i*6+5 < data.length) 
+		if(input.indexOf("#") >= 0)
 		{
-		    if(!data[i*6+3].equals(player.getName())) 
+		    //Process Player info
+		    playerData = input.substring(0, input.indexOf("#"));
+		    data = playerData.split(":");
+		    playerList.clear();
+		    
+		    int i = 0;
+		    while(i*6+5 < data.length) 
 		    {
-			Player temp = new Player(Double.parseDouble(data[i*6+1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
-			temp.setHealth((int)Double.parseDouble(data[i*6+4]));
-			temp.setDirection(Double.parseDouble(data[i*6+5])); 
-			playerList.add(temp);
+			if(!data[i*6+3].equals(player.getName())) 
+			{
+			    Player temp = new Player(Double.parseDouble(data[i*6+1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
+			    temp.setHealth((int)Double.parseDouble(data[i*6+4]));
+			    temp.setDirection(Double.parseDouble(data[i*6+5])); 
+			    playerList.add(temp);
+			}
+			
+			i++;
 		    }
 		    
-		    i++;
+		    //Process Timer info
+		    input = input.substring(input.indexOf("#") + 1);
+		    timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+		    System.out.println(timerData);
+		    data = timerData.split(":");
+		    
+		    if(data[0].equals("timerinfo"))
+		    {
+			timeRemaining = (int)Double.parseDouble(data[1]);
+		    }
+		    
+		    //Process Bullet info
+		    input = input.substring(input.indexOf("#") + 1);
+		    if(input.indexOf("bulletinfo") >= 0 && input.indexOf("#") >= 0)
+		    {
+			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
+			data = bulletData.split(":");
+			bulletList.clear();
+		    
+			int j = 0;
+			while(i*4+3 < data.length)
+			{
+			    Bullet b = new Bullet(Double.parseDouble(data[j*4+1]), Double.parseDouble(data[j*4+2]), Double.parseDouble(data[j*4+3]), player);
+			    bulletList.add(b);
+			    j++;
+			}
+		    }
 		}
 	    }
-	    
-	    input = input.substring(input.indexOf("#") + 1);
-	    if(input.indexOf("timerData") >= 0)
+	    catch(Exception e)
 	    {
-		timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
-		data = timerData.split(":");
-	    
-		if(data[0].equals("timerinfo"))
-		{
-		    timeRemaining = (int)Double.parseDouble(data[1]);
-		}
+		
 	    }
-	    
-	    input = input.substring(input.indexOf("#") + 1);
-	    if(input.indexOf("bulletinfo") >= 0)
-	    {
-		bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
-		data = bulletData.split(":");
-		bulletList.clear();
-	    
-		int i = 0;
-		while(i*4+3 < data.length)
-		{
-		    Bullet b = new Bullet(Double.parseDouble(data[i*4+1]), Double.parseDouble(data[i*4+2]), Double.parseDouble(data[i*4+3]), player);
-		    bulletList.add(b);
-		    i++;
-		}
-	    }
+	}
+	
+	text("Time remaining: " + timeRemaining, 675, 550);
+	if(timeRemaining < 1)
+	{
+	    textSize(72);
+	    text("GAME OVER", 200, 100);
+	    textSize(11);
+	    noLoop();
 	}
 
 	for(int i = 0; i < playerList.size(); i++) 
@@ -126,7 +142,6 @@ public class ClientDrawing extends DrawingSurface
 	{
 	    b.draw(this);
 	}
-	text("Time remaining: " + timeRemaining, 675, 550);
 
 	popMatrix();
     }
