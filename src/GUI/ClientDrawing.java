@@ -17,6 +17,7 @@ public class ClientDrawing extends DrawingSurface
     private String data[];
 
     private ArrayList<Player> playerList;
+    private int timeRemaining;
     
     public ClientDrawing()
     {
@@ -55,6 +56,7 @@ public class ClientDrawing extends DrawingSurface
 	if (c.available() > 0)
 	{
 	    input = c.readString();
+	    input = input.substring(0, input.indexOf("#"));
 
 	    data = input.split(":");
 	    
@@ -77,13 +79,18 @@ public class ClientDrawing extends DrawingSurface
 		    i++;
 		}
 	    }
-	    
+	    if(data[0].equals("timerinfo"))
+	    {
+		timeRemaining = (int)Double.parseDouble(data[1]);
+		System.out.println("Hi");
+	    }
 	}
 
 	for(int i = 0; i < playerList.size(); i++) 
 	{
 	    playerList.get(i).draw(this);
 	}
+	text("Time remaining: " + timeRemaining, 675, 550);
 
 	popMatrix();
     }
@@ -91,5 +98,6 @@ public class ClientDrawing extends DrawingSurface
     public void sendPlayerInfo()
     {	
 	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
+	c.write("#");
     }
 }

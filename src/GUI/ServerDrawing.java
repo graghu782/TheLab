@@ -71,6 +71,7 @@ public class ServerDrawing extends DrawingSurface
 	fill(255);
 	
 	sendPlayerInfo();
+	sendTimerInfo();
 	c = s.available();
 
 	for(int i = 0; i < s.clientCount; i++) 
@@ -78,24 +79,25 @@ public class ServerDrawing extends DrawingSurface
 	    if(s.clients[i] != null)
 	    {
 		input = s.clients[i].readString();
-		if(input != null)
+		
+		try 
 		{
-		    data = input.split(":");
-		    
-		    if(data[0].equals("playerinfo"))
+		    if(input != null)
 		    {
-			try 
+			input = input.substring(0, input.indexOf("#"));
+			data = input.split(":");
+		    
+			if(data[0].equals("playerinfo"))
 			{
 			    players[i] = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);   
 			    players[i].setHealth((int)Double.parseDouble(data[4]));
 			    players[i].setDirection(Double.parseDouble(data[5])); 
 			} 
-			catch(Exception e)
-			{
-			}
 		    }
 		}
-
+		catch(Exception e)
+		{
+		}
 	    }
 	}
 
@@ -121,10 +123,13 @@ public class ServerDrawing extends DrawingSurface
 		s.write("playerinfo" + ":" + players[i].getX() + ":" + players[i].getY() + ":" + players[i].getName() + ":" + players[i].getHealth() + ":" + players[i].getDirection() + ":");
 	    }
 	}
+	
+	s.write("#");
     }
     
     public void sendTimerInfo()
     {
-	
+	s.write("timerinfo" + ":" + interval + ":");
+	s.write("#");
     }
 }
