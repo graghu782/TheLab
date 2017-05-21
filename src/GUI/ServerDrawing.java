@@ -3,6 +3,7 @@ package GUI;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Gameplay.Bullet;
 import Gameplay.Player;
 import processing.net.Client;
 import processing.net.Server;
@@ -130,6 +131,27 @@ public class ServerDrawing extends DrawingSurface
     public void sendTimerInfo()
     {
 	s.write("timerinfo" + ":" + interval + ":");
+	s.write("#");
+    }
+    
+    public void sendBulletInfo()
+    {
+	for(Bullet b : player.getBullets())
+	{
+	    s.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection());
+	}
+	
+	for(int i = 0; i < s.clientCount; i++)
+	{
+	    if(players[i] != null)
+	    {
+		for(Bullet b : players[i].getBullets())
+		{
+		    s.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection());
+		}
+	    }
+	}
+	
 	s.write("#");
     }
 }

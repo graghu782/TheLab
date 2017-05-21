@@ -18,6 +18,7 @@ public class ClientDrawing extends DrawingSurface
     
     private String playerData;
     private String timerData;
+    private String bulletData;
 
     private ArrayList<Player> playerList;
     private int timeRemaining;
@@ -85,7 +86,16 @@ public class ClientDrawing extends DrawingSurface
 	    if(data[0].equals("timerinfo"))
 	    {
 		timeRemaining = (int)Double.parseDouble(data[1]);
-		System.out.println("Hi");
+	    }
+	    
+	    input = input.substring(input.indexOf("#") + 1);
+	    bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
+	    data = bulletData.split(":");
+	    
+	    i = 0;
+	    while(i*4+3 < data.length)
+	    {
+		
 	    }
 	}
 

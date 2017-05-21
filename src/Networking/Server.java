@@ -9,33 +9,38 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server implements Runnable {
+public class Server implements Runnable
+{
 
-    //			Socket connect = ss.accept();
-    //			BufferedReader br = new BufferedReader(new InputStreamReader(connect.getInputStream()));
-    //			PrintWriter pw = new PrintWriter(connect.getOutputStream(), true);
-    //			
-    //			while(true) {
-    //				String in = br.readLine();
-    //				if(in != null) {
-    //					System.out.println(in);
-    //					break;
-    //				}
-    //			}
+    // Socket connect = ss.accept();
+    // BufferedReader br = new BufferedReader(new
+    // InputStreamReader(connect.getInputStream()));
+    // PrintWriter pw = new PrintWriter(connect.getOutputStream(), true);
+    //
+    // while(true) {
+    // String in = br.readLine();
+    // if(in != null) {
+    // System.out.println(in);
+    // break;
+    // }
+    // }
     private ServerSocket serverSocket;
     private boolean isStopped;
     private Thread runningThread;
     private int port;
-    
-    public Server(int port){
+
+    public Server(int port)
+    {
 	this.port = port;
     }
 
-    public void run(){
-	synchronized(this){
+    public void run()
+    {
+	synchronized (this)
+	{
 	    this.runningThread = Thread.currentThread();
 	}
-	
+
 	try
 	{
 	    serverSocket = new ServerSocket(port);
@@ -44,41 +49,55 @@ public class Server implements Runnable {
 	{
 	    e.printStackTrace();
 	}
-	
-	while(!isStopped){	
+
+	while (!isStopped)
+	{
 	    Socket clientSocket = null;
-	    try {
+	    try
+	    {
 		clientSocket = this.serverSocket.accept();
-	    } catch (IOException e) {
-		if(!isStopped) {
-		    System.out.println("Server Stopped.") ;
+	    }
+	    catch (IOException e)
+	    {
+		if (!isStopped)
+		{
+		    System.out.println("Server Stopped.");
 		    return;
 		}
 		throw new RuntimeException("Error accepting client connection", e);
 	    }
 
-	    try {
+	    try
+	    {
 		BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		PrintWriter pw = new PrintWriter(clientSocket.getOutputStream(), true);
-		while(true) {
+		while (true)
+		{
 		    String in = br.readLine();
-		    if(in != null) {
+		    if (in != null)
+		    {
 			System.out.println(in);
 			break;
 		    }
 		}
-	    } catch (IOException e) {
+	    }
+	    catch (IOException e)
+	    {
 	    }
 	}
 
-	System.out.println("Server Stopped.") ;
+	System.out.println("Server Stopped.");
     }
 
-    public synchronized void stop(){
+    public synchronized void stop()
+    {
 	isStopped = true;
-	try {
+	try
+	{
 	    serverSocket.close();
-	} catch (IOException e) {
+	}
+	catch (IOException e)
+	{
 	    throw new RuntimeException("Error closing server", e);
 	}
     }
