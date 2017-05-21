@@ -60,24 +60,26 @@ public class ClientDrawing extends DrawingSurface
 	    input = c.readString();
 
 	    data = input.split(":");
-	    for(int i = 0;i < 4 && i < data.length/5; i+=5) {
-		try
-		{
-		    if(players[i] != null) {
-			players[i].update(Double.parseDouble(data[i]), Double.parseDouble(data[i+1]));
+	    for(int i = 0;i < players.length && i*5 < data.length; i++) {
+		if(!data[i*5+2].equals(player.getName())) {
+		    try
+		    {
+			if(players[i] != null) {
+			    players[i].update(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]));
+			}
+			else {
+			    players[i] = new Player(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]), data[i*5+2], false);   
+			}
+			players[i].setHealth((int)Double.parseDouble(data[i*5+3]));
+			players[i].setDirection(Double.parseDouble(data[i*5+4])); 
 		    }
-		    else {
-			players[i] = new Player(Double.parseDouble(data[i]), Double.parseDouble(data[i+1]), data[i+2], false);   
+		    catch (Exception e)
+		    {
 		    }
-		    players[i].setHealth((int)Double.parseDouble(data[i+3]));
-		    players[i].setDirection(Double.parseDouble(data[i+4])); 
-		}
-		catch (Exception e)
-		{
-		}
-		finally {
-		    if(players[i] != null) {
-			players[i].draw(this);	
+		    finally {
+			if(players[i] != null) {
+			    players[i].draw(this);	
+			}
 		    }
 		}
 	    }
@@ -90,7 +92,7 @@ public class ClientDrawing extends DrawingSurface
     public void sendPlayerInfo()
     {	
 	c.write(player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
-	
+
 	//	for(Bullet b : player.getBullets())
 	//	{
 	//	    if(c != null)
