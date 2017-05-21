@@ -24,7 +24,7 @@ public class ClientDrawing extends DrawingSurface
     public ClientDrawing(String IP, String playerName)
     {
 	super();
-	
+
 	this.IP = IP;
 	this.playerName = playerName;
     }
@@ -32,7 +32,7 @@ public class ClientDrawing extends DrawingSurface
     public void setup()
     {
 	super.setup();
-	
+
 	try
 	{
 	    c = new Client(this, IP, 4444);
@@ -51,7 +51,7 @@ public class ClientDrawing extends DrawingSurface
     public void draw()
     {
 	pushMatrix();
-	
+
 	super.draw();
 	sendPlayerInfo();
 
@@ -60,20 +60,30 @@ public class ClientDrawing extends DrawingSurface
 	    input = c.readString();
 
 	    data = input.split(":");
+	    for(int i = 0;i < 4 && i < data.length/5; i+=5) {
+		try
+		{
+		    if(players[i] != null) {
+			players[i].update(Double.parseDouble(data[i]), Double.parseDouble(data[i+1]));
+		    }
+		    else {
+			players[i] = new Player(Double.parseDouble(data[i]), Double.parseDouble(data[i+1]), data[i+2], false);   
+		    }
+		    players[i].setHealth((int)Double.parseDouble(data[i+3]));
+		    players[i].setDirection(Double.parseDouble(data[i+4])); 
+		}
+		catch (Exception e)
+		{
+		}
+		finally {
+		    if(players[i] != null) {
+			players[i].draw(this);	
+		    }
+		}
+	    }
 
-	    try
-	    {
-		receivedPlayer = new Player(Double.parseDouble(data[0]), Double.parseDouble(data[1]), data[2], false);
-		receivedPlayer.setHealth((int) Double.parseDouble(data[3]));
-		receivedPlayer.setDirection(Double.parseDouble(data[4]));
-	    }
-	    catch (Exception e)
-	    {
-		if (receivedPlayer != null)
-		    receivedPlayer.draw(this);
-	    }
 	}
-	
+
 	popMatrix();
     }
 
@@ -81,10 +91,10 @@ public class ClientDrawing extends DrawingSurface
     {	
 	c.write(player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
 	
-//	for(Bullet b : player.getBullets())
-//	{
-//	    if(c != null)
-//		c.write(b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
-//	}
+	//	for(Bullet b : player.getBullets())
+	//	{
+	//	    if(c != null)
+	//		c.write(b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
+	//	}
     }
 }

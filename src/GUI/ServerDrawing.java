@@ -85,7 +85,13 @@ public class ServerDrawing extends DrawingSurface
     public void sendPlayerInfo()
     {
 	s.write(player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
+	
+	for(int i = 0; i < s.clientCount; i++) {
+	    if(players[i] != null) {
+		s.write(players[i].getX() + ":" + players[i].getY() + ":" + players[i].getName() + ":" + players[i].getHealth() + ":" + players[i].getDirection() + ":");
 
+	    }
+	}
 //	for(Bullet b : player.getBullets())
 //	{
 //	    if(s != null)
