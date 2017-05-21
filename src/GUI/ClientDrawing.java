@@ -15,6 +15,9 @@ public class ClientDrawing extends DrawingSurface
 
     private String input;
     private String data[];
+    
+    private String playerData;
+    private String timerData;
 
     private ArrayList<Player> playerList;
     private int timeRemaining;
@@ -56,29 +59,29 @@ public class ClientDrawing extends DrawingSurface
 	if (c.available() > 0)
 	{
 	    input = c.readString();
-	    input = input.substring(0, input.indexOf("#"));
-
-	    data = input.split(":");
 	    
+	    playerData = input.substring(0, input.indexOf("#"));
+	    data = playerData.split(":");
 	    playerList.clear();
 	    
 	    int i = 0;
-	    
-	    if(data[0].equals("playerinfo"))
+	    while(i*6+5 < data.length) 
 	    {
-		while(i*6+5 < data.length) 
+		if(!data[i*6+3].equals(player.getName())) 
 		{
-		    if(!data[i*6+3].equals(player.getName())) 
-		    {
-			Player temp = new Player(Double.parseDouble(data[i*6 + 1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
-			temp.setHealth((int)Double.parseDouble(data[i*6+4]));
-			temp.setDirection(Double.parseDouble(data[i*6+5])); 
-			playerList.add(temp);
-		    }
-		    
-		    i++;
+		    Player temp = new Player(Double.parseDouble(data[i*6 + 1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
+		    temp.setHealth((int)Double.parseDouble(data[i*6+4]));
+		    temp.setDirection(Double.parseDouble(data[i*6+5])); 
+		    playerList.add(temp);
 		}
+		    
+		  i++;
 	    }
+	    
+	    input = input.substring(input.indexOf("#") + 1);
+	    timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+	    data = timerData.split(":");
+	    
 	    if(data[0].equals("timerinfo"))
 	    {
 		timeRemaining = (int)Double.parseDouble(data[1]);
