@@ -75,7 +75,7 @@ public class ServerDrawing extends DrawingSurface
 	
 	sendPlayerInfo();
 	sendTimerInfo();
-	//sendBulletInfo();
+	sendBulletInfo();
 	c = s.available();
 
 	for(int i = 0; i < s.clientCount; i++) 
@@ -155,7 +155,7 @@ public class ServerDrawing extends DrawingSurface
     {
 	for(Bullet b : player.getBullets())
 	{
-	    s.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection());
+	    s.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
 	}
 	
 	for(int i = 0; i < s.clientCount; i++)
@@ -164,7 +164,7 @@ public class ServerDrawing extends DrawingSurface
 	    {
 		for(Bullet b : players[i].getBullets())
 		{
-		    s.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection());
+		    s.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
 		}
 	    }
 	}

@@ -85,12 +85,15 @@ public class ClientDrawing extends DrawingSurface
 	    }
 	    
 	    input = input.substring(input.indexOf("#") + 1);
-	    timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
-	    data = timerData.split(":");
-	    
-	    if(data[0].equals("timerinfo"))
+	    if(input.indexOf("timerData") >= 0)
 	    {
-		timeRemaining = (int)Double.parseDouble(data[1]);
+		timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+		data = timerData.split(":");
+	    
+		if(data[0].equals("timerinfo"))
+		{
+		    timeRemaining = (int)Double.parseDouble(data[1]);
+		}
 	    }
 	    
 	    input = input.substring(input.indexOf("#") + 1);
@@ -105,7 +108,6 @@ public class ClientDrawing extends DrawingSurface
 		{
 		    Bullet b = new Bullet(Double.parseDouble(data[i*4+1]), Double.parseDouble(data[i*4+2]), Double.parseDouble(data[i*4+3]), player);
 		    bulletList.add(b);
-		
 		    i++;
 		}
 	    }
