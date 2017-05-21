@@ -66,6 +66,8 @@ public class ServerDrawing extends DrawingSurface
 			players[i].setHealth((int)Double.parseDouble(data[3]));
 			players[i].setDirection(Double.parseDouble(data[4])); 
 		    } catch(Exception e) {
+		    }
+		    finally {
 			if(players[i] != null) {
 			    players[i].draw(this);
 			}
