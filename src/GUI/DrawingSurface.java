@@ -79,7 +79,6 @@ public class DrawingSurface extends PApplet
 	float ratioY = (float) height / DRAWING_HEIGHT;
 
 	scale(ratioX, ratioY);
-	//checkBullets();
 
 	player.draw(this);
 

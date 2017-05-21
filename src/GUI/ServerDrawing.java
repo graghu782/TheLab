@@ -1,5 +1,6 @@
 package GUI;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +21,7 @@ public class ServerDrawing extends DrawingSurface
     
     private Timer timeRemaining;
     private int interval;
+    private int eliminations;
 
     public ServerDrawing()
     {
@@ -73,9 +75,6 @@ public class ServerDrawing extends DrawingSurface
 
 	fill(255);
 	
-	sendPlayerInfo();
-	sendTimerInfo();
-	sendBulletInfo();
 	c = s.available();
 
 	for(int i = 0; i < s.clientCount; i++) 
@@ -113,6 +112,12 @@ public class ServerDrawing extends DrawingSurface
 		{
 		}
 	    }
+	    
+	    checkBullets();
+	    
+	    sendPlayerInfo();
+	    sendTimerInfo();
+	    sendBulletInfo();
 	}
 
 	for(int i = 0; i < players.length; i++) 
@@ -170,5 +175,27 @@ public class ServerDrawing extends DrawingSurface
 	}
 	
 	s.write("#");
+    }
+    
+    public void checkBullets()
+    {
+	for(Player p : players)
+	{
+	    if(p != null)
+	    {
+		ArrayList<Bullet> bullets = p.getBullets();
+		for(Bullet b : bullets)
+		{
+		    for(Player t : players)
+		    {
+			if(t != null && !t.equals(p) && t.isHit(b))
+			{
+			    t.decHealth(10);
+			    bullets.remove(b);
+			}
+		    }
+		}
+	    }
+	}
     }
 }

@@ -23,6 +23,7 @@ public class ClientDrawing extends DrawingSurface
     private ArrayList<Player> playerList;
     private ArrayList<Bullet> bulletList;
     private int timeRemaining;
+    private int eliminations;
     
     public ClientDrawing()
     {
@@ -65,23 +66,27 @@ public class ClientDrawing extends DrawingSurface
 	if (c.available() > 0)
 	{
 	    input = c.readString();
+	    System.out.println(input);
 	    
-	    playerData = input.substring(0, input.indexOf("#"));
-	    data = playerData.split(":");
-	    playerList.clear();
-	    
-	    int i = 0;
-	    while(i*6+5 < data.length) 
+	    if(input.indexOf("#") >= 0)
 	    {
-		if(!data[i*6+3].equals(player.getName())) 
+		playerData = input.substring(0, input.indexOf("#"));
+		data = playerData.split(":");
+		playerList.clear();
+	    
+		int i = 0;
+		while(i*6+5 < data.length) 
 		{
-		    Player temp = new Player(Double.parseDouble(data[i*6+1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
-		    temp.setHealth((int)Double.parseDouble(data[i*6+4]));
-		    temp.setDirection(Double.parseDouble(data[i*6+5])); 
-		    playerList.add(temp);
-		}
+		    if(!data[i*6+3].equals(player.getName())) 
+		    {
+			Player temp = new Player(Double.parseDouble(data[i*6+1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
+			temp.setHealth((int)Double.parseDouble(data[i*6+4]));
+			temp.setDirection(Double.parseDouble(data[i*6+5])); 
+			playerList.add(temp);
+		    }
 		    
-		  i++;
+		    i++;
+		}
 	    }
 	    
 	    input = input.substring(input.indexOf("#") + 1);
@@ -103,7 +108,7 @@ public class ClientDrawing extends DrawingSurface
 		data = bulletData.split(":");
 		bulletList.clear();
 	    
-		i = 0;
+		int i = 0;
 		while(i*4+3 < data.length)
 		{
 		    Bullet b = new Bullet(Double.parseDouble(data[i*4+1]), Double.parseDouble(data[i*4+2]), Double.parseDouble(data[i*4+3]), player);
