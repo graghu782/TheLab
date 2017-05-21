@@ -37,11 +37,6 @@ public class ServerDrawing extends DrawingSurface
 	s = new Server(this, 4444);
     }
 
-    // The statements in draw() are executed 60 times a second until the
-    // program is stopped. Each statement is executed in
-    // sequence and after the last line is read, the first
-    // line is executed again.s
-
     public void draw()
     {
 	pushMatrix();
@@ -85,10 +80,5 @@ public class ServerDrawing extends DrawingSurface
 		s.write(players[i].getX() + ":" + players[i].getY() + ":" + players[i].getName() + ":" + players[i].getHealth() + ":" + players[i].getDirection() + ":");
 	    }
 	}
-	//	for(Bullet b : player.getBullets())
-	//	{
-	//	    if(s != null)
-	//		s.write(b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
-	//	}
     }
 }
