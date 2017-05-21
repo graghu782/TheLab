@@ -71,7 +71,7 @@ public class Bullet extends Line
 	drawer.strokeWeight(1);
 	drawer.line((float) x, (float) y, (float) (xTemp1), (float) (yTemp1));
 
-	//	super.draw(drawer);
+	//super.draw(drawer);
 
 	x = x + (SPEED * xTemp);
 	y = y + (SPEED * yTemp);

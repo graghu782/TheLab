@@ -93,19 +93,22 @@ public class ClientDrawing extends DrawingSurface
 		timeRemaining = (int)Double.parseDouble(data[1]);
 	    }
 	    
-	    /*
 	    input = input.substring(input.indexOf("#") + 1);
-	    bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
-	    data = bulletData.split(":");
-	    bulletList.clear();
-	    
-	    i = 0;
-	    while(i*4+3 < data.length)
+	    if(input.indexOf("bulletinfo") >= 0)
 	    {
-		Bullet b = new Bullet(Double.parseDouble(data[i*4+1]), Double.parseDouble(data[i*4+2]), Double.parseDouble(data[i*4+3]), player);
-		bulletList.add(b);
+		bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
+		data = bulletData.split(":");
+		bulletList.clear();
+	    
+		i = 0;
+		while(i*4+3 < data.length)
+		{
+		    Bullet b = new Bullet(Double.parseDouble(data[i*4+1]), Double.parseDouble(data[i*4+2]), Double.parseDouble(data[i*4+3]), player);
+		    bulletList.add(b);
+		
+		    i++;
+		}
 	    }
-	    */
 	}
 
 	for(int i = 0; i < playerList.size(); i++) 
