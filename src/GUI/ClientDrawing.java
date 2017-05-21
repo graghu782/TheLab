@@ -16,6 +16,8 @@ public class ClientDrawing extends DrawingSurface
     private String input;
     private String data[];
 
+    private ArrayList<Player> playerList;
+    
     public ClientDrawing()
     {
 	super();
@@ -24,7 +26,7 @@ public class ClientDrawing extends DrawingSurface
     public ClientDrawing(String IP, String playerName)
     {
 	super();
-
+	playerList = new ArrayList<Player>();
 	this.IP = IP;
 	this.playerName = playerName;
     }
@@ -60,31 +62,25 @@ public class ClientDrawing extends DrawingSurface
 	    input = c.readString();
 
 	    data = input.split(":");
-	    for(int i = 0;i < players.length && i*5 < data.length; i++) {
+	    
+	    playerList.clear();
+	    
+	    int i = 0;
+	    
+	    while(i*5+4 < data.length) {
 		if(!data[i*5+2].equals(player.getName())) {
-		    try
-		    {
-			if(players[i] != null) {
-			    players[i].update(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]));
-			    players[i].changeName(data[i*5+2]);
-			}
-			else {
-			    players[i] = new Player(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]), data[i*5+2], false);   
-			}
-			players[i].setHealth((int)Double.parseDouble(data[i*5+3]));
-			players[i].setDirection(Double.parseDouble(data[i*5+4])); 
-		    }
-		    catch (Exception e)
-		    {
-		    }
-		    finally {
-			if(players[i] != null) {
-			    players[i].draw(this);	
-			}
-		    }
+		    Player temp = new Player(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]), data[i*5+2], false);
+		    temp.setHealth((int)Double.parseDouble(data[i*5+3]));
+		    temp.setDirection(Double.parseDouble(data[i*5+4])); 
+		    playerList.add(temp);
 		}
+		i++;
 	    }
+	    
+	}
 
+	for(int i = 0; i < playerList.size(); i++) {
+	    playerList.get(i).draw(this);
 	}
 
 	popMatrix();
