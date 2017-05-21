@@ -69,6 +69,8 @@ public class ClientDrawing extends DrawingSurface
 		    temp.setDirection(Double.parseDouble(data[i*5+4])); 
 		    playerList.add(temp);
 		}
+		
+		
 		i++;
 	    }
 	    

@@ -34,6 +34,7 @@ public class ServerDrawing extends DrawingSurface
 
     public void draw()
     {
+	
 	pushMatrix();
 
 	super.draw();
