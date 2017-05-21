@@ -1,11 +1,13 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import processing.awt.PSurfaceAWT;
 
