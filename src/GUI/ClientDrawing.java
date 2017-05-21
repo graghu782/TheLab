@@ -62,21 +62,26 @@ public class ClientDrawing extends DrawingSurface
 	    
 	    int i = 0;
 	    
-	    while(i*5+4 < data.length) {
-		if(!data[i*5+2].equals(player.getName())) {
-		    Player temp = new Player(Double.parseDouble(data[i*5]), Double.parseDouble(data[i*5+1]), data[i*5+2], false);
-		    temp.setHealth((int)Double.parseDouble(data[i*5+3]));
-		    temp.setDirection(Double.parseDouble(data[i*5+4])); 
-		    playerList.add(temp);
+	    if(data[0].equals("playerinfo"))
+	    {
+		while(i*6+5 < data.length) 
+		{
+		    if(!data[i*6+3].equals(player.getName())) 
+		    {
+			Player temp = new Player(Double.parseDouble(data[i*6 + 1]), Double.parseDouble(data[i*6+2]), data[i*6+3], false);
+			temp.setHealth((int)Double.parseDouble(data[i*6+4]));
+			temp.setDirection(Double.parseDouble(data[i*6+5])); 
+			playerList.add(temp);
+		    }
+		    
+		    i++;
 		}
-		
-		
-		i++;
 	    }
 	    
 	}
 
-	for(int i = 0; i < playerList.size(); i++) {
+	for(int i = 0; i < playerList.size(); i++) 
+	{
 	    playerList.get(i).draw(this);
 	}
 
@@ -85,6 +90,6 @@ public class ClientDrawing extends DrawingSurface
 
     public void sendPlayerInfo()
     {	
-	c.write(player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
+	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
     }
 }

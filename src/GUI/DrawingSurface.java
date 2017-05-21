@@ -31,14 +31,10 @@ public class DrawingSurface extends PApplet
     protected String playerName;
     
     protected Obstacle[] obstacles;
-    
-    private Timer timeRemaining;
-    private int interval;
 
     public DrawingSurface()
     {
 	keysPressed = new boolean[4];
-	timeRemaining = new Timer();
 	players = new Player[3];
 	runSketch();
     }
@@ -54,21 +50,8 @@ public class DrawingSurface extends PApplet
 	img = loadImage("background.bmp");
 	player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
-	
-	interval = 180;
-	
-	timeRemaining.scheduleAtFixedRate(new TimerTask()
-	{
-    		public void run()
-    		{
-    		    if(interval == 1)
-    			timeRemaining.cancel();
-    		    interval--;
-    		}
-	}, 1000, 1000);
 
 	frameRate(20);
-	
 	
 	obstacles = new Obstacle[1];
 	obstacles[0] = new Obstacle(400, 0, 420, 800);
@@ -92,17 +75,6 @@ public class DrawingSurface extends PApplet
 	border = new Border(DRAWING_WIDTH / 2 - x - 5 - player.getWidth() / 2, DRAWING_HEIGHT / 2 - y - 5 - player.getHeight() / 2, MAP_WIDTH + 10, MAP_HEIGHT + 10);
 	border.draw(this);
 	
-	fill(0);
-	text("Time remaining: " + interval, 675, 550);
-	if(interval < 1)
-	{
-	    textSize(72);
-	    text("GAME OVER", 200, 100);
-	    textSize(11);
-	    noLoop();
-	}
-
-	fill(255);
 	float ratioX = (float) width / DRAWING_WIDTH;
 	float ratioY = (float) height / DRAWING_HEIGHT;
 
