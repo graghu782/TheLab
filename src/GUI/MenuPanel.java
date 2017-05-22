@@ -15,7 +15,6 @@ public class MenuPanel extends JPanel implements ActionListener
 
     private Main w;
 
-    private JButton sandbox;
     private JButton startServer;
     private JButton joinServer;
     private JButton instructions;
@@ -34,8 +33,7 @@ public class MenuPanel extends JPanel implements ActionListener
 
 	buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 	// Move down by 300 pixels
-
-	sandbox = new JButton("Sandbox");
+	
 	instructions = new JButton("Instructions");
 	startServer = new JButton("Start Server");
 	joinServer = new JButton("Join Server");
@@ -43,14 +41,12 @@ public class MenuPanel extends JPanel implements ActionListener
 	title = new JLabel();
 	title.setIcon(new ImageIcon("LabTitle.png"));
 
-	sandbox.addActionListener(this);
 	startServer.addActionListener(this);
 	joinServer.addActionListener(this);
 	instructions.addActionListener(this);
 
 	
 	buttonPanel.add(Box.createHorizontalStrut(100));
-	buttonPanel.add(sandbox);
 	buttonPanel.add(startServer);
 	buttonPanel.add(joinServer);
 	buttonPanel.add(instructions);
@@ -85,11 +81,7 @@ public class MenuPanel extends JPanel implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	if (e.getSource() == sandbox)
-	{
-	    w.changePanel("game");
-	}
-	else if(e.getSource() == startServer)
+	if(e.getSource() == startServer)
 	{
 	    w.changePanel("servermenu");
 	}
