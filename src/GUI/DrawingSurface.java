@@ -40,7 +40,6 @@ public class DrawingSurface extends PApplet
 	interval = 1;
 	
 	keysPressed = new boolean[4];
-	players = new Player[3];
 	runSketch();
     }
 
@@ -212,24 +211,27 @@ public class DrawingSurface extends PApplet
 	}
     }
 
-    public void checkBullets(Player player, int size)
+    public void checkBullets(Player player)
     {
 	if(player != null)
 	{
 	    for (int i = 0; i < player.getBullets().size(); i++)
 	    {
-		
-		for(int x = 0; x < size + 1; x++)
-		{   
-		    if(players[x] != null && !players[x].getName().equals(player.getName()))
+		if(player.equals(this.player))
+		{
+		    if(receivedPlayer != null)
 		    {
-			if (players[x] != null && players[x].isHit(player.getBullets().get(i)))
+			if(receivedPlayer.isHit(player.getBullets().get(i)))
 			{
 			    player.getBullets().remove(i);
-			    players[x].decHealth(10);
-			    //System.out.println("Test 1: " + players[x].getHealth());
+			    receivedPlayer.decHealth(10);
 			}
 		    }
+		}
+		else if(receivedPlayer != null)
+		{
+		    player.getBullets().remove(i);
+		    this.player.decHealth(10);
 		}
 	    }
 	}

@@ -18,8 +18,8 @@ public class ServerDrawing extends DrawingSurface
     private String data[];
     private String bulletData;
     private String playerData;
-    private Player clientPlayer;
-    
+    private Player receivedPlayer;
+
     private Timer timeRemaining;
     private int interval;
     private int eliminations;
@@ -42,30 +42,30 @@ public class ServerDrawing extends DrawingSurface
     {
 	super.setup();
 	s = new Server(this, 4444);
-	
+
 	interval = 180;
-	
+
 	timeRemaining.scheduleAtFixedRate(new TimerTask()
 	{
-    		public void run()
-    		{
-    		    if(interval == 1)
-    			timeRemaining.cancel();
-    		    interval--;
-    		}
+	    public void run()
+	    {
+		if (interval == 1)
+		    timeRemaining.cancel();
+		interval--;
+	    }
 	}, 1000, 1000);
     }
 
     public void draw()
     {
-	
+
 	pushMatrix();
 
 	super.draw();
-	
+
 	fill(0);
 	text("Time remaining: " + interval, 675, 550);
-	if(interval < 1)
+	if (interval < 1)
 	{
 	    textSize(72);
 	    text("GAME OVER", 200, 100);
@@ -74,108 +74,98 @@ public class ServerDrawing extends DrawingSurface
 	}
 
 	fill(255);
-	
+
 	c = s.available();
 
-	for(int i = 0; i < s.clientCount + 1; i++) 
+	for (int i = 0; i < s.clientCount + 1; i++)
 	{
-	    if(s.clients[i] != null)
+	    if (s.clients[i] != null)
 	    {
 		input = s.clients[i].readString();
 
-		try 
+		try
 		{
-		    if(input != null)
+		    if (input != null)
 		    {
 			playerData = input.substring(0, input.indexOf("#"));
 			data = playerData.split(":");
-			
-			clientPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);   
-			clientPlayer.setHealth((int)Double.parseDouble(data[4]));
-			clientPlayer.setDirection(Double.parseDouble(data[5])); 
-			
+
+			receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3],
+				false);
+			receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
+			receivedPlayer.setDirection(Double.parseDouble(data[5]));
+
 			input = input.substring(input.indexOf("#") + 1);
 			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
 			data = bulletData.split(":");
-			
+
 			int j = 0;
-			while(j*4+3 < data.length)
+			while (j * 4 + 3 < data.length)
 			{
-			    Bullet b = new Bullet(Double.parseDouble(data[j*4+1]), Double.parseDouble(data[j*4+2]), Double.parseDouble(data[j*4+3]), clientPlayer);
-			    clientPlayer.addBullet(b);
-			    
+			    Bullet b = new Bullet(Double.parseDouble(data[j * 4 + 1]),
+				    Double.parseDouble(data[j * 4 + 2]), Double.parseDouble(data[j * 4 + 3]),
+				    receivedPlayer);
+			    receivedPlayer.addBullet(b);
+
 			    j++;
 			}
 		    }
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 		}
 	    }
 	}
 
-	clientPlayer.draw(this);
-	
+	receivedPlayer.draw(this);
+
 	checkBullets();
-	
+
 	sendPlayerInfo();
 	sendTimerInfo();
-	sendBulletInfo(); 
+	sendBulletInfo();
 
 	popMatrix();
     }
 
     public void sendPlayerInfo()
     {
-	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
+	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":"
+		+ player.getHealth() + ":" + player.getDirection() + ":");
 
-	if(clientPlayer != null)
-	    s.write("playerinfo" + ":" + players[i].getX() + ":" + players[i].getY() + ":" + players[i].getName() + ":" + players[i].getHealth() + ":" + players[i].getDirection() + ":");
-	    
-	for(int i = 1; i < s.clientCount + 1; i++) 
-	{
-	    if(players[i] != null) 
-	    {
-		System.out.println(players[i].getHealth());
-		s.write("playerinfo" + ":" + players[i].getX() + ":" + players[i].getY() + ":" + players[i].getName() + ":" + players[i].getHealth() + ":" + players[i].getDirection() + ":");
-	    }
-	}
-	
+	if (receivedPlayer != null)
+	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName()
+		    + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":");
+
 	s.write("#");
     }
-    
+
     public void sendTimerInfo()
     {
 	s.write("timerinfo" + ":" + interval + ":");
 	s.write("#");
     }
-    
+
     public void sendBulletInfo()
     {
-	for(Bullet b : player.getBullets())
+	for (Bullet b : player.getBullets())
 	{
-	    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + player.getName() + ":");
+	    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":"
+		    + player.getName() + ":");
 	}
-	
-	for(int i = 1; i < s.clientCount; i++)
+
+	for (Bullet b : receivedPlayer.getBullets())
 	{
-	    if(players[i] != null)
-	    {
-		for(Bullet b : players[i].getBullets())
-		{
-		    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + players[i].getName() + ":");
-		}
-	    }
+	    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":"
+		    + receivedPlayer.getName() + ":");
 	}
-	
+
 	s.write("#");
     }
-    
+
     public void checkBullets()
-    {	
-	for(Player p : players)
-	{
-	    super.checkBullets(p, s.clientCount + 1);
-	}
-    }	
+    {
+	super.checkBullets(player);
+	super.checkBullets(receivedPlayer);
+    }
 }
