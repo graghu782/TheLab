@@ -75,7 +75,6 @@ public class ClientDrawing extends DrawingSurface
 		while (i * 6 + 5 < data.length)
 		{
 		    if(data[i*6+3].equals(player.getName())) {
-			player.update(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]));
 			player.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
 			player.setDirection(Double.parseDouble(data[i * 6 + 5]));
 		    }
