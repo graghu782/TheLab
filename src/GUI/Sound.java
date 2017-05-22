@@ -8,13 +8,13 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
-public class EasySound2 implements Runnable
+public class Sound implements Runnable
 {
   private SourceDataLine line = null;
   private byte[] audioBytes;
   private int numBytes;
 
-  public EasySound2(String fileName)
+  public Sound(String fileName)
   {
     File  soundFile = new File(fileName);
     AudioInputStream audioInputStream = null;

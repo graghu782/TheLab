@@ -4,16 +4,11 @@ The Lab
 Introduction: 
 
 
-There was once a legend about a mysterious lab that contained great secrets and many treasures... you and some others set off to find this lab. 
-One day, you and your team set off into a particularly forboding jungle... and there it is. However, you are not alone. You will have to kill
-the others for control of the legendary lab. This is a two dimensional, third person multiplayer shooter game. There are different game modes,
-free for all and team deathmatch. There is a large 2D map which the players can move around in. The objective is to eliminate the enemy and secure
-the win for your team. The game is timebased, so one and his team has to tally up as many kills as possible in the time given. The team with the 
-most kills wins and takes control of the legendary lab and its secrets.
-
+This is a free for all game in which the goal is to eliminate as many enemy players as possible. There is a large 2D map which the players can move around 
+in. The objective is to eliminate the enemy and secure the win for yourself. The game is timebased, so one has to tally up as many kills as possible in the 
+time given. The team with the most kills wins and takes control of the legendary lab and its secrets.
 
 Use your skills to move around the map, killing all others before the time runs out. 
-
 
 Instructions: Use WASD to move while mercilessly killing all others who stand in your way by using your mouse to aim. Click to shoot.
 
@@ -28,8 +23,8 @@ Must-Have features:
 (DONE)Players can move around and shoot
 (DONE)A background that moves with the player
 (DONE)Characters have hitboxes
-(NOT DONE)Character animations
-(NOT DONE)A multiplayer mode allowing local players on the network to play each other
+(DONE)Character animations
+(DONE)A multiplayer mode allowing local players on the network to play each other
 
 
 Want-To-Have Features:
@@ -39,7 +34,7 @@ Want-To-Have Features:
 (NOT DONE)Animations for the characters
 (NOT DONE)A minimap
 (NOT DONE)Accurate collision detection
-(NOT DONE)Sound Effects
+(DONE)Sound Effects
 (NOT DONE)Power-ups
 
 
@@ -61,39 +56,30 @@ Class list:
 
 Package: MAP
 
-
 Obstacle - Obstacles on the map
 Map - Represents the map that will be used
-Minimap - (Want-to-have) feature for showing various objects on the map
-
 
 Package: GAMEPLAY
 
-
-MovingObject - Represents all moving objects.
-Bullet - Extends MovingObject, represents a bullet.
-Person - Extends MovingObject, represents a player.
-Arm - Used by the person, extends MovingObject.
-Torso - Main body of the person
-Legs - (Stretch goal, used for better hitbox scanning)
+Bullet - represents a bullet.
+Player - represents a player.
+Border - Creates a border around the playable map.
 Hud - shows the stats of the player(health, ammo, reloading)
 
 
 Package: GUI
 
-
 Main - Contains the main method/menu
-GameFrame - Controls frame  
-GamePanel - Controls frame
-
-
-Package: NETWORKING
-
-
-TBD
-
+DrawingSurface - Represents the frame on which the game is displayed
+ClientDrawing - Extends DrawingSurface, represents the game panel for what client users can see
+ServerDrawing - Extends DrawingSurface, represents the game panel for what the server user can see
+Sound - Provides the sound effects of the game
+MenuPanel - The Panel that contains the menu
+OptionPanel - contains a way to go back to the menu from the game.
+ServerCreationPanel - The panel that allows a user to start a server.
+ServerJoinPanel - The panel that allows a user to connect to a server
 
 Responsibilities List:
-* Justin: Game mechanics
+* Justin: Game mechanics/Networking
 * Gautam: Networking
 * David: Animation/Graphics

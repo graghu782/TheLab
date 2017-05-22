@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.w3c.dom.css.Rect;
 
-import GUI.EasySound2;
+import GUI.Sound;
 import processing.core.PApplet;
 import processing.core.PImage;
 import kim.shapes.Line;
@@ -15,7 +15,7 @@ public class Player
     // private static double mx, my;
     private boolean isMain;
 
-    private final EasySound2 gunshot = new EasySound2("gunshots2.wav");
+    private final Sound gunshot = new Sound("gunshots2.wav");
     private double x, y, width, height;
     private double xCenter, yCenter;
     private double direction;
