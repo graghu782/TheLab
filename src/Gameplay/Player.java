@@ -176,11 +176,11 @@ public class Player
 
     public boolean isHit(Bullet b)
     {
-	System.out.println(!b.getPlayer().equals(this));
 	if (!b.getPlayer().equals(this))
 	{
 	    if (b.intersects(lines[0]) || b.intersects(lines[1]) || b.intersects(lines[2]) || b.intersects(lines[3]))
 	    {
+		System.out.println("HELLO");
 		return true;
 	    }
 	    else
@@ -216,26 +216,23 @@ public class Player
 
     public void draw(PApplet drawer)
     {
-	if (isMain){
+	if (isMain)
+	{
 	    mouseXChange = drawer.mouseX - drawer.width / 2;
 	    mouseYChange = drawer.mouseY - drawer.height / 2;
 	}
+	
 	updateMain();
 	double xs = -mainX + drawer.width / 2 - width / 2;
 	double ys = -mainY + drawer.height / 2 - height / 2;
 
-	lines[0] = new Line(x + xs, y + ys, x + width + xs, y + ys);
-	lines[1] = new Line(x + xs + width, y + ys, x + width + xs, y + height + ys);
-	lines[2] = new Line(x + width + xs, y + ys + height, x + xs, y + height + ys);
-	lines[3] = new Line(x + xs, y + ys, x + xs, y + ys + height);
+	lines[0] = new Line(x, y , x + width , y);
+	lines[1] = new Line(x +  width, y, x + width, y + height);
+	lines[2] = new Line(x + width, y + height, x, y + height);
+	lines[3] = new Line(x , y, x , y  + height);
 
 	hud.updateHealth(health);
 	hud.draw(drawer, (float)(x + xs), (float)(y + ys));
-	
-	lines[0].draw(drawer);
-	lines[1].draw(drawer);
-	lines[2].draw(drawer);
-	lines[3].draw(drawer);
 
 	drawer.pushMatrix();
 	drawer.translate((float) (drawer.width / 2 - mainX + x), (float) (drawer.height / 2 - mainY + y));
