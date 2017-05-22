@@ -82,7 +82,6 @@ public class ClientDrawing extends DrawingSurface
 		    }
 		    
 		    player.setHealth((int)Double.parseDouble(data[4]));
-		    System.out.println(data[4]);
 		    i++;
 		}
 
@@ -127,11 +126,6 @@ public class ClientDrawing extends DrawingSurface
 
 	    }
 	}
-	
-	sendPlayerInfo();
-
-	if (player.getBullets().size() != 0)
-	    sendBulletInfo();
 
 	text("Time remaining: " + timeRemaining, 675, 550);
 	if (timeRemaining < 1)
@@ -152,13 +146,18 @@ public class ClientDrawing extends DrawingSurface
 	    if(!b.getPlayer().getName().equals(player.getName()))
 		b.draw(this);
 	}
+	
+	sendPlayerInfo();
+
+	if (player.getBullets().size() != 0)
+	    sendBulletInfo();
 
 	popMatrix();
     }
 
     public void sendPlayerInfo()
     {
-	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
+	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getDirection() + ":");
 	c.write("#");
     }
 

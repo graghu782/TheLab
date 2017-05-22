@@ -213,18 +213,32 @@ public class DrawingSurface extends PApplet
 	}
     }
 
-    public void checkBullets(Player player)
+    public void checkBullets(Player player, int size)
     {
 	if(player != null)
-	for (int i = 0; i < player.getBullets().size(); i++)
 	{
-	    ArrayList<Bullet> bas = player.getBullets();
-	    for(int x = 0; x < players.length; x++)
+	    for (int i = 0; i < player.getBullets().size(); i++)
 	    {
-		if (players[x] != null && !players[x].getName().equals(player.getName()) && players[x].isHit(bas.get(i)))
-		{
-		    bas.remove(i);
-		    players[x].decHealth(10);
+		ArrayList<Bullet> bas = player.getBullets();
+		
+		for(int x = 0; x < size; x++)
+		{   
+		    if(!players[x].getName().equals(player.getName()))
+		    {
+			if (players[x] != null && players[x].isHit(bas.get(i)))
+			{
+			    bas.remove(i);
+			    players[x].decHealth(10);
+			}
+		    }
+		    else
+		    {
+			if(this.player.isHit(bas.get(i)))
+			{
+			    bas.remove(i);
+			    this.player.decHealth(10);
+			}
+		    }
 		}
 	    }
 	}

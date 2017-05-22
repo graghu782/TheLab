@@ -77,6 +77,12 @@ public class Player
 	this.y += y;
     }
     
+    public void moveTo(double x, double y)
+    {
+	this.x = x;
+	this.y = y;
+    }
+    
     public double getMainX()
     {
 	return mainX;
@@ -170,6 +176,7 @@ public class Player
 
     public boolean isHit(Bullet b)
     {
+	System.out.println(!b.getPlayer().equals(this));
 	if (!b.getPlayer().equals(this))
 	{
 	    if (b.intersects(lines[0]) || b.intersects(lines[1]) || b.intersects(lines[2]) || b.intersects(lines[3]))
@@ -224,6 +231,11 @@ public class Player
 
 	hud.updateHealth(health);
 	hud.draw(drawer, (float)(x + xs), (float)(y + ys));
+	
+	lines[0].draw(drawer);
+	lines[1].draw(drawer);
+	lines[2].draw(drawer);
+	lines[3].draw(drawer);
 
 	drawer.pushMatrix();
 	drawer.translate((float) (drawer.width / 2 - mainX + x), (float) (drawer.height / 2 - mainY + y));
@@ -259,7 +271,7 @@ public class Player
 	
 	if (bullets.size() > 0)
 	{
-	    if (bullets.get(0).getIs() >= 100)
+	    if (bullets.get(0).getIs() >= 12)
 		bullets.remove(0);
 	}
 

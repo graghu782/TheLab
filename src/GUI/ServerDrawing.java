@@ -82,7 +82,7 @@ public class ServerDrawing extends DrawingSurface
 	    if(s.clients[i] != null)
 	    {
 		input = s.clients[i].readString();
-		
+
 		try 
 		{
 		    if(input != null)
@@ -91,8 +91,7 @@ public class ServerDrawing extends DrawingSurface
 			data = playerData.split(":");
 			
 			players[i] = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);   
-			players[i].setHealth((int)Double.parseDouble(data[4]));
-			players[i].setDirection(Double.parseDouble(data[5])); 
+			players[i].setDirection(Double.parseDouble(data[4])); 
 			
 			input = input.substring(input.indexOf("#") + 1);
 			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
@@ -112,12 +111,6 @@ public class ServerDrawing extends DrawingSurface
 		{
 		}
 	    }
-	    
-	    checkBullets();
-	    
-	    sendPlayerInfo();
-	    sendTimerInfo();
-	    sendBulletInfo(); 
 	}
 
 	for(int i = 0; i < players.length; i++) 
@@ -127,6 +120,12 @@ public class ServerDrawing extends DrawingSurface
 		players[i].draw(this);
 	    }
 	}
+	
+	checkBullets();
+	    
+	sendPlayerInfo();
+	sendTimerInfo();
+	sendBulletInfo(); 
 
 	popMatrix();
     }
@@ -174,32 +173,11 @@ public class ServerDrawing extends DrawingSurface
     }
     
     public void checkBullets()
-    {
-	/*
+    {	
+	super.checkBullets(player, s.clientCount);
 	for(Player p : players)
 	{
-	    if(p != null)
-	    {
-		ArrayList<Bullet> bullets = p.getBullets();
-		for(Bullet b : bullets)
-		{
-		    for(Player t : players)
-		    {
-			if(t != null && !t.equals(p) && t.isHit(b))
-			{
-			    t.decHealth(10);
-			    bullets.remove(b);
-			}
-		    }
-		}
-	    }
-	}
-	*/
-	
-	super.checkBullets(player);
-	for(Player p : players)
-	{
-	    super.checkBullets(p);
+	    super.checkBullets(p, s.clientCount);
 	}
     }	
 }
