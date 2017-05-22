@@ -196,6 +196,10 @@ public class ServerDrawing extends DrawingSurface
 	}
 	*/
 	
-	super.checkBullets();
-    }
+	super.checkBullets(player);
+	for(Player p : players)
+	{
+	    super.checkBullets(p);
+	}
+    }	
 }

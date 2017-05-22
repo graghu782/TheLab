@@ -58,18 +58,13 @@ public class ClientDrawing extends DrawingSurface
 	pushMatrix();
 
 	super.draw();
-	sendPlayerInfo();
-
-	if (player.getBullets().size() != 0)
-	    sendBulletInfo();
-
+	
 	if (c.available() > 0)
 	{
 	    input = c.readString();
 
 	    try
 	    {
-
 		// Process Player info
 		playerData = input.substring(0, input.indexOf("#"));
 		data = playerData.split(":");
@@ -85,7 +80,9 @@ public class ClientDrawing extends DrawingSurface
 			temp.setDirection(Double.parseDouble(data[i * 6 + 5]));
 			playerList.add(temp);
 		    }
-
+		    
+		    player.setHealth((int)Double.parseDouble(data[4]));
+		    System.out.println(data[4]);
 		    i++;
 		}
 
@@ -130,6 +127,11 @@ public class ClientDrawing extends DrawingSurface
 
 	    }
 	}
+	
+	sendPlayerInfo();
+
+	if (player.getBullets().size() != 0)
+	    sendBulletInfo();
 
 	text("Time remaining: " + timeRemaining, 675, 550);
 	if (timeRemaining < 1)
