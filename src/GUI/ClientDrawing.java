@@ -20,7 +20,6 @@ public class ClientDrawing extends DrawingSurface
     private String timerData;
     private String bulletData;
 
-    private ArrayList<Player> playerList;
     private ArrayList<Bullet> bulletList;
     private int timeRemaining;
     private int eliminations;
@@ -33,9 +32,7 @@ public class ClientDrawing extends DrawingSurface
     public ClientDrawing(String IP, String playerName)
     {
 	super();
-	timeRemaining = 100;
-	playerList = new ArrayList<Player>();
-	players[0] = player;
+	timeRemaining = 100;	
 	
 	bulletList = new ArrayList<Bullet>();
 	this.IP = IP;
@@ -71,18 +68,18 @@ public class ClientDrawing extends DrawingSurface
 		// Process Player info
 		playerData = input.substring(0, input.indexOf("#"));
 		data = playerData.split(":");
-		playerList.clear();
 
 		int i = 0;
 		while (i * 6 + 5 < data.length)
 		{
-		    if (!data[i * 6 + 3].equals(player.getName()))
-		    {
 			Player temp = new Player(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]), data[i * 6 + 3], false);
 			temp.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
 			temp.setDirection(Double.parseDouble(data[i * 6 + 5]));
-			playerList.add(temp);
-		    }
+		    
+			if (!data[i * 6 + 3].equals(player.getName()))
+			    player = temp; 
+			else 
+			    receivedPlayer = temp;
 		    i++;
 		}
 
@@ -107,13 +104,13 @@ public class ClientDrawing extends DrawingSurface
 		    while (j * 5 + 4 < data.length)
 		    {
 			Player temp = player;
-			for(Player p : playerList)
-			{
-			    if(p.getName().equals(data[j*5+4]))
+			    if(player.getName().equals(data[j*5+4]))
 			    {
-				temp = p;
+				temp = player;
 			    }
-			}
+			    else {
+				temp = receivedPlayer;
+			    }
 			
 			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]), Double.parseDouble(data[j * 5 + 3]), temp);
 			bulletList.add(b);
@@ -137,10 +134,7 @@ public class ClientDrawing extends DrawingSurface
 	    noLoop();
 	}
 
-	for (int i = 0; i < playerList.size(); i++)
-	{
-	    playerList.get(i).draw(this);
-	}
+	receivedPlayer.draw(this);
 	
 	for (Bullet b : bulletList)
 	{
