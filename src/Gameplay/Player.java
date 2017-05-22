@@ -176,11 +176,10 @@ public class Player
 
     public boolean isHit(Bullet b)
     {
-	if (!b.getPlayer().equals(this))
+	if (!b.getPlayer().getName().equals(getName()))
 	{
 	    if (b.intersects(lines[0]) || b.intersects(lines[1]) || b.intersects(lines[2]) || b.intersects(lines[3]))
 	    {
-		System.out.println("HELLO");
 		return true;
 	    }
 	    else

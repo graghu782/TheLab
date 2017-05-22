@@ -80,8 +80,6 @@ public class ClientDrawing extends DrawingSurface
 			temp.setDirection(Double.parseDouble(data[i * 6 + 5]));
 			playerList.add(temp);
 		    }
-		    
-		    player.setHealth((int)Double.parseDouble(data[4]));
 		    i++;
 		}
 
