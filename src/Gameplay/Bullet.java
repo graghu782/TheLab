@@ -10,8 +10,6 @@ public class Bullet extends Line
     private final double SPEED = 40;
     double xTemp;
     double yTemp;
-    double xo;
-    double yo;
     double direction;
     Player player;
 
@@ -46,8 +44,6 @@ public class Bullet extends Line
 	player = p;
 	this.direction = direction;
 	iters = 0;
-	xo = x;
-	yo = y;
 	xTemp = Math.cos(direction);
 	yTemp = Math.sin(direction);
     }
@@ -87,15 +83,6 @@ public class Bullet extends Line
 	return iters;
     }
 
-    public double getX()
-    {
-	return xo;
-    }
-
-    public double getY()
-    {
-	return yo;
-    }
 
     public double getXCoord() 
     {
@@ -112,11 +99,5 @@ public class Bullet extends Line
 	return direction;
     }
     
-    public void update(double mn, double mb)
-    {
-	x += xo - mn;
-	xo = mn;
-	y += yo - mb;
-	yo = mb;
-    }
+  
 }

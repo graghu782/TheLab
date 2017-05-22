@@ -262,7 +262,6 @@ public class Player
 	for (Bullet b : bullets)
 	{
 	    b.draw(drawer);
-	    b.update(mainX, mainY);
 	}
 	
 	if (bullets.size() > 0)
