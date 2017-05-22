@@ -52,7 +52,7 @@ public class DrawingSurface extends PApplet
     public void setup()
     {
 	background(255);
-	img = loadImage("background.bmp");
+	img = loadImage("background.png");
 	player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
 
