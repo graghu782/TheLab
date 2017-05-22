@@ -117,7 +117,7 @@ public class ServerDrawing extends DrawingSurface
 	    
 	    sendPlayerInfo();
 	    sendTimerInfo();
-	    sendBulletInfo();
+	    sendBulletInfo(); 
 	}
 
 	for(int i = 0; i < players.length; i++) 
