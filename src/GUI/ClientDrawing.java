@@ -106,7 +106,7 @@ public class ClientDrawing extends DrawingSurface
 		    bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
 		    data = bulletData.split(":");
 		    bulletList.clear();
-
+		    System.out.println(bulletData);
 		    int j = 0;
 		    while (i * 4 + 3 < data.length)
 		    {
@@ -139,7 +139,7 @@ public class ClientDrawing extends DrawingSurface
 	
 	for (Bullet b : bulletList)
 	{
-	    if(!b.getPlayer().getName().equals(player.getName()))
+//	    if(!b.getPlayer().getName().equals(player.getName()))
 	    b.draw(this);
 	}
 
