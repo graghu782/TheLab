@@ -57,7 +57,7 @@ public class DrawingSurface extends PApplet
 	player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
 
-	frameRate(20);
+	frameRate(180);
 	
 	obstacles = new Obstacle[1];
 	obstacles[0] = new Obstacle(400, 0, 420, 800);
