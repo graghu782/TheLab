@@ -54,7 +54,7 @@ public class Bullet extends Line
 
     public void draw(PApplet drawer)
     {
-	
+	drawer.stroke(100, 255, 0);
 	double mn = -player.getMainX()+drawer.width/2;
 	double mb = -player.getMainY()+drawer.height/2;
 	
@@ -65,7 +65,7 @@ public class Bullet extends Line
 	
 	double xTemp1 = x + mn + (20 * xTemp);
 	double yTemp1 = y + mb + (20 * yTemp);
-	drawer.strokeWeight(1); 
+	drawer.strokeWeight(2); 
 	drawer.line((float)(x + mn), (float)(y +mb), (float) (xTemp1), (float) (yTemp1));
 
 	//super.draw(drawer);
@@ -74,6 +74,7 @@ public class Bullet extends Line
 	y = y + (SPEED * yTemp);
 	}
 	iters++;
+	drawer.stroke(0);
     }
 
     public Player getPlayer()
