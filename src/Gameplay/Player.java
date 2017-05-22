@@ -58,6 +58,10 @@ public class Player
 	mouseYChange = 0;
 
 	lines = new Line[4];
+	lines[0] = new Line(0-x,0-y,10-x,10-y);
+	lines[1] = new Line(0-x,0-y,10-x,10-y);
+	lines[2] = new Line(0-x,0-y,10-x,10-y);
+	lines[3] = new Line(0-x,0-y,10-x,10-y);
 	bullets = new ArrayList<Bullet>();
 	hud = new Hud(name);
 	ammo = 16;
