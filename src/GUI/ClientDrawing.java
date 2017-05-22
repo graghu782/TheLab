@@ -2,6 +2,8 @@ package GUI;
 
 import java.util.ArrayList;
 
+import javax.xml.transform.ErrorListener;
+
 import Gameplay.Border;
 import Gameplay.Bullet;
 import Gameplay.Player;
@@ -33,7 +35,7 @@ public class ClientDrawing extends DrawingSurface
     {
 	super();
 	timeRemaining = 100;	
-	
+
 	bulletList = new ArrayList<Bullet>();
 	this.IP = IP;
 	this.playerName = playerName;
@@ -58,7 +60,7 @@ public class ClientDrawing extends DrawingSurface
 	pushMatrix();
 
 	super.draw();
-	
+
 	if (c.available() > 0)
 	{
 	    input = c.readString();
@@ -72,14 +74,21 @@ public class ClientDrawing extends DrawingSurface
 		int i = 0;
 		while (i * 6 + 5 < data.length)
 		{
-			Player temp = new Player(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]), data[i * 6 + 3], false);
-			temp.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
-			temp.setDirection(Double.parseDouble(data[i * 6 + 5]));
-		    
-			if (!data[i * 6 + 3].equals(player.getName()))
-			    player = temp; 
-			else 
-			    receivedPlayer = temp;
+		    if(data[i*6+3].equals(player.getName())) {
+			player.update(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]));
+			player.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
+			player.setDirection(Double.parseDouble(data[i * 6 + 5]));
+		    }
+		    else {
+			if(receivedPlayer != null) {
+			    receivedPlayer.update(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]));
+			}
+			else {
+			    receivedPlayer = new Player(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]), data[i*6+3], false);			    
+			}
+			receivedPlayer.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
+			receivedPlayer.setDirection(Double.parseDouble(data[i * 6 + 5]));
+		    }
 		    i++;
 		}
 
@@ -104,14 +113,14 @@ public class ClientDrawing extends DrawingSurface
 		    while (j * 5 + 4 < data.length)
 		    {
 			Player temp = player;
-			    if(player.getName().equals(data[j*5+4]))
-			    {
-				temp = player;
-			    }
-			    else {
-				temp = receivedPlayer;
-			    }
-			
+			if(player.getName().equals(data[j*5+4]))
+			{
+			    temp = player;
+			}
+			else {
+			    temp = receivedPlayer;
+			}
+
 			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]), Double.parseDouble(data[j * 5 + 3]), temp);
 			bulletList.add(b);
 			j++;
@@ -134,14 +143,16 @@ public class ClientDrawing extends DrawingSurface
 	    noLoop();
 	}
 
-	receivedPlayer.draw(this);
-	
+	if(receivedPlayer != null) {
+	    receivedPlayer.draw(this);
+	}
+
 	for (Bullet b : bulletList)
 	{
 	    if(!b.getPlayer().getName().equals(player.getName()))
 		b.draw(this);
 	}
-	
+
 	sendPlayerInfo();
 
 	if (player.getBullets().size() != 0)

@@ -117,7 +117,8 @@ public class ServerDrawing extends DrawingSurface
 	    }
 	}
 
-	receivedPlayer.draw(this);
+	if(receivedPlayer != null)
+	    receivedPlayer.draw(this);
 
 	checkBullets();
 
@@ -135,7 +136,7 @@ public class ServerDrawing extends DrawingSurface
 
 	if (receivedPlayer != null)
 	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName()
-		    + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":");
+	    + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":");
 
 	s.write("#");
     }
@@ -154,12 +155,13 @@ public class ServerDrawing extends DrawingSurface
 		    + player.getName() + ":");
 	}
 
-	for (Bullet b : receivedPlayer.getBullets())
-	{
-	    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":"
-		    + receivedPlayer.getName() + ":");
+	if(receivedPlayer != null) {
+	    for (Bullet b : receivedPlayer.getBullets())
+	    {
+		s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":"
+			+ receivedPlayer.getName() + ":");
+	    }
 	}
-
 	s.write("#");
     }
 
