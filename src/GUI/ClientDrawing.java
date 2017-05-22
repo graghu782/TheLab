@@ -106,7 +106,6 @@ public class ClientDrawing extends DrawingSurface
 		    bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
 		    data = bulletData.split(":");
 		    bulletList.clear();
-		    System.out.println(bulletData);
 		    int j = 0;
 		    while (i * 4 + 3 < data.length)
 		    {
