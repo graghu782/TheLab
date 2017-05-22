@@ -107,9 +107,18 @@ public class ClientDrawing extends DrawingSurface
 		    data = bulletData.split(":");
 		    bulletList.clear();
 		    int j = 0;
-		    while (i * 4 + 3 < data.length)
+		    while (j * 5 + 4 < data.length)
 		    {
-			Bullet b = new Bullet(Double.parseDouble(data[j * 4 + 1]), Double.parseDouble(data[j * 4 + 2]), Double.parseDouble(data[j * 4 + 3]), player);
+			Player temp = player;
+			for(Player p : playerList)
+			{
+			    if(p.getName().equals(data[j*5+4]))
+			    {
+				temp = p;
+			    }
+			}
+			
+			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]), Double.parseDouble(data[j * 5 + 3]), temp);
 			bulletList.add(b);
 			j++;
 		    }
@@ -138,8 +147,8 @@ public class ClientDrawing extends DrawingSurface
 	
 	for (Bullet b : bulletList)
 	{
-//	    if(!b.getPlayer().getName().equals(player.getName()))
-	    b.draw(this);
+	    if(!b.getPlayer().getName().equals(player.getName()))
+		b.draw(this);
 	}
 
 	popMatrix();
