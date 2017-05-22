@@ -33,6 +33,7 @@ public class ClientDrawing extends DrawingSurface
     public ClientDrawing(String IP, String playerName)
     {
 	super();
+	timeRemaining = 100;
 	playerList = new ArrayList<Player>();
 	players[0] = player;
 	
