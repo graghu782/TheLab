@@ -25,7 +25,6 @@ public class DrawingSurface extends PApplet
     public static final int MAP_HEIGHT = 1800;
     protected int count;
     protected double x, y;
-    protected Player[] players;
 
     protected String IP;
     protected String playerName;

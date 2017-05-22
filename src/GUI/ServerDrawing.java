@@ -18,6 +18,7 @@ public class ServerDrawing extends DrawingSurface
     private String data[];
     private String bulletData;
     private String playerData;
+    private Player clientPlayer;
     
     private Timer timeRemaining;
     private int interval;
@@ -40,7 +41,6 @@ public class ServerDrawing extends DrawingSurface
     public void setup()
     {
 	super.setup();
-	players[0] = player;
 	s = new Server(this, 4444);
 	
 	interval = 180;
@@ -90,9 +90,9 @@ public class ServerDrawing extends DrawingSurface
 			playerData = input.substring(0, input.indexOf("#"));
 			data = playerData.split(":");
 			
-			players[i + 1] = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);   
-			players[i + 1].setHealth((int)Double.parseDouble(data[4]));
-			players[i + 1].setDirection(Double.parseDouble(data[5])); 
+			clientPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);   
+			clientPlayer.setHealth((int)Double.parseDouble(data[4]));
+			clientPlayer.setDirection(Double.parseDouble(data[5])); 
 			
 			input = input.substring(input.indexOf("#") + 1);
 			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
@@ -101,8 +101,8 @@ public class ServerDrawing extends DrawingSurface
 			int j = 0;
 			while(j*4+3 < data.length)
 			{
-			    Bullet b = new Bullet(Double.parseDouble(data[j*4+1]), Double.parseDouble(data[j*4+2]), Double.parseDouble(data[j*4+3]), players[i + 1]);
-			    players[i + 1].addBullet(b);
+			    Bullet b = new Bullet(Double.parseDouble(data[j*4+1]), Double.parseDouble(data[j*4+2]), Double.parseDouble(data[j*4+3]), clientPlayer);
+			    clientPlayer.addBullet(b);
 			    
 			    j++;
 			}
@@ -114,13 +114,7 @@ public class ServerDrawing extends DrawingSurface
 	    }
 	}
 
-	for(int i = 1; i < players.length; i++) 
-	{
-	    if(players[i] != null) 
-	    {
-		players[i].draw(this);
-	    }
-	}
+	clientPlayer.draw(this);
 	
 	checkBullets();
 	
@@ -135,6 +129,9 @@ public class ServerDrawing extends DrawingSurface
     {
 	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
 
+	if(clientPlayer != null)
+	    s.write("playerinfo" + ":" + players[i].getX() + ":" + players[i].getY() + ":" + players[i].getName() + ":" + players[i].getHealth() + ":" + players[i].getDirection() + ":");
+	    
 	for(int i = 1; i < s.clientCount + 1; i++) 
 	{
 	    if(players[i] != null) 
