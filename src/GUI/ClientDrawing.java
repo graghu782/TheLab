@@ -34,6 +34,8 @@ public class ClientDrawing extends DrawingSurface
     {
 	super();
 	playerList = new ArrayList<Player>();
+	players[0] = player;
+	
 	bulletList = new ArrayList<Bullet>();
 	this.IP = IP;
 	this.playerName = playerName;
@@ -155,7 +157,7 @@ public class ClientDrawing extends DrawingSurface
 
     public void sendPlayerInfo()
     {
-	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getDirection() + ":");
+	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
 	c.write("#");
     }
 

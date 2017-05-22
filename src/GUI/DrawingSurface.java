@@ -228,6 +228,7 @@ public class DrawingSurface extends PApplet
 			{
 			    player.getBullets().remove(i);
 			    players[x].decHealth(10);
+			    //System.out.println("Test 1: " + players[x].getHealth());
 			}
 		    }
 		}
