@@ -38,11 +38,11 @@ public class Bullet extends Line
     public Bullet(double x, double y, double direction, Player p)
 
     {
-	//double xs = -player.getMainX() + drawer.width / 2 - player.getWidth() / 2;
-	//double ys = -player.getMainY() + drawer.height / 2 - player.getHeight() / 2;
-	super(x + 400-p.getX(),y + 300-p.getY(),  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
+//	super(x + 400-p.getX(),y + 300-p.getY(),  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 	//super(400 - p.getMainX() + x , 300 -p.getMainY()+y,  Math.cos(direction) *LENGTH+400 - p.getMainX() + x, Math.sin(direction)*LENGTH+300 -p.getMainY()+y);
 
+	super(x,y,Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
+	
 	player = p;
 	this.direction = direction;
 	iters = 0;
@@ -55,8 +55,8 @@ public class Bullet extends Line
     public void draw(PApplet drawer)
     {
 	
-	double mn = -player.getMainX()+player.getMainX();
-	double mb = -player.getMainY()+player.getMainY();
+	double mn = -player.getMainX()+drawer.width/2;
+	double mb = -player.getMainY()+drawer.height/2;
 	
 	double xTemp2 =  x + (LENGTH * xTemp);
 	double yTemp2 =  y + (LENGTH * yTemp);
