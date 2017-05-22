@@ -139,6 +139,7 @@ public class ClientDrawing extends DrawingSurface
 	
 	for (Bullet b : bulletList)
 	{
+	    if(!b.getPlayer().getName().equals(player.getName()))
 	    b.draw(this);
 	}
 

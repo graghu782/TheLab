@@ -35,8 +35,6 @@ public class Bullet extends Line
     }
     */
 
-
-    
     public Bullet(double x, double y, double direction, Player p)
 
     {
@@ -54,38 +52,26 @@ public class Bullet extends Line
 	yTemp = Math.sin(direction);
     }
 
-     
-
-
-
-
-
-
-
     public void draw(PApplet drawer)
     {
 	
 	double mn = -player.getMainX()+player.getMainX();
 	double mb = -player.getMainY()+player.getMainY();
 	
-	
-	
-	double xTemp2 =  + x + (LENGTH * xTemp);
-
-	double yTemp2 =  + y + (LENGTH * yTemp);
-	
+	double xTemp2 =  x + (LENGTH * xTemp);
+	double yTemp2 =  y + (LENGTH * yTemp);
 	
 	super.setPoint2((float) xTemp2, (float) yTemp2);
 	
-	double xTemp1 = x +mn  + (20 * xTemp);
-	double yTemp1 = y +mb  + (20 * yTemp);
+	double xTemp1 = x + mn + (20 * xTemp);
+	double yTemp1 = y + mb + (20 * yTemp);
 	drawer.strokeWeight(1); 
 	drawer.line((float)(x + mn), (float)(y +mb), (float) (xTemp1), (float) (yTemp1));
 
 	//super.draw(drawer);
 	{
-	x =   +x + (SPEED * xTemp);
-	y =   +y + (SPEED * yTemp);
+	x = x + (SPEED * xTemp);
+	y = y + (SPEED * yTemp);
 	}
 	iters++;
     }
@@ -110,20 +96,21 @@ public class Bullet extends Line
 	return yo;
     }
 
-    public double getXCoord() {
+    public double getXCoord() 
+    {
 	return x;
     }
 
-    public double getYCoord() {
+    public double getYCoord() 
+    {
 	return y;
     }
 
-    public double getDirection() {
+    public double getDirection() 
+    {
 	return direction;
     }
-
-
-
+    
     public void update(double mn, double mb)
     {
 	x += xo - mn;

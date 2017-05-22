@@ -113,7 +113,7 @@ public class ServerDrawing extends DrawingSurface
 		}
 	    }
 	    
-	   // checkBullets();
+	    checkBullets();
 	    
 	    sendPlayerInfo();
 	    sendTimerInfo();
@@ -125,10 +125,6 @@ public class ServerDrawing extends DrawingSurface
 	    if(players[i] != null) 
 	    {
 		players[i].draw(this);
-		for(Bullet b : players[i].getBullets())
-		{
-		    b.draw(this);
-		}
 	    }
 	}
 

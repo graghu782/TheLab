@@ -119,7 +119,8 @@ public class Player
 	return name;
     }
     
-    public void changeName(String name) {
+    public void changeName(String name) 
+    {
 	this.name = name;
     }
     
@@ -192,7 +193,9 @@ public class Player
     {
 	return health;
     }
-    public void updateMain(){
+    
+    public void updateMain()
+    {
 	if (isMain)
 	{
 	    mainX = x;
@@ -249,9 +252,10 @@ public class Player
 	    b.draw(drawer);
 	    b.update(mainX, mainY);
 	}
+	
 	if (bullets.size() > 0)
 	{
-	    if (bullets.get(0).getIs() >= 16)
+	    if (bullets.get(0).getIs() >= 100)
 		bullets.remove(0);
 	}
 
@@ -260,8 +264,6 @@ public class Player
 	{
 	    direction += Math.PI;
 	}
-
-	jnum = 1;
     }
 
 }
