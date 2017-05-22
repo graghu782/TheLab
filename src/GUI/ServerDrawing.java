@@ -175,6 +175,7 @@ public class ServerDrawing extends DrawingSurface
     
     public void checkBullets()
     {
+	/*
 	for(Player p : players)
 	{
 	    if(p != null)
@@ -193,5 +194,8 @@ public class ServerDrawing extends DrawingSurface
 		}
 	    }
 	}
+	*/
+	
+	super.checkBullets();
     }
 }
