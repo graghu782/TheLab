@@ -60,6 +60,8 @@ public class ClientDrawing extends DrawingSurface
 	pushMatrix();
 
 	super.draw();
+	
+	sendPlayerInfo();
 
 	if (c.available() > 0)
 	{
@@ -74,11 +76,7 @@ public class ClientDrawing extends DrawingSurface
 		int i = 0;
 		while (i * 6 + 5 < data.length)
 		{
-		    if(data[i*6+3].equals(player.getName())) {
-			player.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
-			player.setDirection(Double.parseDouble(data[i * 6 + 5]));
-		    }
-		    else {
+		    if(!data[i*6+3].equals(player.getName())){
 			if(receivedPlayer != null) {
 			    receivedPlayer.update(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]));
 			}
@@ -151,8 +149,6 @@ public class ClientDrawing extends DrawingSurface
 	    if(!b.getPlayer().getName().equals(player.getName()))
 		b.draw(this);
 	}
-
-	sendPlayerInfo();
 
 	if (player.getBullets().size() != 0)
 	    sendBulletInfo();
