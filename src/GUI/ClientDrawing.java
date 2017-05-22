@@ -155,7 +155,7 @@ public class ClientDrawing extends DrawingSurface
     {
 	for (Bullet b : player.getBullets())
 	{
-	    c.write("bulletinfo" + ":" + b.getX() + ":" + b.getY() + ":" + b.getDirection() + ":");
+	    c.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":");
 	}
 
 	c.write("#");
