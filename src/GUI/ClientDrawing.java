@@ -79,7 +79,6 @@ public class ClientDrawing extends DrawingSurface
 		int i = 0;
 		while (i * 6 + 5 < data.length)
 		{
-		    
 		    try
 		    {
 		   	if (!data[i * 7 + 3].equals(player.getName()))
@@ -100,7 +99,13 @@ public class ClientDrawing extends DrawingSurface
 		   	i++;
 		    }
 		    catch(NumberFormatException e)
-		    {System.out.println("Error");}	
+		    {
+			for(int k = 0; k < data.length; k++)
+			{
+				System.out.print(data[k] + " ");
+			}
+			break;
+		    }	
 		}
 		if (player.getHealth() < 1)
 		{
@@ -125,7 +130,7 @@ public class ClientDrawing extends DrawingSurface
 
 		// Process Bullet info
 		input = input.substring(input.indexOf("#") + 1);
-		if (input.indexOf("bulletinfo") >= 0 && input.indexOf("#") >= 0)
+		if (input.indexOf("bulletinfo") >= 0 && input.indexOf("#") >= 0 && input.indexOf("#") > input.indexOf("bulletinfo"))
 		{
 		    bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
 		    data = bulletData.split(":");
