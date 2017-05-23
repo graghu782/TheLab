@@ -50,13 +50,13 @@ public class DrawingSurface extends PApplet
 
     public void setup()
     {
-	///double xxx = Math.random() * (MAP_WIDTH - 50);
+	double xxx = Math.random() * (MAP_WIDTH - 50);
 
-	///double yyy = Math.random() * (MAP_HEIGHT - 50);
+	double yyy = Math.random() * (MAP_HEIGHT - 50);
 	
 	background(255);
 	img = loadImage("background.png");
-	player = new Player(0, 0, playerName, true);
+	player = new Player(xxx,yyy, playerName, true);
 	border = new Border(0, 0, 10, 10);
 
 	frameRate(20);
