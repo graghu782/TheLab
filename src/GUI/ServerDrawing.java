@@ -113,6 +113,7 @@ public class ServerDrawing extends DrawingSurface
 		}
 		catch (Exception e)
 		{
+		    //System.out.println("ServerError!");
 		}
 	    }
 	}
@@ -131,12 +132,10 @@ public class ServerDrawing extends DrawingSurface
 
     public void sendPlayerInfo()
     {
-	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":"
-		+ player.getHealth() + ":" + player.getDirection() + ":");
+	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
 
 	if (receivedPlayer != null)
-	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName()
-	    + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":");
+	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName() + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":");
 
 	s.write("#");
     }
@@ -151,15 +150,13 @@ public class ServerDrawing extends DrawingSurface
     {
 	for (Bullet b : player.getBullets())
 	{
-	    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":"
-		    + player.getName() + ":");
+	    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + player.getName() + ":");
 	}
 
 	if(receivedPlayer != null) {
 	    for (Bullet b : receivedPlayer.getBullets())
 	    {
-		s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":"
-			+ receivedPlayer.getName() + ":");
+		s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + receivedPlayer.getName() + ":");
 	    }
 	}
 	s.write("#");
@@ -167,7 +164,25 @@ public class ServerDrawing extends DrawingSurface
 
     public void checkBullets()
     {
-	super.checkBullets(player);
-	super.checkBullets(receivedPlayer);
-    }
+	for(int i = 0; i < player.getBullets().size(); i++)
+	{
+	    if(receivedPlayer != null && receivedPlayer.isHit(player.getBullets().get(i)))
+	    {
+		receivedPlayer.decHealth(10);
+		player.getBullets().remove(player.getBullets().get(i));
+	    }
+	}
+	
+	if(receivedPlayer != null)
+	{
+	    for(int i = 0; i < receivedPlayer.getBullets().size(); i++)
+	    {
+		if(player.isHit(receivedPlayer.getBullets().get(i)))
+		{
+		    player.decHealth(10);
+		    receivedPlayer.getBullets().remove(receivedPlayer.getBullets().get(i));
+		}
+	    }
+	}
+    }	
 }

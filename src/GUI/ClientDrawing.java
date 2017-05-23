@@ -122,7 +122,7 @@ public class ClientDrawing extends DrawingSurface
 	    }
 	    catch (Exception e)
 	    {
-
+		System.out.println("ClientError!");
 	    }
 	}
 
