@@ -23,6 +23,7 @@ public class ServerDrawing extends DrawingSurface
     private Timer timeRemaining;
     private int interval;
     private int eliminations;
+    private boolean sendEliminated;
 
     public ServerDrawing()
     {
@@ -64,6 +65,7 @@ public class ServerDrawing extends DrawingSurface
 	super.draw();
 
 	fill(0);
+	text("Eliminations: " + eliminations, 675, 525);
 	text("Time remaining: " + interval, 675, 550);
 	if (interval < 1)
 	{
@@ -93,6 +95,11 @@ public class ServerDrawing extends DrawingSurface
 			receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);
 			receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
 			receivedPlayer.setDirection(Double.parseDouble(data[5]));
+			
+			if(data[6].equals("true"))
+			{
+			    eliminations++;
+			}
 
 			input = input.substring(input.indexOf("#") + 1);
 			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
@@ -114,6 +121,12 @@ public class ServerDrawing extends DrawingSurface
 		}
 	    }
 	}
+	
+	if(player.getHealth() < 1)
+	{
+	    player = new Player(0, 0, playerName, true);
+	    sendEliminated  = true;
+	}
 
 	if(receivedPlayer != null)
 	    receivedPlayer.draw(this);
@@ -129,10 +142,14 @@ public class ServerDrawing extends DrawingSurface
 
     public void sendPlayerInfo()
     {
-	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":");
+	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":");
+	if(sendEliminated)
+	{
+	    sendEliminated = false;
+	}
 
 	if (receivedPlayer != null)
-	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName() + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":");
+	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName() + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":" + sendEliminated + ":");
 
 	s.write("#");
     }

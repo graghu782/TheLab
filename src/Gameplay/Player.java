@@ -26,6 +26,7 @@ public class Player
     private int health;
     private int jnum;
     private int ammo;
+    private int eliminations;
     
     double mouseXChange, mouseYChange;
 
@@ -92,12 +93,6 @@ public class Player
     {
 	return mainY;
     }
-
-    public void update(double x, double y) 
-    {
-	this.x = x;
-	this.y = y;
-    }
     
     public void fire()
     {
@@ -128,12 +123,7 @@ public class Player
     {
 	return name;
     }
-    
-    public void changeName(String name) 
-    {
-	this.name = name;
-    }
-    
+
     public void changeAmmo(int num)
     {
 	ammo += num;
