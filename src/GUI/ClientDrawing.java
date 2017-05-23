@@ -26,6 +26,8 @@ public class ClientDrawing extends DrawingSurface
     private int timeRemaining;
     private int eliminations;
     private int seliminations;
+    
+    private int prevHealth;
 
     private boolean sendEliminated;
 
@@ -113,7 +115,12 @@ public class ClientDrawing extends DrawingSurface
 			}
 			else
 			{
-			    player.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
+			    if(player.getHealth() == prevHealth)
+				player.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
+			    else
+			    {
+				prevHealth = player.getHealth();
+			    }
 			}
 			i++;
 		    }
