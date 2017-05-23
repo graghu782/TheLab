@@ -7,6 +7,13 @@ import processing.core.PApplet;
 public class Border 
 {
     double x, y, x2, y2;
+    /**
+     * creates a border that wraps around the playing field
+     * @param x x coord of top left
+     * @param y y coord of top left
+     * @param x2 x coord of bottom right
+     * @param y2 y coord of bottom right
+     */
     public Border(double x, double y, double x2, double y2)
     {
 	this.x = x;
