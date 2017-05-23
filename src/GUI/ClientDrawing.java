@@ -77,7 +77,7 @@ public class ClientDrawing extends DrawingSurface
 		data = playerData.split(":");
 
 		int i = 0;
-		while (i * 6 + 5 < data.length)
+		while (i * 7 + 5 < data.length)
 		{
 		    try
 		    {
