@@ -12,26 +12,26 @@ import kim.shapes.Line;
 /**
  * a player for the game
  * @author david
- * @param x x coord
- * @param y y coord
- * @param width width of player
- * @param height height of player
- * @param xCenter x center of player
- * @param yCenter y center of player
- * @param direction direction of player
- * @param name name of player
- * @param health health of player
- * @param jNum animation number
- * @param ammo overheat of the gun
- * @param eliminations number of kills
- * @param mouseXChange change of mouse x coord
- * @param mouseYChange change of mouse y coord
- * @param john player image
- * @param lines hitbox of player
- * @param bullets bullets player shot
- * @param hud player hud
- * @param mainX main player x
- * @param mainY main player y
+ * @field x x coord
+ * @field y y coord
+ * @field width width of player
+ * @field height height of player
+ * @field xCenter x center of player
+ * @field yCenter y center of player
+ * @field direction direction of player
+ * @field name name of player
+ * @field health health of player
+ * @field jNum animation number
+ * @field ammo overheat of the gun
+ * @field eliminations number of kills
+ * @field mouseXChange change of mouse x coord
+ * @field mouseYChange change of mouse y coord
+ * @field john player image
+ * @field lines hitbox of player
+ * @field bullets bullets player shot
+ * @field hud player hud
+ * @field mainX main player x
+ * @field mainY main player y
  */
 public class Player
 {
@@ -60,6 +60,7 @@ public class Player
     private Hud hud;
 
     private static double mainX, mainY;
+    
 /**
  * creates a player at x,y, with name name and checks to see if is main character
  * @param x x coord of player
@@ -99,6 +100,7 @@ public class Player
 	// spriteRects = new Rect[2];
 	// spriteRects[0] = new rect(0,99,41,46);
     }
+    
     /**
      * moves the player by x,y
      * @param x x-change
@@ -109,6 +111,7 @@ public class Player
 	this.x += x;
 	this.y += y;
     }
+    
     /**
      * moves the player to x,y
      * @param x x-change
@@ -119,6 +122,7 @@ public class Player
 	this.x = x;
 	this.y = y;
     }
+    
     /**
      * returns main character x
      * @return mainX
@@ -127,6 +131,7 @@ public class Player
     {
 	return mainX;
     }
+    
     /**
      * returns main character y
      * @return mainY
@@ -135,6 +140,7 @@ public class Player
     {
 	return mainY;
     }
+    
     /**
      * creates a new bullet firing at direction of player
      */
@@ -155,6 +161,7 @@ public class Player
     {
 	jnum = num;
     }
+    
 /**
  * returns the bullets array
  * @return bullets
@@ -163,6 +170,7 @@ public class Player
     {
 	return bullets;
     }
+    
     /**
      * adds a bullet to bullets
      * @param b bullet to add to bullets
@@ -171,6 +179,7 @@ public class Player
     {
 	bullets.add(b);
     }
+    
     /**
      * returns name of character	
      * @return name
@@ -179,6 +188,7 @@ public class Player
     {
 	return name;
     }
+    
 /**
  *  number of ammo
  * @param num ammo
@@ -187,6 +197,7 @@ public class Player
     {
 	ammo += num;
     }
+    
     /**
      * ammo of player
      * @return ammo
@@ -195,6 +206,7 @@ public class Player
     {
 	return ammo;
     }
+    
 /**
  * returns x coord of player
  * @return x
@@ -203,6 +215,7 @@ public class Player
     {
 	return x;
     }
+    
 /**
  * returns y coord of player
  * @return y
@@ -211,6 +224,7 @@ public class Player
     {
 	return y;
     }
+    
 /**
  * returns width of player
  * @return width
@@ -219,6 +233,7 @@ public class Player
     {
 	return width;
     }
+    
 /**
  * returns height of player
  * @return height
@@ -227,6 +242,7 @@ public class Player
     {
 	return height;
     }
+    
     /**
      * sets direction to d
      * @param d direction
@@ -235,6 +251,7 @@ public class Player
     {
 	direction = d;
     }
+    
 /**
  * returns direction of person
  * @return direction
@@ -243,6 +260,7 @@ public class Player
     {
 	return direction;
     }
+    
 /**
  * checks to see if bullet is hitting player
  * @param b bullet
@@ -262,6 +280,7 @@ public class Player
 	else
 	    return false;
     }
+    
 /**
  * decreases health of player by num
  * @param num num to decrease health by
@@ -270,6 +289,7 @@ public class Player
     {
 	health -= num;
     }
+    
     /**
      * sets health to num
      * @param num num to set health to
@@ -278,6 +298,7 @@ public class Player
     {
 	health = num;
     }
+    
 /**
  * returns health of player
  * @return health
@@ -286,6 +307,7 @@ public class Player
     {
 	return health;
     }
+    
     /**
      * updates main characters coordinates
      */
@@ -297,6 +319,7 @@ public class Player
 	    mainY = y;
 	}
     }
+    
 /**
  * draws the player
  * @param drawer pApplet used to draw the player

@@ -23,24 +23,6 @@ public class Bullet extends Line
     Player player;
 
     private int iters;
-
-/*
-    public Bullet(double xCoord, double yCoord, double direction, double x, double y, Player p)
-
-    {
-	super(xCoord, yCoord, Math.cos(direction) *LENGTH+xCoord, Math.sin(direction)*LENGTH+yCoord);
-	player = p;
-	this.direction = direction;
-	iters = 0;
-	xo = x;
-	yo = y;
-	xTemp = Math.cos(direction);
-	yTemp = Math.sin(direction);
-	//super.setPoint2((float)xTemp, (float)yTemp);
-
-	//System.out.println(x + " " + y + " " + xTemp*LENGTH + " " + yTemp*LENGTH);
-    }
-    */
 /**
  * creates a bullet with coordinates at x,y, with direction of direction, belonging to player p
  *  @param x x-coordinate of bullet
@@ -49,11 +31,7 @@ public class Bullet extends Line
  *  @param p what player the bullet belongs to
  */
     public Bullet(double x, double y, double direction, Player p)
-
     {
-//	super(x + 400-p.getX(),y + 300-p.getY(),  Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
-	//super(400 - p.getMainX() + x , 300 -p.getMainY()+y,  Math.cos(direction) *LENGTH+400 - p.getMainX() + x, Math.sin(direction)*LENGTH+300 -p.getMainY()+y);
-
 	super(x,y,Math.cos(direction) *LENGTH+x, Math.sin(direction)*LENGTH+y);
 	
 	player = p;

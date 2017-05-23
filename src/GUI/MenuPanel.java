@@ -5,8 +5,6 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Networking.Server;
-
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 

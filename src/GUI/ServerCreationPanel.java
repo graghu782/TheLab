@@ -11,7 +11,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import javax.swing.*;
-import Networking.Server;
 
 public class ServerCreationPanel extends JPanel implements ActionListener
 {

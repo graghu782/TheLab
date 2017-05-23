@@ -15,8 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Networking.Client;
-
 public class ServerJoinPanel extends JPanel implements ActionListener
 {
     private Main w;
