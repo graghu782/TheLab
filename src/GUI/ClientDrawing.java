@@ -25,7 +25,7 @@ public class ClientDrawing extends DrawingSurface
     private ArrayList<Bullet> bulletList;
     private int timeRemaining;
     private int eliminations;
-    
+
     private boolean sendEliminated;
 
     public ClientDrawing()
@@ -36,7 +36,7 @@ public class ClientDrawing extends DrawingSurface
     public ClientDrawing(String IP, String playerName)
     {
 	super();
-	timeRemaining = 100;	
+	timeRemaining = 100;
 
 	bulletList = new ArrayList<Bullet>();
 	this.IP = IP;
@@ -69,34 +69,36 @@ public class ClientDrawing extends DrawingSurface
 	{
 	    input = c.readString();
 
-	    //try
-	    //{
-		// Process Player info
+	    // Process Player info
+	    if (input.indexOf("#") >= 0)
+	    {
+
 		playerData = input.substring(0, input.indexOf("#"));
 		data = playerData.split(":");
 
 		int i = 0;
 		while (i * 6 + 5 < data.length)
 		{
-		    if(!data[i*7+3].equals(player.getName()))
+		    if (!data[i * 7 + 3].equals(player.getName()))
 		    {
-			receivedPlayer = new Player(Double.parseDouble(data[i * 7 + 1]), Double.parseDouble(data[i * 7 + 2]), data[i*7+3], false);			    
+			receivedPlayer = new Player(Double.parseDouble(data[i * 7 + 1]),
+				Double.parseDouble(data[i * 7 + 2]), data[i * 7 + 3], false);
 			receivedPlayer.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
 			receivedPlayer.setDirection(Double.parseDouble(data[i * 7 + 5]));
-			
-			if(data[i * 7 + 6].equals("true"))
+
+			if (data[i * 7 + 6].equals("true"))
 			{
 			    eliminations++;
 			}
 		    }
 		    else
 		    {
-			player.setHealth((int)Double.parseDouble(data[i * 7 + 4]));
+			player.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
 		    }
 		    i++;
 		}
-		
-		if(player.getHealth() < 1)
+
+		if (player.getHealth() < 1)
 		{
 		    player = new Player(1200, 900, playerName, true);
 		    sendEliminated = true;
@@ -123,26 +125,23 @@ public class ClientDrawing extends DrawingSurface
 		    while (j * 5 + 4 < data.length)
 		    {
 			Player temp = player;
-			if(player.getName().equals(data[j*5+4]))
+			if (player.getName().equals(data[j * 5 + 4]))
 			{
 			    temp = player;
 			}
-			else 
+			else
 			{
 			    temp = receivedPlayer;
 			}
 
-			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]), Double.parseDouble(data[j * 5 + 3]), temp);
+			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]),
+				Double.parseDouble(data[j * 5 + 3]), temp);
 			bulletList.add(b);
 			j++;
 		    }
 		}
 	    }
-	   // catch (Exception e)
-	    //{
-	//	System.out.println("ClientError!");
-	    //}
-	//}
+	}
 
 	text("Eliminations: " + eliminations, 675, 525);
 	text("Time remaining: " + timeRemaining, 675, 550);
@@ -154,32 +153,33 @@ public class ClientDrawing extends DrawingSurface
 	    noLoop();
 	}
 
-	if(receivedPlayer != null) 
+	if (receivedPlayer != null)
 	{
 	    receivedPlayer.draw(this);
 	}
 
 	for (Bullet b : bulletList)
 	{
-	    if(!b.getPlayer().getName().equals(player.getName()))
+	    if (!b.getPlayer().getName().equals(player.getName()))
 		b.draw(this);
 	}
 
 	if (player.getBullets().size() != 0)
 	    sendBulletInfo();
-	
+
 	popMatrix();
     }
 
     public void sendPlayerInfo()
     {
-	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":");
-	
-	if(sendEliminated)
+	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":"
+		+ player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":");
+
+	if (sendEliminated)
 	{
 	    sendEliminated = false;
 	}
-	
+
 	c.write("#");
     }
 

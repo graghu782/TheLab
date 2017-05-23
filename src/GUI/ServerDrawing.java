@@ -85,23 +85,24 @@ public class ServerDrawing extends DrawingSurface
 	    {
 		input = s.clients[i].readString();
 
-		try
+		if (input != null)
 		{
-		    if (input != null)
+		    playerData = input.substring(0, input.indexOf("#"));
+		    data = playerData.split(":");
+
+		    receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);
+		    receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
+		    receivedPlayer.setDirection(Double.parseDouble(data[5]));
+
+		    if (data[6].equals("true"))
 		    {
-			playerData = input.substring(0, input.indexOf("#"));
-			data = playerData.split(":");
+			eliminations++;
+		    }
 
-			receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);
-			receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
-			receivedPlayer.setDirection(Double.parseDouble(data[5]));
-			
-			if(data[6].equals("true"))
-			{
-			    eliminations++;
-			}
+		    input = input.substring(input.indexOf("#") + 1);
 
-			input = input.substring(input.indexOf("#") + 1);
+		    if (input.indexOf("bulletinfo") >= 0)
+		    {
 			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
 			data = bulletData.split(":");
 
@@ -115,20 +116,17 @@ public class ServerDrawing extends DrawingSurface
 			}
 		    }
 		}
-		catch (Exception e)
-		{
-		    //System.out.println("ServerError!");
-		}
+
 	    }
 	}
-	
-	if(player.getHealth() < 1)
+
+	if (player.getHealth() < 1)
 	{
 	    player = new Player(0, 0, playerName, true);
-	    sendEliminated  = true;
+	    sendEliminated = true;
 	}
 
-	if(receivedPlayer != null)
+	if (receivedPlayer != null)
 	    receivedPlayer.draw(this);
 
 	checkBullets();
@@ -143,13 +141,15 @@ public class ServerDrawing extends DrawingSurface
     public void sendPlayerInfo()
     {
 	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":");
-	if(sendEliminated)
+	if (sendEliminated)
 	{
 	    sendEliminated = false;
 	}
 
 	if (receivedPlayer != null)
+	{
 	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName() + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":" + sendEliminated + ":");
+	}
 
 	s.write("#");
     }
@@ -167,7 +167,8 @@ public class ServerDrawing extends DrawingSurface
 	    s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + player.getName() + ":");
 	}
 
-	if(receivedPlayer != null) {
+	if (receivedPlayer != null)
+	{
 	    for (Bullet b : receivedPlayer.getBullets())
 	    {
 		s.write("bulletinfo" + ":" + b.getXCoord() + ":" + b.getYCoord() + ":" + b.getDirection() + ":" + receivedPlayer.getName() + ":");
@@ -178,25 +179,25 @@ public class ServerDrawing extends DrawingSurface
 
     public void checkBullets()
     {
-	for(int i = 0; i < player.getBullets().size(); i++)
+	for (int i = 0; i < player.getBullets().size(); i++)
 	{
-	    if(receivedPlayer != null && receivedPlayer.isHit(player.getBullets().get(i)))
+	    if (receivedPlayer != null && receivedPlayer.isHit(player.getBullets().get(i)))
 	    {
 		receivedPlayer.decHealth(10);
 		player.getBullets().remove(player.getBullets().get(i));
 	    }
 	}
-	
-	if(receivedPlayer != null)
+
+	if (receivedPlayer != null)
 	{
-	    for(int i = 0; i < receivedPlayer.getBullets().size(); i++)
+	    for (int i = 0; i < receivedPlayer.getBullets().size(); i++)
 	    {
-		if(player.isHit(receivedPlayer.getBullets().get(i)))
+		if (player.isHit(receivedPlayer.getBullets().get(i)))
 		{
 		    player.decHealth(10);
 		    receivedPlayer.getBullets().remove(receivedPlayer.getBullets().get(i));
 		}
 	    }
 	}
-    }	
+    }
 }
