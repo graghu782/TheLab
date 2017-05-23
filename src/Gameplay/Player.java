@@ -337,11 +337,17 @@ public class Player
 	double xs = -mainX + drawer.width / 2 - width / 2;
 	double ys = -mainY + drawer.height / 2 - height / 2;
 
-	lines[0] = new Line(x, y, x + width, y);
-	lines[1] = new Line(x + width, y, x + width, y + height);
-	lines[2] = new Line(x + width, y + height, x, y + height);
-	lines[3] = new Line(x, y, x, y + height);
-
+	lines[0] = new Line(x+xs, y+ys, x + width+xs, y+ys);
+	lines[1] = new Line(x+xs + width, y+ys, x + width+xs, y + height+ys);
+	lines[2] = new Line(x+xs + width, y + height+ys, x+xs, y + height+ys);
+	lines[3] = new Line(x+xs, y+ys, x+xs, y + height+ys);
+	drawer.line((float)(x+xs), (float)(y+ys), (float)(x + width+xs), (float)(y+ys));
+	drawer.line((float)(x+xs + width), (float)(y+ys), (float)(x + width+xs), (float)(y + height+ys));
+	drawer.line((float)(x+xs + width), (float)(y + height+ys), (float)(x+xs), (float)(y + height+ys));
+	drawer.line((float)(x+xs), (float)(y+ys), (float)(x+xs), (float)(y + height+ys));
+	
+	
+	
 	hud.updateHealth(health);
 	hud.draw(drawer, (float) (x + xs), (float) (y + ys));
 
