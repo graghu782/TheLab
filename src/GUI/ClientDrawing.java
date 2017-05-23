@@ -79,25 +79,29 @@ public class ClientDrawing extends DrawingSurface
 		int i = 0;
 		while (i * 6 + 5 < data.length)
 		{
-		    if (!data[i * 7 + 3].equals(player.getName()))
+		    
+		    try
 		    {
-			receivedPlayer = new Player(Double.parseDouble(data[i * 7 + 1]),
-				Double.parseDouble(data[i * 7 + 2]), data[i * 7 + 3], false);
-			receivedPlayer.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
-			receivedPlayer.setDirection(Double.parseDouble(data[i * 7 + 5]));
+		   	if (!data[i * 7 + 3].equals(player.getName()))
+		   	{
+		   	    receivedPlayer = new Player(Double.parseDouble(data[i * 7 + 1]), Double.parseDouble(data[i * 7 + 2]), data[i * 7 + 3], false);
+		   	    receivedPlayer.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
+		   	    receivedPlayer.setDirection(Double.parseDouble(data[i * 7 + 5]));
 
-			if (data[i * 7 + 6].equals("true"))
-			{
-			    eliminations++;
-			}
+		   	    if (data[i * 7 + 6].equals("true"))
+		   	    {
+		   		eliminations++;
+		   	    }
+		   	}
+		   	else
+		   	{
+		   	    player.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
+		   	}
+		   	i++;
 		    }
-		    else
-		    {
-			player.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
-		    }
-		    i++;
+		    catch(NumberFormatException e)
+		    {System.out.println("Error");}	
 		}
-
 		if (player.getHealth() < 1)
 		{
 		    player = new Player(1200, 900, playerName, true);

@@ -104,7 +104,7 @@ public class ServerDrawing extends DrawingSurface
 
 		    input = input.substring(input.indexOf("#") + 1);
 
-		    if (input.indexOf("bulletinfo") >= 0)
+		    if (input.indexOf("bulletinfo") >= 0 && input.indexOf("#") >= 0 && input.indexOf("#") > input.indexOf("bulletinfo"))
 		    {
 			bulletData = input.substring(input.indexOf("bulletinfo"), input.indexOf("#"));
 			data = bulletData.split(":");
