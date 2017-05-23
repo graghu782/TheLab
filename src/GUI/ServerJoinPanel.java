@@ -34,8 +34,8 @@ public class ServerJoinPanel extends JPanel implements ActionListener
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.add(Box.createVerticalStrut(150));
 
-	inputName = new JTextField("client");
-	inputIP = new JTextField("localhost");
+	inputName = new JTextField("Name here");
+	inputIP = new JTextField("IP here");
 
 	joinButton = new JButton("Join");
 	menuButton = new JButton("Menu");

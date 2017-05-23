@@ -47,7 +47,7 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	    IPText.append("Error getting your IP address!");
 	}
 	
-	inputName = new JTextField("server");
+	inputName = new JTextField("Name here");
 
 	joinButton = new JButton("Start");
 	menuButton = new JButton("Menu");
