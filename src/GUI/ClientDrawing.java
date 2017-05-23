@@ -113,7 +113,8 @@ public class ClientDrawing extends DrawingSurface
 		
 		if(input.indexOf("timerinfo") >= 0 && input.indexOf("#") >= 0)
 		{
-		    timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+		    //timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+		    timerData = input.substring(input.indexOf("timerinfo"));
 		    data = timerData.split(":");
 
 		    if (data[0].equals("timerinfo"))

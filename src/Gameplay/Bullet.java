@@ -2,7 +2,16 @@ package Gameplay;
 
 import processing.core.PApplet;
 import kim.shapes.Line;
-
+/**
+ * A bullet that interacts with players
+ * @author david
+ * @param LENGTH size of the bullet
+ * @param SPEED distance between iterations of bullet
+ *  @param xTemp x-coordinate of bullet
+ *  @param yTemp y-coordinate of bullet
+ *  @param direction direction bullet is traveling
+ *  @param player what player the bullet belongs to
+ */
 public class Bullet extends Line
 {
     // private double xCoord, yCoord;
@@ -32,7 +41,13 @@ public class Bullet extends Line
 	//System.out.println(x + " " + y + " " + xTemp*LENGTH + " " + yTemp*LENGTH);
     }
     */
-
+/**
+ * creates a bullet with coordinates at x,y, with direction of direction, belonging to player p
+ *  @param x x-coordinate of bullet
+ *  @param y y-coordinate of bullet
+ *  @param direction direction bullet is traveling
+ *  @param p what player the bullet belongs to
+ */
     public Bullet(double x, double y, double direction, Player p)
 
     {
@@ -47,7 +62,10 @@ public class Bullet extends Line
 	xTemp = Math.cos(direction);
 	yTemp = Math.sin(direction);
     }
-
+/**
+ * draws the bullet
+ * @param drawer the PApplet used to draw the bullet
+ */
     public void draw(PApplet drawer)
     {
 	drawer.stroke(51, 0, 153);
@@ -73,27 +91,43 @@ public class Bullet extends Line
 	drawer.stroke(0);
     }
 
+    /**
+     * returns the player the bullet belongs to
+     * @return the player the bullet belongs to
+     */
     public Player getPlayer()
     {
 	return player;
     }
-
+/**
+ * returns the bullet's current iterations
+ * @return the bullet's current iterations
+ */
     public int getIs()
     {
 	return iters;
     }
 
-
+/**
+ * returns the x coordinate
+ * @return the x coordinate
+ */
     public double getXCoord() 
     {
 	return x;
     }
-
+/**
+ * returns the y coordinate
+ * @return the y coordinate
+ */
     public double getYCoord() 
     {
 	return y;
     }
-
+/**
+ * returns the direction of the bullet
+ * @return direction
+ */
     public double getDirection() 
     {
 	return direction;
