@@ -245,4 +245,30 @@ public class ClientDrawing extends DrawingSurface
 
 	c.write("#");
     }
+    /**
+     * checks to see if the bullets are hitting the player
+     */
+        public void checkBullets()
+        {
+    	for (int i = 0; i < player.getBullets().size(); i++)
+    	{
+    	    if (receivedPlayer != null && receivedPlayer.isHit(player.getBullets().get(i)))
+    	    {
+    		receivedPlayer.decHealth(10);
+    		player.getBullets().remove(player.getBullets().get(i));
+    	    }
+    	}
+
+    	if (receivedPlayer != null)
+    	{
+    	    for (int i = 0; i < receivedPlayer.getBullets().size(); i++)
+    	    {
+    		if (player.isHit(receivedPlayer.getBullets().get(i)))
+    		{
+    		    player.decHealth(10);
+    		    receivedPlayer.getBullets().remove(receivedPlayer.getBullets().get(i));
+    		}
+    	    }
+    	}
+        }
 }
