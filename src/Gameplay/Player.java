@@ -376,7 +376,7 @@ public class Player
 
 	if (bullets.size() > 0)
 	{
-	    if (bullets.get(0).getIs() >= 12)
+	    if (bullets.get(0).getIs() >= 10)
 		bullets.remove(0);
 	}
 
