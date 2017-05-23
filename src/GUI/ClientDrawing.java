@@ -29,12 +29,21 @@ public class ClientDrawing extends DrawingSurface
 
     private boolean sendEliminated;
 
-    
+    /**
+     * Creates a new DrawingSurface for a client, which draws depending on the client's point of view.
+     */
     public ClientDrawing()
     {
 	super();
     }
 
+    /**
+     * Creates a new DrawingSurface for a client, which draws depending on the client's point of view. 
+     * Connects to the server with the IP address of IP
+     * 
+     * @param IP
+     * @param playerName
+     */
     public ClientDrawing(String IP, String playerName)
     {
 	super();

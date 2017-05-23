@@ -34,6 +34,9 @@ public class DrawingSurface extends PApplet
     private Timer animationTimer;
     private int interval;
 
+    /**
+     * Creates a new DrawingSurface upon which the players, the bullets, and the game is drawn on.
+     */
     public DrawingSurface()
     {
 	animationTimer = new Timer();
@@ -43,11 +46,17 @@ public class DrawingSurface extends PApplet
 	runSketch();
     }
 
+    /**
+     * Sets the window size
+     */
     public void settings()
     {
 	size(800, 600);
     }
 
+    /**
+     * Sets the timer up, adds the background.
+     */
     public void setup()
     {
 	background(255);
@@ -81,6 +90,9 @@ public class DrawingSurface extends PApplet
 	super.surface.startThread();
     }
     
+    /**
+     * 
+     */
     public void draw()
     {
 	x = player.getX();
@@ -110,6 +122,9 @@ public class DrawingSurface extends PApplet
 	checkKeys();
     }
     
+    /**
+     * Checks for keys pressed, sets the corresponding value in the boolean array to true.
+     */
     public void keyPressed()
     {
 
@@ -131,6 +146,9 @@ public class DrawingSurface extends PApplet
 	}
     }
 
+    /**
+     * Checks for keys released, sets the corresponding value in the boolean array to false.
+     */
     public void keyReleased()
     {
 	if (key == 'w' || key == 'W')
@@ -151,6 +169,10 @@ public class DrawingSurface extends PApplet
 	}
     }
     
+    /**
+     * Checks to see if the player is moving or not.
+     * @return true if player is moving, false if not.
+     */
     public boolean isMoving()
     {
 	if(keysPressed[0] || keysPressed[1] || keysPressed[2] || keysPressed[3])
@@ -160,6 +182,9 @@ public class DrawingSurface extends PApplet
 	else return false;
     }
 
+    /**
+     * Checks and sees which keys are pressed, moves according to the keys pressed.
+     */
     public void checkKeys()
     {
 	if (keysPressed[0])
