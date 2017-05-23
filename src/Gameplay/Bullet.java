@@ -50,7 +50,7 @@ public class Bullet extends Line
 
     public void draw(PApplet drawer)
     {
-	drawer.stroke(100, 255, 0);
+	drawer.stroke(51, 0, 153);
 	double mn = -player.getMainX()+drawer.width/2;
 	double mb = -player.getMainY()+drawer.height/2;
 	
