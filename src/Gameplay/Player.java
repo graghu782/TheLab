@@ -19,6 +19,19 @@ import kim.shapes.Line;
  * @param xCenter x center of player
  * @param yCenter y center of player
  * @param direction direction of player
+ * @param name name of player
+ * @param health health of player
+ * @param jNum animation number
+ * @param ammo overheat of the gun
+ * @param eliminations number of kills
+ * @param mouseXChange change of mouse x coord
+ * @param mouseYChange change of mouse y coord
+ * @param john player image
+ * @param lines hitbox of player
+ * @param bullets bullets player shot
+ * @param hud player hud
+ * @param mainX main player x
+ * @param mainY main player y
  */
 public class Player
 {
@@ -30,7 +43,6 @@ public class Player
     private double xCenter, yCenter;
     private double direction;
     
-    private Color color;
     private String name;
     
     private int health;
@@ -48,7 +60,13 @@ public class Player
     private Hud hud;
 
     private static double mainX, mainY;
-
+/**
+ * creates a player at x,y, with name name and checks to see if is main character
+ * @param x x coord of player
+ * @param y y coord of player
+ * @param name name of player
+ * @param isMain is Main Character
+ */
     public Player(double x, double y, String name, boolean isMain)
     {
 
@@ -81,29 +99,45 @@ public class Player
 	// spriteRects = new Rect[2];
 	// spriteRects[0] = new rect(0,99,41,46);
     }
-    
+    /**
+     * moves the player by x,y
+     * @param x x-change
+     * @param y y-change
+     */
     public void move(double x, double y)
     {
 	this.x += x;
 	this.y += y;
     }
-    
+    /**
+     * moves the player to x,y
+     * @param x x-change
+     * @param y y-change
+     */
     public void moveTo(double x, double y)
     {
 	this.x = x;
 	this.y = y;
     }
-    
+    /**
+     * returns main character x
+     * @return mainX
+     */
     public double getMainX()
     {
 	return mainX;
     }
-    
+    /**
+     * returns main character y
+     * @return mainY
+     */
     public double getMainY()
     {
 	return mainY;
     }
-    
+    /**
+     * creates a new bullet firing at direction of player
+     */
     public void fire()
     {
 	//bullets.add(new Bullet(400, 300, direction, x, y, this));
@@ -113,67 +147,107 @@ public class Player
 	
 	gunshot.play();
     }
-    
+    /**
+     * changes animation to num
+     * @param num animation number
+     */
     public void changeAnimation(int num)
     {
 	jnum = num;
     }
-
+/**
+ * returns the bullets array
+ * @return bullets
+ */
     public ArrayList<Bullet> getBullets()
     {
 	return bullets;
     }
-    
+    /**
+     * adds a bullet to bullets
+     * @param b bullet to add to bullets
+     */
     public void addBullet(Bullet b)
     {
 	bullets.add(b);
     }
-    
+    /**
+     * returns name of character	
+     * @return name
+     */
     public String getName()
     {
 	return name;
     }
-
+/**
+ *  number of ammo
+ * @param num ammo
+ */
     public void changeAmmo(int num)
     {
 	ammo += num;
     }
-    
+    /**
+     * ammo of player
+     * @return ammo
+     */
     public int getAmmo()
     {
 	return ammo;
     }
-
+/**
+ * returns x coord of player
+ * @return x
+ */
     public double getX()
     {
 	return x;
     }
-
+/**
+ * returns y coord of player
+ * @return y
+ */
     public double getY()
     {
 	return y;
     }
-
+/**
+ * returns width of player
+ * @return width
+ */
     public double getWidth()
     {
 	return width;
     }
-
+/**
+ * returns height of player
+ * @return height
+ */
     public double getHeight()
     {
 	return height;
     }
-    
+    /**
+     * sets direction to d
+     * @param d direction
+     */
     public void setDirection(double d)
     {
 	direction = d;
     }
-
+/**
+ * returns direction of person
+ * @return direction
+ */
     public double getDirection()
     {
 	return direction;
     }
-
+/**
+ * checks to see if bullet is hitting player
+ * @param b bullet
+ * @return true if bullet hits player
+ */
     public boolean isHit(Bullet b)
     {
 	if (!b.getPlayer().getName().equals(getName()))
@@ -188,22 +262,33 @@ public class Player
 	else
 	    return false;
     }
-
+/**
+ * decreases health of player by num
+ * @param num num to decrease health by
+ */
     public void decHealth(int num)
     {
 	health -= num;
     }
-    
+    /**
+     * sets health to num
+     * @param num num to set health to
+     */
     public void setHealth(int num)
     {
 	health = num;
     }
-
+/**
+ * returns health of player
+ * @return health
+ */
     public int getHealth()
     {
 	return health;
     }
-    
+    /**
+     * updates main characters coordinates
+     */
     public void updateMain()
     {
 	if (isMain)
@@ -212,7 +297,10 @@ public class Player
 	    mainY = y;
 	}
     }
-
+/**
+ * draws the player
+ * @param drawer pApplet used to draw the player
+ */
     public void draw(PApplet drawer)
     {
 	if (isMain)
