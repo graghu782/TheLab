@@ -16,7 +16,10 @@ import javax.swing.JPanel;
 public class InstructionsPanel extends JPanel implements ActionListener
 {
     private Main w;
-
+/**
+ * gives the user the instructions for the game
+ * @param w the panel to draw the instruction panel in
+ */
     public InstructionsPanel(Main w)
     {
 	this.w = w;
@@ -30,7 +33,9 @@ public class InstructionsPanel extends JPanel implements ActionListener
 	p.add(button);
 	add(p);
     }
-
+/**
+ * draws everything into the panel
+ */
     public void paintComponent(Graphics g)
     {
 	super.paintComponent(g);
@@ -57,7 +62,9 @@ public class InstructionsPanel extends JPanel implements ActionListener
 
 	g2.setTransform(af);
     }
-
+/**
+ * checks to see if the user presses the back button
+ */
     public void actionPerformed(ActionEvent e)
     {
 	w.changePanel("menu");

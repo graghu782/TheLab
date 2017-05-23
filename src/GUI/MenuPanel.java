@@ -19,7 +19,10 @@ public class MenuPanel extends JPanel implements ActionListener
     
     private JLabel title;
     private JLabel background;
-
+/**
+ * creates a new MenuPanel
+ * @param w name of the JPanel
+ */
     public MenuPanel(Main w)
     {
 	this.w = w;
@@ -54,7 +57,9 @@ public class MenuPanel extends JPanel implements ActionListener
 	
 	add(mainPanel);
     }
-
+/**
+ * draws the panel
+ */
     public void paintComponent(Graphics g)
     {
 	super.paintComponent(g);
@@ -76,7 +81,9 @@ public class MenuPanel extends JPanel implements ActionListener
 
 	g2.setTransform(af);
     }
-
+/**
+ * checks to see what actions are performed and acts accordingly
+ */
     public void actionPerformed(ActionEvent e)
     {
 	if(e.getSource() == startServer)

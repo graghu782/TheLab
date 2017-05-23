@@ -81,7 +81,9 @@ public class DrawingSurface extends PApplet
 	}, 500, 500);
 	
     }
-
+/**
+ * runs the class
+ */
     public void runMe()
     {
 	super.setSize(800, 600);
@@ -91,7 +93,7 @@ public class DrawingSurface extends PApplet
     }
     
     /**
-     * 
+     * draws everything onto the server computer
      */
     public void draw()
     {

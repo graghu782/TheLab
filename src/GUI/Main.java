@@ -31,7 +31,10 @@ public class Main extends JFrame
     private boolean createdServer;
     
     private JLabel background;
-
+/**
+ * creates a new menu and serverpanel
+ * @param title name of JFrame
+ */
     public Main(String title)
     {
 	super(title);
@@ -59,27 +62,44 @@ public class Main extends JFrame
 
 	setVisible(true);
     }
-
+/**
+ * main menu of the program
+ * @param args
+ * @throws UnknownHostException
+ * @throws IOException
+ */
     public static void main(String args[]) throws UnknownHostException, IOException
     {
 	Main w = new Main("The Lab");
     }
-    
+    /**
+     * sets the IP to s
+     * @param s the string to set IP to
+     */
     public void setIP(String s)
     {
 	IP = s;
     }
-    
+    /**
+     * checks and creates server if b is true
+     * @param b true if server is created
+     */
     public void setIfServer(boolean b)
     {
 	createdServer = b;
     }
-    
+    /**
+     * sets playername to s
+     * @param s name of player
+     */
     public void setName(String s)
     {
 	playerName = s;
     }
-
+/**
+ * changes panel to panel s
+ * @param s name of panel
+ */
     public void changePanel(String s)
     {
 	cl.show(cardPanel, s);

@@ -41,8 +41,8 @@ public class ClientDrawing extends DrawingSurface
      * Creates a new DrawingSurface for a client, which draws depending on the client's point of view. 
      * Connects to the server with the IP address of IP
      * 
-     * @param IP
-     * @param playerName
+     * @param IP name of IP
+     * @param playerName name of player
      */
     public ClientDrawing(String IP, String playerName)
     {
@@ -53,7 +53,9 @@ public class ClientDrawing extends DrawingSurface
 	this.IP = IP;
 	this.playerName = playerName;
     }
-
+/**
+ * sets up the drawingSurface
+ */
     public void setup()
     {
 	super.setup();
@@ -67,7 +69,9 @@ public class ClientDrawing extends DrawingSurface
 	    c.dispose();
 	}
     }
-
+/**
+ * draws the client onto the server
+ */
     public void draw()
     {
 	pushMatrix();
@@ -210,7 +214,9 @@ public class ClientDrawing extends DrawingSurface
 
 	popMatrix();
     }
-
+/**
+ * sends the player info to the server
+ */
     public void sendPlayerInfo()
     {
 	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":" + eliminations + ":");
@@ -222,7 +228,9 @@ public class ClientDrawing extends DrawingSurface
 
 	c.write("#");
     }
-
+/**
+ * sends the bullet info to the server
+ */
     public void sendBulletInfo()
     {
 	for (Bullet b : player.getBullets())
