@@ -29,6 +29,7 @@ public class ClientDrawing extends DrawingSurface
 
     private boolean sendEliminated;
 
+    
     public ClientDrawing()
     {
 	super();
