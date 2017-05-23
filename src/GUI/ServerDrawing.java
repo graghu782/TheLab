@@ -85,18 +85,21 @@ public class ServerDrawing extends DrawingSurface
 	    {
 		input = s.clients[i].readString();
 
-		if (input != null)
+		if (input != null && input.indexOf("#") >= 0)
 		{
 		    playerData = input.substring(0, input.indexOf("#"));
 		    data = playerData.split(":");
 
-		    receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);
-		    receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
-		    receivedPlayer.setDirection(Double.parseDouble(data[5]));
-
-		    if (data[6].equals("true"))
+		    if(data.length > 6 && data[0].equals("playerinfo"))
 		    {
-			eliminations++;
+			receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);
+			receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
+			receivedPlayer.setDirection(Double.parseDouble(data[5]));
+
+			if (data[6].equals("true"))
+			{
+			    eliminations++;
+			}
 		    }
 
 		    input = input.substring(input.indexOf("#") + 1);

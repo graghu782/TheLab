@@ -106,12 +106,16 @@ public class ClientDrawing extends DrawingSurface
 
 		// Process Timer info
 		input = input.substring(input.indexOf("#") + 1);
-		timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
-		data = timerData.split(":");
-
-		if (data[0].equals("timerinfo"))
+		
+		if(input.indexOf("timerinfo") >= 0 && input.indexOf("#") >= 0)
 		{
-		    timeRemaining = (int) Double.parseDouble(data[1]);
+		    timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+		    data = timerData.split(":");
+
+		    if (data[0].equals("timerinfo"))
+		    {
+			timeRemaining = (int) Double.parseDouble(data[1]);
+		    }
 		}
 
 		// Process Bullet info
