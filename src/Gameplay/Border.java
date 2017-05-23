@@ -3,16 +3,7 @@ package Gameplay;
 import java.awt.Color;
 import processing.core.PApplet;
 
-/**
- * This class prints out a visible border that surrounds the walkable map
- * 
- * @author david
- *
- * @param x x-coord of first point
- * @param y y-coord of first point
- * @param x2 x-coord of second point
- * @param y2 y-coord of second point
- */
+
 public class Border 
 {
     double x, y, x2, y2;

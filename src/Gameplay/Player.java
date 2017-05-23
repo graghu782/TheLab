@@ -9,30 +9,7 @@ import GUI.Sound;
 import processing.core.PApplet;
 import processing.core.PImage;
 import kim.shapes.Line;
-/**
- * a player for the game
- * @author david
- * @field x x coord
- * @field y y coord
- * @field width width of player
- * @field height height of player
- * @field xCenter x center of player
- * @field yCenter y center of player
- * @field direction direction of player
- * @field name name of player
- * @field health health of player
- * @field jNum animation number
- * @field ammo overheat of the gun
- * @field eliminations number of kills
- * @field mouseXChange change of mouse x coord
- * @field mouseYChange change of mouse y coord
- * @field john player image
- * @field lines hitbox of player
- * @field bullets bullets player shot
- * @field hud player hud
- * @field mainX main player x
- * @field mainY main player y
- */
+
 public class Player
 {
     // private static double mx, my;

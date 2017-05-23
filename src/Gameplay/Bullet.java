@@ -2,16 +2,7 @@ package Gameplay;
 
 import processing.core.PApplet;
 import kim.shapes.Line;
-/**
- * A bullet that interacts with players
- * @author david
- * @param LENGTH size of the bullet
- * @param SPEED distance between iterations of bullet
- *  @param xTemp x-coordinate of bullet
- *  @param yTemp y-coordinate of bullet
- *  @param direction direction bullet is traveling
- *  @param player what player the bullet belongs to
- */
+
 public class Bullet extends Line
 {
     // private double xCoord, yCoord;

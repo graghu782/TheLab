@@ -1,13 +1,7 @@
 package Gameplay;
 
 import processing.core.PApplet;
-/**
- * shows the basic information of the player
- * @author david
- * @param health the health of the player
- * @param ratio the percentage of the players health
- * @param playerName the name of the player
- */
+
 public class Hud
 {
     private static final double MAX_HEALTH = 100.0;
