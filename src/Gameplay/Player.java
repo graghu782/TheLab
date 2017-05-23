@@ -9,7 +9,17 @@ import GUI.Sound;
 import processing.core.PApplet;
 import processing.core.PImage;
 import kim.shapes.Line;
-
+/**
+ * a player for the game
+ * @author david
+ * @param x x coord
+ * @param y y coord
+ * @param width width of player
+ * @param height height of player
+ * @param xCenter x center of player
+ * @param yCenter y center of player
+ * @param direction direction of player
+ */
 public class Player
 {
     // private static double mx, my;
@@ -101,7 +111,7 @@ public class Player
 	updateMain();
 	bullets.add(new Bullet(x,y,direction,this));
 	
-	//gunshot.play();
+	gunshot.play();
     }
     
     public void changeAnimation(int num)
