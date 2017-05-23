@@ -65,7 +65,7 @@ public class DrawingSurface extends PApplet
 	 player = new Player(0, 0, playerName, true);
 	border = new Border(0, 0, 10, 10);
 
-	frameRate(20);
+	frameRate(180);
 	
 	obstacles = new Obstacle[1];
 	obstacles[0] = new Obstacle(400, 0, 420, 800);
@@ -194,23 +194,23 @@ public class DrawingSurface extends PApplet
 	{
 	    if (player.getY() > 1)
 	    {
-		player.move(0, -15);
+		player.move(0, -10);
 	    }
 	}
 	if (keysPressed[1])
 	{
 	    if (player.getX() > 1)
-		player.move(-15, 0);
+		player.move(-10, 0);
 	}
 	if (keysPressed[2])
 	{
 	    if (player.getY() + player.getHeight() < MAP_HEIGHT - 1)
-		player.move(0, 15);
+		player.move(0, 10);
 	}
 	if (keysPressed[3])
 	{
 	    if (player.getX() + player.getWidth() < MAP_WIDTH - 1)
-		player.move(15, 0);
+		player.move(10, 0);
 	}
 
 	if (mousePressed)
