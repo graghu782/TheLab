@@ -249,6 +249,8 @@ public class ServerDrawing extends DrawingSurface
 		{
 		    player.decHealth(10);
 		    receivedPlayer.getBullets().remove(receivedPlayer.getBullets().get(i));
+		    
+		    System.out.println(receivedPlayer.getBullets().size());
 		}
 	    }
 	}

@@ -81,6 +81,8 @@ public class ClientDrawing extends DrawingSurface
     {
 	pushMatrix();
 
+	player.getBullets().clear();
+	
 	super.draw();
 
 	sendPlayerInfo();
@@ -92,7 +94,7 @@ public class ClientDrawing extends DrawingSurface
 	    // Process Player info
 	    if (input.indexOf("#") >= 0)
 	    {
-
+		
 		playerData = input.substring(0, input.indexOf("#"));
 		data = playerData.split(":");
 
@@ -177,11 +179,19 @@ public class ClientDrawing extends DrawingSurface
 
 			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]), Double.parseDouble(data[j * 5 + 3]), temp);
 			bulletList.add(b);
+			
+			if(b.getPlayer().getName().equals(playerName))
+			{
+				player.addBullet(b);
+			}
+
 			j++;
 		    }
 		}
 	    }
 	}
+	
+	checkBullets();
 
 	text("My Eliminations: " + eliminations, 675, 500);
 	text("Enemy Eliminations: " + seliminations, 670, 525);
@@ -215,8 +225,7 @@ public class ClientDrawing extends DrawingSurface
 
 	for (Bullet b : bulletList)
 	{
-	    if (!b.getPlayer().getName().equals(player.getName()))
-		b.draw(this);
+	    b.draw(this);
 	}
 
 	if (player.getBullets().size() != 0)
@@ -251,5 +260,16 @@ public class ClientDrawing extends DrawingSurface
 	}
 
 	c.write("#");
+    }
+    
+    public void checkBullets()
+    {
+	for(int i = 0; i < player.getBullets().size(); i++)
+	{
+	    if(receivedPlayer != null && receivedPlayer.isHit(player.getBullets().get(i)))
+	    {
+		player.getBullets().remove(player.getBullets().get(i));
+	    }
+	}
     }
 }

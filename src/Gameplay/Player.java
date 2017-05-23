@@ -341,12 +341,6 @@ public class Player
 	lines[1] = new Line(x + width, y, x + width, y + height);
 	lines[2] = new Line(x + width, y + height, x, y + height);
 	lines[3] = new Line(x, y, x, y + height);
-	drawer.line((float)(x+xs), (float)(y+ys), (float)(x + width+xs), (float)(y+ys));
-	drawer.line((float)(x+xs + width), (float)(y+ys), (float)(x + width+xs), (float)(y + height+ys));
-	drawer.line((float)(x+xs + width), (float)(y + height+ys), (float)(x+xs), (float)(y + height+ys));
-	drawer.line((float)(x+xs), (float)(y+ys), (float)(x+xs), (float)(y + height+ys));
-	
-	
 	
 	hud.updateHealth(health);
 	hud.draw(drawer, (float) (x + xs), (float) (y + ys));
