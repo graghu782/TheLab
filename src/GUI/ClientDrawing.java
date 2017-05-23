@@ -30,7 +30,8 @@ public class ClientDrawing extends DrawingSurface
     private boolean sendEliminated;
 
     /**
-     * Creates a new DrawingSurface for a client, which draws depending on the client's point of view.
+     * Creates a new DrawingSurface for a client, which draws depending on the
+     * client's point of view.
      */
     public ClientDrawing()
     {
@@ -38,8 +39,8 @@ public class ClientDrawing extends DrawingSurface
     }
 
     /**
-     * Creates a new DrawingSurface for a client, which draws depending on the client's point of view. 
-     * Connects to the server with the IP address of IP
+     * Creates a new DrawingSurface for a client, which draws depending on the
+     * client's point of view. Connects to the server with the IP address of IP
      * 
      * @param IP name of IP
      * @param playerName name of player
@@ -53,9 +54,10 @@ public class ClientDrawing extends DrawingSurface
 	this.IP = IP;
 	this.playerName = playerName;
     }
-/**
- * sets up the drawingSurface
- */
+
+    /**
+     * sets up the drawingSurface
+     */
     public void setup()
     {
 	super.setup();
@@ -69,9 +71,10 @@ public class ClientDrawing extends DrawingSurface
 	    c.dispose();
 	}
     }
-/**
- * draws the client onto the server
- */
+
+    /**
+     * draws the client onto the server
+     */
     public void draw()
     {
 	pushMatrix();
@@ -96,32 +99,32 @@ public class ClientDrawing extends DrawingSurface
 		{
 		    try
 		    {
-		   	if (!data[i * 8 + 3].equals(player.getName()))
-		   	{
-		   	    receivedPlayer = new Player(Double.parseDouble(data[i * 8 + 1]), Double.parseDouble(data[i * 8 + 2]), data[i * 8 + 3], false);
-		   	    receivedPlayer.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
-		   	    receivedPlayer.setDirection(Double.parseDouble(data[i * 8 + 5]));
-		   	    seliminations = (int)Double.parseDouble(data[i * 8 + 7]);
-		   	    
-		   	    if (data[i * 8 + 6].equals("true"))
-		   	    {
-		   		eliminations++;
-		   	    }
-		   	}
-		   	else
-		   	{
-		   	    player.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
-		   	}
-		   	i++;
-		    }
-		    catch(NumberFormatException e)
-		    {
-			for(int k = 0; k < data.length; k++)
+			if (!data[i * 8 + 3].equals(player.getName()))
 			{
-				System.out.print(data[k] + " ");
+			    receivedPlayer = new Player(Double.parseDouble(data[i * 8 + 1]), Double.parseDouble(data[i * 8 + 2]), data[i * 8 + 3], false);
+			    receivedPlayer.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
+			    receivedPlayer.setDirection(Double.parseDouble(data[i * 8 + 5]));
+			    seliminations = (int) Double.parseDouble(data[i * 8 + 7]);
+
+			    if (data[i * 8 + 6].equals("true"))
+			    {
+				eliminations++;
+			    }
+			}
+			else
+			{
+			    player.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
+			}
+			i++;
+		    }
+		    catch (NumberFormatException e)
+		    {
+			for (int k = 0; k < data.length; k++)
+			{
+			    System.out.print(data[k] + " ");
 			}
 			break;
-		    }	
+		    }
 		}
 		if (player.getHealth() < 1)
 		{
@@ -131,10 +134,11 @@ public class ClientDrawing extends DrawingSurface
 
 		// Process Timer info
 		input = input.substring(input.indexOf("#") + 1);
-		
-		if(input.indexOf("timerinfo") >= 0 && input.indexOf("#") >= 0)
+
+		if (input.indexOf("timerinfo") >= 0 && input.indexOf("#") >= 0)
 		{
-		    //timerData = input.substring(input.indexOf("timerinfo"), input.indexOf("#"));
+		    // timerData = input.substring(input.indexOf("timerinfo"),
+		    // input.indexOf("#"));
 		    timerData = input.substring(input.indexOf("timerinfo"));
 		    data = timerData.split(":");
 
@@ -164,8 +168,7 @@ public class ClientDrawing extends DrawingSurface
 			    temp = receivedPlayer;
 			}
 
-			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]),
-				Double.parseDouble(data[j * 5 + 3]), temp);
+			Bullet b = new Bullet(Double.parseDouble(data[j * 5 + 1]), Double.parseDouble(data[j * 5 + 2]), Double.parseDouble(data[j * 5 + 3]), temp);
 			bulletList.add(b);
 			j++;
 		    }
@@ -180,12 +183,12 @@ public class ClientDrawing extends DrawingSurface
 	{
 	    textSize(72);
 	    text("GAME OVER", 200, 100);
-	    
-	    if(seliminations < eliminations)
+
+	    if (seliminations < eliminations)
 	    {
 		text("YOU WON", 200, 300);
 	    }
-	    else if(seliminations > eliminations)
+	    else if (seliminations > eliminations)
 	    {
 		text("YOU LOST", 200, 300);
 	    }
@@ -193,7 +196,7 @@ public class ClientDrawing extends DrawingSurface
 	    {
 		text("DRAW", 200, 300);
 	    }
-	    
+
 	    textSize(11);
 	    noLoop();
 	}
@@ -214,9 +217,10 @@ public class ClientDrawing extends DrawingSurface
 
 	popMatrix();
     }
-/**
- * sends the player info to the server
- */
+
+    /**
+     * sends the player info to the server
+     */
     public void sendPlayerInfo()
     {
 	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":" + eliminations + ":");
@@ -228,9 +232,10 @@ public class ClientDrawing extends DrawingSurface
 
 	c.write("#");
     }
-/**
- * sends the bullet info to the server
- */
+
+    /**
+     * sends the bullet info to the server
+     */
     public void sendBulletInfo()
     {
 	for (Bullet b : player.getBullets())
