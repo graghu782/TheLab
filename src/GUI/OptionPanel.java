@@ -16,7 +16,10 @@ import javax.swing.JPanel;
 public class OptionPanel extends JPanel implements ActionListener
 {
     private Main w;
-
+/**
+ * creates new OptionPanel
+ * @param w name of JPanel
+ */
     public OptionPanel(Main w)
     {
 	this.w = w;
@@ -30,7 +33,9 @@ public class OptionPanel extends JPanel implements ActionListener
 	p.add(button);
 	add(p);
     }
-
+/**
+ * changes panel to menu panel if menu button is pressed
+ */
     public void actionPerformed(ActionEvent e)
     {
 	w.changePanel("menu");

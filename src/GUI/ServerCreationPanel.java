@@ -23,7 +23,10 @@ public class ServerCreationPanel extends JPanel implements ActionListener
     private JButton menuButton;
     
     private JTextField inputName;
-
+/**
+ * creates new ServerPanel
+ * @param w name of JPanel
+ */
     public ServerCreationPanel(Main w)
     {
 	this.w = w;
@@ -64,7 +67,9 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 	p.add(menuButton);
 	add(p);
     }
-
+/**
+ * prints out the panel into the JPanel
+ */
     public void paintComponent(Graphics g)
     {
 	super.paintComponent(g);
@@ -83,7 +88,9 @@ public class ServerCreationPanel extends JPanel implements ActionListener
 
 	g2.setTransform(af);
     }
-
+/**
+ * checks to see what actions are performed and acts accordingly
+ */
     public void actionPerformed(ActionEvent e)
     {
 	if (e.getSource() == joinButton)

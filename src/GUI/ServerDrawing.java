@@ -26,12 +26,18 @@ public class ServerDrawing extends DrawingSurface
     private int celiminations;
     
     private boolean sendEliminated;
-
+/**
+ * sets up a new DrawingSurface
+ */
     public ServerDrawing()
     {
 	super();
     }
-
+/**
+ * sets up a new DrawingSurface
+ * @param IP IP address of the server
+ * @param playerName name of the player
+ */
     public ServerDrawing(String IP, String playerName)
     {
 	super();
@@ -40,7 +46,9 @@ public class ServerDrawing extends DrawingSurface
 	this.IP = IP;
 	this.playerName = playerName;
     }
-
+/**
+ * sets up the game drawingsurface
+ */
     public void setup()
     {
 	super.setup();
@@ -58,7 +66,9 @@ public class ServerDrawing extends DrawingSurface
 	    }
 	}, 1000, 1000);
     }
-
+/**
+ * draws the main game
+ */
     public void draw()
     {
 
@@ -160,7 +170,9 @@ public class ServerDrawing extends DrawingSurface
 
 	popMatrix();
     }
-
+/**
+ * sends playerInfo to the server
+ */
     public void sendPlayerInfo()
     {
 	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":" + eliminations + ":");
@@ -176,13 +188,17 @@ public class ServerDrawing extends DrawingSurface
 
 	s.write("#");
     }
-
+/**
+ * sends timer info to the server
+ */
     public void sendTimerInfo()
     {
 	s.write("timerinfo" + ":" + interval + ":");
 	s.write("#");
     }
-
+/**
+ * sends bullet info to the server
+ */
     public void sendBulletInfo()
     {
 	for (Bullet b : player.getBullets())
@@ -199,7 +215,9 @@ public class ServerDrawing extends DrawingSurface
 	}
 	s.write("#");
     }
-
+/**
+ * checks to see if the bullets are hitting the player
+ */
     public void checkBullets()
     {
 	for (int i = 0; i < player.getBullets().size(); i++)
