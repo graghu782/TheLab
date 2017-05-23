@@ -76,10 +76,15 @@ public class ClientDrawing extends DrawingSurface
 		int i = 0;
 		while (i * 6 + 5 < data.length)
 		{
-		    if(!data[i*6+3].equals(player.getName())){
+		    if(!data[i*6+3].equals(player.getName()))
+		    {
 			receivedPlayer = new Player(Double.parseDouble(data[i * 6 + 1]), Double.parseDouble(data[i * 6 + 2]), data[i*6+3], false);			    
 			receivedPlayer.setHealth((int) Double.parseDouble(data[i * 6 + 4]));
 			receivedPlayer.setDirection(Double.parseDouble(data[i * 6 + 5]));
+		    }
+		    else
+		    {
+			player.setHealth((int)Double.parseDouble(data[i * 6 + 4]));
 		    }
 		    i++;
 		}
@@ -109,7 +114,8 @@ public class ClientDrawing extends DrawingSurface
 			{
 			    temp = player;
 			}
-			else {
+			else 
+			{
 			    temp = receivedPlayer;
 			}
 
@@ -118,7 +124,6 @@ public class ClientDrawing extends DrawingSurface
 			j++;
 		    }
 		}
-
 	    }
 	    catch (Exception e)
 	    {
@@ -135,7 +140,8 @@ public class ClientDrawing extends DrawingSurface
 	    noLoop();
 	}
 
-	if(receivedPlayer != null) {
+	if(receivedPlayer != null) 
+	{
 	    receivedPlayer.draw(this);
 	}
 

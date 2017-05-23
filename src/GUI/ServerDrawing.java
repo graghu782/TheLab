@@ -90,8 +90,7 @@ public class ServerDrawing extends DrawingSurface
 			playerData = input.substring(0, input.indexOf("#"));
 			data = playerData.split(":");
 
-			receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3],
-				false);
+			receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);
 			receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
 			receivedPlayer.setDirection(Double.parseDouble(data[5]));
 
@@ -102,9 +101,7 @@ public class ServerDrawing extends DrawingSurface
 			int j = 0;
 			while (j * 4 + 3 < data.length)
 			{
-			    Bullet b = new Bullet(Double.parseDouble(data[j * 4 + 1]),
-				    Double.parseDouble(data[j * 4 + 2]), Double.parseDouble(data[j * 4 + 3]),
-				    receivedPlayer);
+			    Bullet b = new Bullet(Double.parseDouble(data[j * 4 + 1]), Double.parseDouble(data[j * 4 + 2]), Double.parseDouble(data[j * 4 + 3]), receivedPlayer);
 			    receivedPlayer.addBullet(b);
 
 			    j++;

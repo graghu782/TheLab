@@ -21,8 +21,8 @@ public class DrawingSurface extends PApplet
 
     public static final int DRAWING_WIDTH = 800;
     public static final int DRAWING_HEIGHT = 600;
-    public static final int MAP_WIDTH = 2400;
-    public static final int MAP_HEIGHT = 1800;
+    public static final int MAP_WIDTH = 1200;
+    public static final int MAP_HEIGHT = 900;
     protected int count;
     protected double x, y;
 
@@ -209,32 +209,5 @@ public class DrawingSurface extends PApplet
 		}
 	    }
 	}
-    }
-
-    public void checkBullets(Player player)
-    {
-	if(player != null)
-	{
-	    for (int i = 0; i < player.getBullets().size(); i++)
-	    {
-		if(player.equals(this.player))
-		{
-		    if(receivedPlayer != null)
-		    {
-			if(receivedPlayer.isHit(player.getBullets().get(i)))
-			{
-			    player.getBullets().remove(i);
-			    receivedPlayer.decHealth(10);
-			}
-		    }
-		}
-		else if(receivedPlayer != null)
-		{
-		    player.getBullets().remove(i);
-		    this.player.decHealth(10);
-		}
-	    }
-	}
-
     }
 }
