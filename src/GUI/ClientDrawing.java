@@ -25,6 +25,7 @@ public class ClientDrawing extends DrawingSurface
     private ArrayList<Bullet> bulletList;
     private int timeRemaining;
     private int eliminations;
+    private int seliminations;
 
     private boolean sendEliminated;
 
@@ -77,24 +78,25 @@ public class ClientDrawing extends DrawingSurface
 		data = playerData.split(":");
 
 		int i = 0;
-		while (i * 7 + 5 < data.length)
+		while (i * 8 + 7 < data.length)
 		{
 		    try
 		    {
-		   	if (!data[i * 7 + 3].equals(player.getName()))
+		   	if (!data[i * 8 + 3].equals(player.getName()))
 		   	{
-		   	    receivedPlayer = new Player(Double.parseDouble(data[i * 7 + 1]), Double.parseDouble(data[i * 7 + 2]), data[i * 7 + 3], false);
-		   	    receivedPlayer.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
-		   	    receivedPlayer.setDirection(Double.parseDouble(data[i * 7 + 5]));
-
-		   	    if (data[i * 7 + 6].equals("true"))
+		   	    receivedPlayer = new Player(Double.parseDouble(data[i * 8 + 1]), Double.parseDouble(data[i * 8 + 2]), data[i * 8 + 3], false);
+		   	    receivedPlayer.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
+		   	    receivedPlayer.setDirection(Double.parseDouble(data[i * 8 + 5]));
+		   	    seliminations = (int)Double.parseDouble(data[i * 8 + 7]);
+		   	    
+		   	    if (data[i * 8 + 6].equals("true"))
 		   	    {
 		   		eliminations++;
 		   	    }
 		   	}
 		   	else
 		   	{
-		   	    player.setHealth((int) Double.parseDouble(data[i * 7 + 4]));
+		   	    player.setHealth((int) Double.parseDouble(data[i * 8 + 4]));
 		   	}
 		   	i++;
 		    }
@@ -157,12 +159,27 @@ public class ClientDrawing extends DrawingSurface
 	    }
 	}
 
-	text("Eliminations: " + eliminations, 675, 525);
+	text("My Eliminations: " + eliminations, 675, 500);
+	text("Enemy Eliminations: " + seliminations, 670, 525);
 	text("Time remaining: " + timeRemaining, 675, 550);
 	if (timeRemaining < 1)
 	{
 	    textSize(72);
 	    text("GAME OVER", 200, 100);
+	    
+	    if(seliminations < eliminations)
+	    {
+		text("YOU WON", 200, 300);
+	    }
+	    else if(seliminations > eliminations)
+	    {
+		text("YOU LOST", 200, 300);
+	    }
+	    else
+	    {
+		text("DRAW", 200, 300);
+	    }
+	    
 	    textSize(11);
 	    noLoop();
 	}
@@ -186,8 +203,7 @@ public class ClientDrawing extends DrawingSurface
 
     public void sendPlayerInfo()
     {
-	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":"
-		+ player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":");
+	c.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":" + eliminations + ":");
 
 	if (sendEliminated)
 	{

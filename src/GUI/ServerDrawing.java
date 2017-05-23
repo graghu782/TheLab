@@ -23,6 +23,8 @@ public class ServerDrawing extends DrawingSurface
     private Timer timeRemaining;
     private int interval;
     private int eliminations;
+    private int celiminations;
+    
     private boolean sendEliminated;
 
     public ServerDrawing()
@@ -44,7 +46,7 @@ public class ServerDrawing extends DrawingSurface
 	super.setup();
 	s = new Server(this, 4444);
 
-	interval = 180;
+	interval = 120;
 
 	timeRemaining.scheduleAtFixedRate(new TimerTask()
 	{
@@ -65,12 +67,27 @@ public class ServerDrawing extends DrawingSurface
 	super.draw();
 
 	fill(0);
-	text("Eliminations: " + eliminations, 675, 525);
+	text("My Eliminations: " + eliminations, 675, 500);
+	text("Enemy Eliminations: " + celiminations, 670, 525);
 	text("Time remaining: " + interval, 675, 550);
 	if (interval < 1)
 	{
 	    textSize(72);
 	    text("GAME OVER", 200, 100);
+	    
+	    if(celiminations < eliminations)
+	    {
+		text("YOU WON", 200, 300);
+	    }
+	    else if(celiminations > eliminations)
+	    {
+		text("YOU LOST", 200, 300);
+	    }
+	    else
+	    {
+		text("DRAW", 200, 300);
+	    }
+	    
 	    textSize(11);
 	    noLoop();
 	}
@@ -90,7 +107,7 @@ public class ServerDrawing extends DrawingSurface
 		    playerData = input.substring(0, input.indexOf("#"));
 		    data = playerData.split(":");
 
-		    if(data.length > 6 && data[0].equals("playerinfo"))
+		    if(data.length > 7 && data[0].equals("playerinfo"))
 		    {
 			receivedPlayer = new Player(Double.parseDouble(data[1]), Double.parseDouble(data[2]), data[3], false);
 			receivedPlayer.setHealth((int) Double.parseDouble(data[4]));
@@ -100,8 +117,11 @@ public class ServerDrawing extends DrawingSurface
 			{
 			    eliminations++;
 			}
-		    }
+			
 
+			celiminations = (int) Double.parseDouble(data[7]);
+		    }
+			    
 		    input = input.substring(input.indexOf("#") + 1);
 
 		    if (input.indexOf("bulletinfo") >= 0 && input.indexOf("#") >= 0 && input.indexOf("#") > input.indexOf("bulletinfo"))
@@ -143,7 +163,7 @@ public class ServerDrawing extends DrawingSurface
 
     public void sendPlayerInfo()
     {
-	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":");
+	s.write("playerinfo" + ":" + player.getX() + ":" + player.getY() + ":" + player.getName() + ":" + player.getHealth() + ":" + player.getDirection() + ":" + sendEliminated + ":" + eliminations + ":");
 	if (sendEliminated)
 	{
 	    sendEliminated = false;
@@ -151,7 +171,7 @@ public class ServerDrawing extends DrawingSurface
 
 	if (receivedPlayer != null)
 	{
-	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName() + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":" + sendEliminated + ":");
+	    s.write("playerinfo" + ":" + receivedPlayer.getX() + ":" + receivedPlayer.getY() + ":" + receivedPlayer.getName() + ":" + receivedPlayer.getHealth() + ":" + receivedPlayer.getDirection() + ":" + sendEliminated + ":" + eliminations + ":");
 	}
 
 	s.write("#");
